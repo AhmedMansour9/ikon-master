@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\ic\Downloads\ikon-master\ikon.iml" filepath="C:\Users\ic\Downloads\ikon-master\ikon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ikon-master.iml" filepath="$PROJECT_DIR$/ikon-master.iml" />
+    </modules>
+  </component>
+</project>

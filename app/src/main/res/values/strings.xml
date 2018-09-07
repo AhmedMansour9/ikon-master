@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">ikon</string>
+
+    <string name="loading">LOADING .. </string>
+    <string name="gust">GUEST</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="FName">First Name</string>
+    <string name="LName">Last Name</string>
+    <string name="Email">Email</string>
+    <string name="Phone">Phone</string>
+    <string name="Password">Password</string>
+    <string name="ConfirmPassword">ConFirm Password</string>
+    <string name="signup">SIGN UP</string>
+    <string name="signin">SIGN IN</string>
+    <string name="Or">OR</string>
+    <string name="Forget_password">Register</string>
+    <string name="chooseservice">Choose Service</string>
+    <string name="shooping">Shopping</string>
+    <string name="maintin">Maintenance</string>
+    <string name="MobileRepair">Mobile Repair</string>
+    <string name="select">Select a Service</string>
+    <string name="selectbrand">Select a Brand</string>
+    <string name="lgrepair">LG Repair</string>
+    <string name="selectmodel">Select a Model</string>
+    <string name="fixedrepair">LG Fixed  Repair</string>
+    <string name="selectvolor">Select Color</string>
+    <string name="selectissue">Issue</string>
+    <string name="price">Price</string>
+    <string name="showprice">Get Price</string>
+    <string name="title_activity_navigation">Navigation</string>
+    <string name="address">Address</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="getlocation">Get Location</string>
+    <string name="action_settings">Settings</string>
+    <string name="servicerequest">Order Now</string>
+    <string name="phones">Phones</string>
+    <string name="Accessories">Accessories</string>
+    <string name="charges">spare parts</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="facebook_app_id">588552121560489</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notes">Other Issue Descroption</string>
+    <string name="home">Home</string>
+    <string name="Profile">Profile</string>
+    <string name="Visit">visit</string>
+    <string name="maintennce">maintenance</string>
+    <string name="White">White</string>
+    <string name="black">Black</string>
+    <string name="silver">Sliver</string>
+</resources>

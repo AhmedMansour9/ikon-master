@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="ikon.ikon.Activites.Maintaince">
+    <ProgressBar
+        android:id="@+id/progressBarMaintenence"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/toolbar"
+            android:background="#ffca00">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/logomaintince"
+                    android:layout_centerHorizontal="true"
+                    />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="#ffffff"
+            android:id="@+id/relaa"
+            android:layout_below="@+id/toolbar"
+            android:layout_height="@dimen/_40sdp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/MobileRepair"
+                android:textColor="#a09e9e"
+                android:textStyle="bold"
+                android:textSize="@dimen/_18sdp"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/relaa"
+            android:id="@+id/scroll"
+
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select"
+                    android:textColor="#a09e9e"
+                    android:id="@+id/selectservice"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/_16sdp"
+                    />
+                <Spinner
+                    android:layout_width="@dimen/_200sdp"
+                    android:background="@drawable/bcmaintaince"
+                    android:layout_below="@+id/selectservice"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/maintin"
+                    android:id="@+id/spin_Service"
+                    android:popupBackground="#EAEAEA"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown"
+                    android:textColor="#000"
+
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:layout_height="@dimen/_40sdp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/selectmodel"
+                    android:textColor="#a09e9e"
+                    android:layout_below="@+id/spin_Service"
+                    android:id="@+id/selectmodel"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/_16sdp"
+                    />
+                <Spinner
+                    android:layout_width="@dimen/_200sdp"
+                    android:background="@drawable/bcmaintaince"
+                    android:layout_below="@+id/selectmodel"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/Spin_Model"
+                    android:popupBackground="#EAEAEA"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown"
+
+                    android:text="@string/fixedrepair"
+                    android:textColor="#000"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:layout_height="@dimen/_40sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/selectvolor"
+                    android:textColor="#a09e9e"
+                    android:layout_below="@+id/Spin_Model"
+                    android:id="@+id/selectColor"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/_16sdp"
+                    />
+                <Spinner
+                    android:layout_width="@dimen/_200sdp"
+                    android:background="@drawable/bcmaintaince"
+                    android:layout_below="@+id/selectColor"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/Spin_Color"
+                    android:text="@string/fixedrepair"
+                    android:popupBackground="#EAEAEA"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:layout_height="@dimen/_40sdp" />
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/selectissue"
+                    android:textColor="#a09e9e"
+                    android:layout_below="@+id/Spin_Color"
+                    android:id="@+id/selectIssue"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/_16sdp"
+                    />
+                <Spinner
+                    android:layout_width="@dimen/_200sdp"
+                    android:background="@drawable/bcmaintaince"
+                    android:layout_below="@+id/selectIssue"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/Spin_Issue"
+                    android:popupBackground="#EAEAEA"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown"
+                    android:text="@string/fixedrepair"
+                    android:textColor="#000"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:layout_height="@dimen/_40sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/notes"
+                    android:textColor="#a09e9e"
+                    android:layout_below="@+id/Spin_Issue"
+                    android:id="@+id/selectOtherIssue"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/_16sdp"
+                    />
+                <EditText
+                    android:layout_width="@dimen/_200sdp"
+                    android:background="@drawable/bcmaintaince"
+                    android:layout_below="@+id/selectOtherIssue"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/Spin_OtherIssue"
+                    android:textColor="#000"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:layout_height="@dimen/_80sdp" />
+                <Button
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_below="@+id/Spin_OtherIssue"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@drawable/signup"
+                    android:text="@string/showprice"
+                    android:textSize="@dimen/_18sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:id="@+id/getprice"
+                    />
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

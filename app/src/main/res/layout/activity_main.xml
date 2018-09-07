@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="ikon.ikon.Activites.MainActivity">
+
+
+    <ImageView
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/logo"
+        android:layout_margin="@dimen/_15sdp"
+
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/_30sdp"
+        android:paddingRight="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_150sdp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/btnguest"
+            android:text="@string/gust"
+            android:textStyle="bold"
+            android:textColor="#afb0b1"
+            android:textSize="@dimen/_18sdp"
+            android:id="@+id/btnguest"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/btnlogin"
+            android:text="@string/login"
+            android:textStyle="bold"
+            android:textColor="#cbd5e6"
+            android:textSize="@dimen/_18sdp"
+            android:layout_below="@+id/btnguest"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:id="@+id/btnlogin"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/btnregister"
+            android:text="@string/register"
+            android:textStyle="bold"
+            android:textColor="#ffefca"
+            android:textSize="@dimen/_18sdp"
+            android:id="@+id/btnRegister"
+            android:layout_below="@+id/btnlogin"
+            android:layout_marginTop="@dimen/_15sdp"
+            />
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

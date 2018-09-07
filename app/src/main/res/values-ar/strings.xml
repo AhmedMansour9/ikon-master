@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loading">جاري التحميل ..  </string>
+    <string name="gust">زائر</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="register">انشاء حساب</string>
+    <string name="FName">الاسم الاول</string>
+    <string name="LName">الاسم الاخير</string>
+    <string name="Email">البريد الالكتروني</string>
+    <string name="Phone">موبيل</string>
+    <string name="Password">الرقم السري</string>
+    <string name="ConfiتmPassword">تأكيد الرقم السري</string>
+    <string name="signup">تسجيل</string>
+    <string name="signin">تسجيل دخول</string>
+    <string name="Or">أو</string>
+    <string name="Forget_password">انشاء حساب</string>
+    <string name="chooseservice">اختار الخدمة</string>
+    <string name="shooping">التسوق</string>
+    <string name="maintin">صيانة</string>
+    <string name="MobileRepair">صيانة موبايل</string>
+    <string name="select">اختار الخدمة </string>
+    <string name="selectbrand">اختار الماركة </string>
+    <string name="lgrepair">LG Repair</string>
+    <string name="selectmodel">اختار الموديل</string>
+    <string name="fixedrepair">LG Fixed  Repair</string>
+    <string name="selectvolor">اختار اللون</string>
+    <string name="selectissue">المشكلة</string>
+    <string name="price">السعر</string>
+    <string name="showprice">حدد السعر </string>
+    <string name="title_activity_navigation">Navigation</string>
+    <string name="address">العنوان</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="getlocation">حدد موقعك</string>
+    <string name="action_settings">Settings</string>
+    <string name="servicerequest">اطلب الان</string>
+    <string name="phones">موبايلات</string>
+    <string name="Accessories">اكسسورات</string>
+    <string name="charges">قطع غيار</string>
+    <string name="notes">وصف المشاكل</string>
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="Profile">الصفحة الشخصية</string>
+    <string name="Visit">زيارة</string>
+    <string name="maintennce">صيانة</string>
+    <string name="White">أبيض</string>
+    <string name="black">أسود </string>
+    <string name="silver">فضة</string>
+
+
+
+</resources>
