@@ -29,11 +29,13 @@ public class Maintincetwo extends AppCompatActivity{
     Gbs e;
     TextView T_address,T_Price,T_Phone;
     String tybe,Product_id,color,issue_id,otherissue,price;
+    Button btnorder;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintancetwo);
         gbs=new GPSTracker(this);
+        btnorder=findViewById(R.id.servicerequest);
         T_address=findViewById(R.id.T_Address);
         T_Phone=findViewById(R.id.T_Phone);
         T_Price=findViewById(R.id.T_Price);
@@ -44,6 +46,14 @@ public class Maintincetwo extends AppCompatActivity{
 
 
 
+    }
+    public void order(){
+        btnorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
     public void get_Intent(){
         tybe=getIntent().getStringExtra("tybe");

@@ -16,16 +16,13 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ikon.ikon.Model.Issue;
 import ikon.ikon.Model.IssueType;
-import ikon.ikon.Model.Product;
 import ikon.ikon.Model.Products;
-import ikon.ikon.PreSenter.GetIssueResponse;
+import ikon.ikon.PreSenter.GetIssuePresenter;
 import ikon.ikon.PreSenter.GetPricePresenter;
 import ikon.ikon.PreSenter.GetProductsPresenter;
 import ikon.ikon.R;
@@ -38,7 +35,7 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
     Spinner spin_Service,Spin_Model,Spin_Color,Spin_Issue;
     EditText Edit_OtherIssue;
     GetProductsPresenter getlist;
-    GetIssueResponse getIssue;
+    GetIssuePresenter getIssue;
     SharedPreferences shared;
     SharedPreferences shareLanguage;
      ProgressBar progressBar;
@@ -68,7 +65,7 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
 //        String logi=shareLanguage.getString("logggin",null);
         otherissue=Edit_OtherIssue.getText().toString();
 
-        getIssue=new GetIssueResponse(this,(IssueTybeView) this);
+        getIssue=new GetIssuePresenter(this,(IssueTybeView) this);
         getlist=new GetProductsPresenter(this,(ProductView)this);
         progressBar.setVisibility(View.VISIBLE);
         getlist.GetProducts(Lan);

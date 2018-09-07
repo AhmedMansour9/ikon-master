@@ -7,6 +7,7 @@ import ikon.ikon.Model.IssueResponse;
 import ikon.ikon.Model.PeoductResponse;
 import ikon.ikon.Model.UserLoginResponse;
 import ikon.ikon.Model.UserRegisterResponse;
+import ikon.ikon.Model.phonesResponse;
 import ikon.ikon.PreSenter.Registergoogle;
 import retrofit2.Call;
 import retrofit2.http.POST;
@@ -39,5 +40,8 @@ public interface Apiinterface {
 
     @POST("issuePrice")
     Call<GetPriceResponse> GetPrice(@QueryMap Map<String,String> queryMab);
+
+    @POST("showProductShop")
+    Call<phonesResponse> GetPHones(@QueryMap Map<String,String> queryMab);
 
 }

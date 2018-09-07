@@ -20,11 +20,11 @@ import retrofit2.Response;
  * Created by ic on 9/6/2018.
  */
 
-public class GetIssueResponse {
+public class GetIssuePresenter {
 
     IssueTybeView getIssuetyb;
 
-    public GetIssueResponse(Context context, IssueTybeView Issueeview)
+    public GetIssuePresenter(Context context, IssueTybeView Issueeview)
     {
         this.getIssuetyb=Issueeview;
 
