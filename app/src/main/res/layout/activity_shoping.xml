@@ -8,7 +8,8 @@
     tools:context="ikon.ikon.Activites.Shoping">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_180sdp">
+        android:layout_height="@dimen/_180sdp"
+        android:id="@+id/relativeLayout">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/_180sdp"
@@ -34,19 +35,21 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/transparent"
             app:tabMode="fixed"
             app:tabGravity="fill"/>
     </android.support.design.widget.AppBarLayout>
 
+    </RelativeLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/bar"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
-
-    </RelativeLayout>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </RelativeLayout>
