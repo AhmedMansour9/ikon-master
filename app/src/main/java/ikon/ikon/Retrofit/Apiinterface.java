@@ -2,6 +2,7 @@ package ikon.ikon.Retrofit;
 
 import java.util.Map;
 
+import ikon.ikon.Model.AccessoriesResponse;
 import ikon.ikon.Model.GetPriceResponse;
 import ikon.ikon.Model.IssueResponse;
 import ikon.ikon.Model.PeoductResponse;
@@ -43,5 +44,8 @@ public interface Apiinterface {
 
     @POST("showProductShop")
     Call<phonesResponse> GetPHones(@QueryMap Map<String,String> queryMab);
+
+    @POST("showAccessoriesShop")
+    Call<AccessoriesResponse> GetAccessories(@QueryMap Map<String,String> queryMab);
 
 }

@@ -16,21 +16,21 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import ikon.ikon.Model.Phone;
+import ikon.ikon.Model.Accessory;
 import ikon.ikon.Model.Phones;
 import ikon.ikon.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
- * Created by ic on 9/7/2018.
+ * Created by ic on 9/8/2018.
  */
 
-public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHolder> {
+public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapter.MyViewHolder> {
 
 
 
-    public List<Phones> filteredList=new ArrayList<>();
+    public List<Accessory> filteredList=new ArrayList<>();
     View itemView;
     Context con;
 
@@ -45,28 +45,28 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
             T_Model = view.findViewById(R.id.T_Model);
             T_Price = view.findViewById(R.id.T_Price);
             mobile=view.findViewById(R.id.Image_Phone);
-          progressBar=view.findViewById(R.id.progrossimage);
+            progressBar=view.findViewById(R.id.progrossimage);
 
 
         }
 
     }
 
-    public Phones_Adapter(List<Phones> phon,Context context){
+    public Accessories_Adapter(List<Accessory> phon,Context context){
         filteredList=phon;
         this.con=context;
     }
 
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Accessories_Adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_phone, parent, false);
-        return new MyViewHolder(itemView);
+                .inflate(R.layout.itemaccessories, parent, false);
+        return new Accessories_Adapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final Accessories_Adapter.MyViewHolder holder, final int position) {
 
 
         holder.T_Name.setText(filteredList.get(position).getProductsName());
@@ -76,7 +76,7 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
         String i = filteredList.get(position).getProductsImage();
 
         Uri u = Uri.parse(i);
-       holder.progressBar.setVisibility(View.VISIBLE);
+        holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(getApplicationContext())
                 .load("http://ikongo.com/site/"+u)
                 .into(holder.mobile, new Callback() {

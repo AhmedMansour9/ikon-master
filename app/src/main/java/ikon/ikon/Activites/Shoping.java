@@ -39,16 +39,18 @@ public class Shoping extends AppCompatActivity {
               tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#fffc00"));
 
         tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
+
+        if(isRTL()) {
+            tabLayout.getTabAt(2).select();
+        }else {
+            tabLayout.getTabAt(0).select();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            tabLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        }
     }
 
-//        if(isRTL()) {
-//            tabLayout.getTabAt(1).select();
-//        }else {
-//            tabLayout.getTabAt(0).select();
-//        }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            tabLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-//        }
+
 
     public static boolean isRTL(Locale locale) {
         final int directionality = Character.getDirectionality(locale.getDisplayName().charAt(0));
@@ -59,27 +61,29 @@ public class Shoping extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
 
-        adapter.addFragment(new Phones(), getResources().getString(R.string.phones));
-        adapter.addFragment(new Accessories(),getResources().getString(R.string.Accessories));
-        adapter.addFragment(new Accessories(),getResources().getString(R.string.charges));
 
-//        if (isRTL()) {
-//            // The view has RTL layout
-//            adapter.addFragment(new FragmentRequests(), getResources().getString(R.string.reqests));
-//            adapter.addFragment(new FragmentFriends(),getResources().getString(R.string.freinds));
-//        } else {
-//            // The view has LTR layout
-//            adapter.addFragment(new FragmentFriends(),getResources().getString(R.string.freinds));
-//            adapter.addFragment(new FragmentRequests(), getResources().getString(R.string.reqests));
-//
-//        }
+        if (isRTL()) {
+            adapter.addFragment(new Accessories(),getResources().getString(R.string.charges));
+            adapter.addFragment(new Accessories(),getResources().getString(R.string.Accessories));
+            adapter.addFragment(new Phones(), getResources().getString(R.string.phones));
 
-        //phones //Accessores // Charges
+        } else {
+            // The view has LTR layout
+
+            adapter.addFragment(new Phones(), getResources().getString(R.string.phones));
+            adapter.addFragment(new Accessories(),getResources().getString(R.string.Accessories));
+            adapter.addFragment(new Accessories(),getResources().getString(R.string.charges));
+
+        }
+
+        //phones //Accessores // Sparts
 
         viewPager.setCurrentItem(adapter.getCount() - 1);
         viewPager.setAdapter(adapter);
     }
-
+    public static boolean isRTL() {
+        return isRTL(Locale.getDefault());
+    }
     static  class Adapter extends FragmentStatePagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();

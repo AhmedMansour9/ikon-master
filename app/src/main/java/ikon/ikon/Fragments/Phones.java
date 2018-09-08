@@ -50,24 +50,13 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
          Lan=shared.getString("Lann",null);
          Recyclview();
         SwipRefresh();
-        if(Lan!=null) {
-            phons.GetPhones(Lan);
-        }else {
-            phons.GetPhones("en");
-        }
-          mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-              @Override
-              public void onRefresh() {
-              phons.GetPhones("ar");
-              }
-          });
+
 
         return view;
     }
 
     @Override
     public void getPhones(List<ikon.ikon.Model.Phones> phone) {
-        Toast.makeText(getContext(), ""+phone.size(), Toast.LENGTH_SHORT).show();
         adapter = new Phones_Adapter(phone,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -99,6 +88,7 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
+                mSwipeRefreshLayout.setEnabled(true);
                 if(Lan!=null) {
                     phons.GetPhones(Lan);
                 }else {
@@ -111,6 +101,7 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
 
     @Override
     public void onRefresh() {
+        mSwipeRefreshLayout.setEnabled(true);
         if(Lan!=null) {
             phons.GetPhones(Lan);
         }else {

@@ -13,10 +13,10 @@ import ikon.ikon.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Charges extends Fragment {
+public class Sparts extends Fragment {
 
 
-    public Charges() {
+    public Sparts() {
         // Required empty public constructor
     }
 
