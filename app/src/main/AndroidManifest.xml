@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ikon.ikon">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ikonNNN.ikonN">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name="ikon.ikon.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/iconlogo"
         android:label="@string/app_name"
-        android:name=".App"
-        android:windowSoftInputMode="stateHidden"        android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activites.Splash">
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:windowSoftInputMode="stateHidden">
+        <activity android:name="ikon.ikon.Activites.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activites.MainActivity" />
-        <activity android:name=".Activites.Register_Activity" />
-        <activity android:name=".Activites.Login" />
-        <activity android:name=".Activites.Maintaince" />
+        <activity android:name="ikon.ikon.Activites.MainActivity" />
+        <activity android:name="ikon.ikon.Activites.Register_Activity" />
+        <activity android:name="ikon.ikon.Activites.Login" />
+        <activity android:name="ikon.ikon.Activites.Maintaince" />
         <activity
-            android:name=".Activites.Navigation"
+            android:name="ikon.ikon.Activites.Navigation"
             android:label="@string/title_activity_navigation"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".Activites.Maintincetwo" />
-        <activity android:name=".Activites.Shoping" />
-        <activity android:name=".Activites.Language"/>
+        <activity android:name="ikon.ikon.Activites.Maintincetwo" />
+        <activity android:name="ikon.ikon.Activites.Shoping" />
+        <activity android:name="ikon.ikon.Activites.Language" />
+        <activity android:name="ikon.ikon.Activites.ShowProduct" />
+        <activity android:name="ikon.ikon.Activites.cartproducts" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
+            tools:replace="android:value"
             android:value="@string/facebook_app_id" />
 
         <activity
@@ -51,6 +58,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCJ6CfOZbzzEilL-dS9y-cfi5PXTTgWrNI" />
+   <activity android:name="ikon.ikon.Activites.Dialog"
+       android:theme="@style/Theme.AppCompat.Dialog"></activity>
 
     </application>
 

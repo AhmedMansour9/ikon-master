@@ -8,7 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import ikon.ikon.R;
+import ikonNNN.ikonN.R;
+
 
 /**
  * Created by ic on 9/5/2018.

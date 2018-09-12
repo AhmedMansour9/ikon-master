@@ -5,8 +5,7 @@ import android.content.Context;
 import java.util.HashMap;
 import java.util.Map;
 
-import ikon.ikon.Activites.RegisterResponse;
-import ikon.ikon.Model.UserLoginResponse;
+import ikon.ikon.Model.RegisterFaceResponse;
 import ikon.ikon.Model.UserRegister;
 import ikon.ikon.Retrofit.ApiCLint;
 import ikon.ikon.Retrofit.Apiinterface;
@@ -39,25 +38,25 @@ public class RegisterFace_Presenter {
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
 
 
-        Call<UserLoginResponse> call = apiInterface.RegisterFace_Book(queryMap);
-        call.enqueue(new Callback<UserLoginResponse>() {
+        Call<RegisterFaceResponse> call = apiInterface.RegisterFace_Book(queryMap);
+        call.enqueue(new Callback<RegisterFaceResponse>() {
             @Override
-            public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
+            public void onResponse(Call<RegisterFaceResponse> call, Response<RegisterFaceResponse> response) {
 
                 if (response.isSuccessful()) {
-                    if(response.body().equals("Singup Success")){
+
                         loginFacevieew.openMainFace(response.body().getData().getUserToken());
                     }else {
                         loginFacevieew.showErrorFace("");
 
                     }
 
-                }
+
             }
 
 
             @Override
-            public void onFailure(Call<UserLoginResponse> call, Throwable t) {
+            public void onFailure(Call<RegisterFaceResponse> call, Throwable t) {
                 loginFacevieew.showErrorFace("");
 
             }

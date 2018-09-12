@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import ikon.ikon.Activites.Maintaince;
 import ikon.ikon.Activites.Shoping;
-import ikon.ikon.R;
+import ikonNNN.ikonN.R;
 
 
 /**

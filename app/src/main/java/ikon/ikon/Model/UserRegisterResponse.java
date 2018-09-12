@@ -11,7 +11,7 @@ public class UserRegisterResponse {
 
     @SerializedName("data")
     @Expose
-    private String data;
+    private UserRegisterrrr data;
     @SerializedName("status")
     @Expose
     private Boolean status;
@@ -19,11 +19,11 @@ public class UserRegisterResponse {
     @Expose
     private String error;
 
-    public String getData() {
+    public UserRegisterrrr getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(UserRegisterrrr data) {
         this.data = data;
     }
 
@@ -42,5 +42,4 @@ public class UserRegisterResponse {
     public void setError(String error) {
         this.error = error;
     }
-
 }

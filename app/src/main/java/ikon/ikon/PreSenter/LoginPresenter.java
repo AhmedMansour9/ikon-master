@@ -5,7 +5,6 @@ import android.content.Context;
 import java.util.HashMap;
 import java.util.Map;
 
-import ikon.ikon.Activites.RegisterResponse;
 import ikon.ikon.Model.UserLoginResponse;
 import ikon.ikon.Model.UserRegister;
 import ikon.ikon.Retrofit.ApiCLint;

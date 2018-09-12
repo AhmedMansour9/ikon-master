@@ -45,7 +45,6 @@ public class Register {
             public void onResponse(Call<UserRegisterResponse> call, Response<UserRegisterResponse> response) {
 
                 if (response.isSuccessful()) {
-                    if(response.body().getData().equals("Singup Success"))
                     registerView.openMain();
                 } else {
                     registerView.showError("");

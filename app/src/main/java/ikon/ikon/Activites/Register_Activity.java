@@ -7,26 +7,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.fourhcode.forhutils.FUtilsValidation;
 
 import ikon.ikon.Model.UserRegister;
 import ikon.ikon.PreSenter.Register;
-import ikon.ikon.R;
 import ikon.ikon.Viewes.RegisterView;
+import ikonNNN.ikonN.R;
 
 public class Register_Activity extends AppCompatActivity implements RegisterView {
     String gender;
     Button register;
     EditText E_FirstName,E_LastName,E_Emai,E_Phone,E_Password,E_ConFirmpassword;
     Register Register_Presenter;
+    ProgressBar Progrossregister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         E_FirstName=findViewById(R.id.E_FirstName);
         E_LastName=findViewById(R.id.E_LastName);
+        Progrossregister=findViewById(R.id.progressBarRegister);
         E_Emai=findViewById(R.id.E_Emai);
         E_Phone=findViewById(R.id.E_Phone);
         E_Password=findViewById(R.id.E_Password);
@@ -70,6 +73,7 @@ public class Register_Activity extends AppCompatActivity implements RegisterView
                     user.setPhone(E_Phone.getText().toString());
                     user.setPassword(E_Password.getText().toString());
 
+                    Progrossregister.setVisibility(View.VISIBLE);
                     Register_Presenter.register(user);
                 }
             }
@@ -80,12 +84,13 @@ public class Register_Activity extends AppCompatActivity implements RegisterView
     @Override
     public void openMain() {
         Toast.makeText(this, "Successfull", Toast.LENGTH_SHORT).show();
+        Progrossregister.setVisibility(View.GONE);
         startActivity(new Intent(Register_Activity.this,Login.class));
         finish();
     }
 
     @Override
     public void showError(String error) {
-
+        Toast.makeText(this, "Email Filed", Toast.LENGTH_SHORT).show();
     }
 }

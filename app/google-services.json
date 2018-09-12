@@ -8,18 +8,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:507115567765:android:a3ee8dd4b9d27523",
+        "mobilesdk_app_id": "1:507115567765:android:d190d82daa057e4f",
         "android_client_info": {
-          "package_name": "ikon.ikon"
+          "package_name": "ikonNNN.ikonN"
         }
       },
       "oauth_client": [
         {
-          "client_id": "507115567765-apu64lfb69jtp759jdpqjg1ttq9vom8o.apps.googleusercontent.com",
+          "client_id": "507115567765-1gnpgvikm23i6i5hocncpdn43u6m8eud.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "ikon.ikon",
+            "package_name": "ikonNNN.ikonN",
             "certificate_hash": "b5ae9b603d19c76994e5dea38521f61c75b79842"
+          }
+        },
+        {
+          "client_id": "507115567765-mu0r9ipu73ibadmggh6v1u0gjn7506ff.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ikonNNN.ikonN",
+            "certificate_hash": "3223fe513d4aa63517b837db5e1110ed363ae878"
           }
         },
         {
@@ -42,6 +50,13 @@
             {
               "client_id": "507115567765-n1gv839sil5444p3mm5rp9g7is9omjvl.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "507115567765-a4ovf8l4ioruo2edllkihdmo9bfupljc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.farid.Mohar.ikon"
+              }
             }
           ]
         },

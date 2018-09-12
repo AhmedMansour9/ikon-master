@@ -13,13 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import java.util.Locale;
 
 import ikon.ikon.Adapter.Accessories_Adapter;
 import ikon.ikon.Adapter.Phones_Adapter;
 import ikon.ikon.Model.Accessory;
 import ikon.ikon.PreSenter.GetAccessoriesPresenter;
-import ikon.ikon.R;
 import ikon.ikon.Viewes.AccessoriesView;
+import ikon.ikon.Viewes.CountView;
+import ikonNNN.ikonN.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -27,7 +29,7 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Accessories extends Fragment implements AccessoriesView,SwipeRefreshLayout.OnRefreshListener{
+public class Accessories extends Fragment implements AccessoriesView,SwipeRefreshLayout.OnRefreshListener,CountView{
 
 
     public Accessories() {
@@ -49,14 +51,26 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
        getAccessoriesP=new GetAccessoriesPresenter(getContext(),this);
         shared=getActivity().getSharedPreferences("Language",MODE_PRIVATE);
         Lan=shared.getString("Lann",null);
-        if(Lan!=null) {
-            getAccessoriesP.GetAccessories(Lan);
-        }else {
-            getAccessoriesP.GetAccessories("en");
-        }
         Recyclview();
         SwipRefresh();
 
+      mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+          @Override
+          public void onRefresh() {
+              mSwipeRefreshLayout.setRefreshing(true);
+              mSwipeRefreshLayout.setEnabled(true);
+              if(Lan!=null) {
+                  getAccessoriesP.GetAccessories(Lan);
+              }else {
+
+                  if(isRTL()){
+                      getAccessoriesP.GetAccessories("ar");
+                  }else {
+                      getAccessoriesP.GetAccessories("en");
+                  }
+              }
+          }
+      });
 
         return view;
     }
@@ -66,7 +80,7 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
     }
 
     public void SwipRefresh(){
-        mSwipeRefreshLayout =  view.findViewById(R.id.swipe_container);
+        mSwipeRefreshLayout =  view.findViewById(R.id.swipe_contain);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
@@ -76,11 +90,17 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
                 mSwipeRefreshLayout.setEnabled(true);
                 if(Lan!=null) {
                     getAccessoriesP.GetAccessories(Lan);
                 }else {
-                    getAccessoriesP.GetAccessories("en");
+
+                    if(isRTL()){
+                        getAccessoriesP.GetAccessories("ar");
+                    }else {
+                        getAccessoriesP.GetAccessories("en");
+                    }
                 }
 
             }
@@ -94,6 +114,7 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -112,7 +133,24 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
         if(Lan!=null) {
             getAccessoriesP.GetAccessories(Lan);
         }else {
-            getAccessoriesP.GetAccessories("en");
-        }
+
+                if(isRTL()){
+                    getAccessoriesP.GetAccessories("ar");
+                }else {
+                    getAccessoriesP.GetAccessories("en");
+                }
+            }
+
     }
+    public static boolean isRTL() {
+        return isRTL(Locale.getDefault());
+    }
+    public static boolean isRTL(Locale locale) {
+        final int directionality = Character.getDirectionality(locale.getDisplayName().charAt(0));
+        return directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT ||
+                directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC;
+    }
+
+    @Override
+    public void Count(String count) {}
 }

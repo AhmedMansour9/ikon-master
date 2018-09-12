@@ -48,10 +48,10 @@ import ikon.ikon.Model.UserRegister;
 import ikon.ikon.PreSenter.RegisterFace_Presenter;
 import ikon.ikon.PreSenter.LoginPresenter;
 import ikon.ikon.PreSenter.Registergoogle;
-import ikon.ikon.R;
 import ikon.ikon.Viewes.RegisterFaceView;
 import ikon.ikon.Viewes.LoginView;
 import ikon.ikon.Viewes.RegistergoogleView;
+import ikonNNN.ikonN.R;
 
 public class Login extends AppCompatActivity implements LoginView,RegisterFaceView,RegistergoogleView{
     ImageView loginfac,google;
@@ -206,7 +206,7 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
             @Override
             public void onClick(View view) {
 
-                    LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("email", "public_profile", "user_friends"));
+                    LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("email", "public_profile"));
                     LoginManager.getInstance().registerCallback(mCallbackManager,
                             new FacebookCallback<LoginResult>() {
                                 @Override
@@ -269,8 +269,8 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
                                             }
                                         }
                                     });
-                            Bundle permission_param = new Bundle();
-                            permission_param.putString("fields", "id,name,email,picture.width(120).height(120)");
+                           Bundle permission_param = new Bundle();
+                            permission_param.putString("fields", "id,name,email");
                             data_request.setParameters(permission_param);
                             data_request.executeAsync();
                             data_request.executeAsync();

@@ -5,12 +5,10 @@ import android.content.Context;
 import java.util.HashMap;
 import java.util.Map;
 
-import ikon.ikon.Activites.RegisterResponse;
 import ikon.ikon.Model.UserLoginResponse;
 import ikon.ikon.Model.UserRegister;
 import ikon.ikon.Retrofit.ApiCLint;
 import ikon.ikon.Retrofit.Apiinterface;
-import ikon.ikon.Viewes.RegisterFaceView;
 import ikon.ikon.Viewes.RegistergoogleView;
 import retrofit2.Call;
 import retrofit2.Callback;

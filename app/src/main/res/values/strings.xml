@@ -8,7 +8,7 @@
     <string name="FName">First Name</string>
     <string name="LName">Last Name</string>
     <string name="Email">Email</string>
-    <string name="Phone">Phone</string>
+    <string name="Phone">Mobile Number</string>
     <string name="Password">Password</string>
     <string name="ConfirmPassword">ConFirm Password</string>
     <string name="signup">SIGN UP</string>
@@ -40,14 +40,19 @@
     <string name="charges">spare parts</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="facebook_app_id">588552121560489</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="notes">Other Issue Descroption</string>
     <string name="home">Home</string>
     <string name="Profile">Profile</string>
     <string name="Visit">visit</string>
     <string name="maintennce">maintenance</string>
-    <string name="White">White</string>
-    <string name="black">Black</string>
+    <string name="sliver">Silver</string>
+    <string name="Gold">Gold</string>
     <string name="silver">Sliver</string>
+    <string name="SpaceGray">Space Gray</string>
+    <string name="Red">Red</string>
     <string name="cart">Add To Cart</string>
+    <string name="rquestorder">Request Order</string>
+    <string name="requestedsuccfuly">Request Order Succesfulled,We Will Review it</string>
+    <string name="Name">Name</string>
+    <string name="discrp">Discrption</string>
 </resources>

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="facebook_app_id">588552121560489</string>
+
+    <string name="app_name">ikon</string>
+    <string name="ConfirmPassword">تأكيد الرقم السري</string>
     <string name="loading">جاري التحميل ..  </string>
     <string name="gust">زائر</string>
     <string name="login">تسجيل دخول</string>
@@ -9,7 +13,6 @@
     <string name="Email">البريد الالكتروني</string>
     <string name="Phone">موبيل</string>
     <string name="Password">الرقم السري</string>
-    <string name="ConfiتmPassword">تأكيد الرقم السري</string>
     <string name="signup">تسجيل</string>
     <string name="signin">تسجيل دخول</string>
     <string name="Or">أو</string>
@@ -42,12 +45,15 @@
     <string name="Profile">الصفحة الشخصية</string>
     <string name="Visit">زيارة</string>
     <string name="maintennce">صيانة</string>
-    <string name="White">أبيض</string>
+    <string name="sliver">فضة</string>
     <string name="cart">أضف الي العربة</string>
-
-    <string name="black">أسود </string>
+    <string name="SpaceGray">فضاء رمادي</string>
+    <string name="Red">احمر</string>
+    <string name="Gold">ذهبي </string>
     <string name="silver">فضة</string>
+    <string name="rquestorder">أطلب الان </string>
 
-
-
+    <string name="requestedsuccfuly">تم طلب الاوردر بنجاح</string>
+    <string name="Name">الاسم </string>
+    <string name="discrp">الوصف </string>
 </resources>

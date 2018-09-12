@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     tools:context="ikon.ikon.Activites.Register_Activity">
 
+    <ProgressBar
+        android:id="@+id/progressBarRegister"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#ff0000"
+        android:layout_centerInParent="true"
+        android:visibility="invisible" />
     <ImageView
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_80sdp"

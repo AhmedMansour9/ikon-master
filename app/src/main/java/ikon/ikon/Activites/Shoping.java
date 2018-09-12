@@ -1,5 +1,6 @@
 package ikon.ikon.Activites;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -11,28 +12,38 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
 import ikon.ikon.Fragments.Accessories;
 import ikon.ikon.Fragments.Phones;
-import ikon.ikon.R;
+import ikon.ikon.Fragments.Sparts;
+import ikon.ikon.Model.Cart;
+import ikon.ikon.Viewes.CountView;
+import ikonNNN.ikonN.R;
 
-public class Shoping extends AppCompatActivity {
+public class Shoping extends AppCompatActivity implements CountView{
     public static TabLayout tabLayout;
     private ViewPager viewPager;
+   public static TextView T_Cart;
+   ImageView btncart;
+    private List<Cart> liscart=new LinkedList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shoping);
         viewPager = findViewById(R.id.viewpager);
+        btncart=findViewById(R.id.btncart);
         setupViewPager(viewPager);
-
+        T_Cart=findViewById(R.id.T_Cart);
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
+        T_Cart.setText(String.valueOf(liscart.size()));
         tabLayout.setTabTextColors(
                 ColorStateList.valueOf(getResources().getColor(R.color.White)));
 //        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#fffc00"));
@@ -48,6 +59,13 @@ public class Shoping extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             tabLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
+
+        btncart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Shoping.this,cartproducts.class));
+            }
+        });
     }
 
 
@@ -63,7 +81,7 @@ public class Shoping extends AppCompatActivity {
 
 
         if (isRTL()) {
-            adapter.addFragment(new Accessories(),getResources().getString(R.string.charges));
+            adapter.addFragment(new Sparts(),getResources().getString(R.string.charges));
             adapter.addFragment(new Accessories(),getResources().getString(R.string.Accessories));
             adapter.addFragment(new Phones(), getResources().getString(R.string.phones));
 
@@ -72,18 +90,24 @@ public class Shoping extends AppCompatActivity {
 
             adapter.addFragment(new Phones(), getResources().getString(R.string.phones));
             adapter.addFragment(new Accessories(),getResources().getString(R.string.Accessories));
-            adapter.addFragment(new Accessories(),getResources().getString(R.string.charges));
+            adapter.addFragment(new Sparts(),getResources().getString(R.string.charges));
 
         }
 
         //phones //Accessores // Sparts
 
-        viewPager.setCurrentItem(adapter.getCount() - 1);
+//        viewPager.setCurrentItem(adapter.getCount() - 1);
         viewPager.setAdapter(adapter);
     }
     public static boolean isRTL() {
         return isRTL(Locale.getDefault());
     }
+
+    @Override
+    public void Count(String count) {
+        T_Cart.setText(count);
+    }
+
     static  class Adapter extends FragmentStatePagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();

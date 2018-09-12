@@ -16,13 +16,31 @@
         android:background="@drawable/header"
         />
    <ImageView
-       android:layout_width="@dimen/_200sdp"
+       android:layout_width="@dimen/_180sdp"
        android:layout_height="@dimen/_100sdp"
        android:layout_centerHorizontal="true"
        android:layout_marginTop="@dimen/_30sdp"
        android:background="@drawable/logoheader"
        />
 
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/carttoolbar"
+            android:id="@+id/btncart"
+                android:layout_alignParentRight="true"
+            android:layout_above="@+id/bar"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/T_Cart"
+            android:textColor="#fff"
+            android:layout_alignParentRight="true"
+            android:layout_above="@+id/bar"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:textSize="@dimen/_15sdp"
+            />
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -19,18 +19,22 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import ikon.ikon.Model.IssueTybeEnglish;
+import ikon.ikon.Model.IssueTybeen;
 import ikon.ikon.Model.IssueType;
 import ikon.ikon.Model.Products;
 import ikon.ikon.PreSenter.GetIssuePresenter;
 import ikon.ikon.PreSenter.GetPricePresenter;
 import ikon.ikon.PreSenter.GetProductsPresenter;
-import ikon.ikon.R;
 import ikon.ikon.Viewes.GetPriceView;
 import ikon.ikon.Viewes.IssueTybeView;
+import ikon.ikon.Viewes.IssuetybeViewEnglish;
 import ikon.ikon.Viewes.ProductView;
+import ikonNNN.ikonN.R;
 
-public class Maintaince extends AppCompatActivity implements ProductView,AdapterView.OnItemSelectedListener,IssueTybeView,GetPriceView{
+public class Maintaince extends AppCompatActivity implements ProductView,AdapterView.OnItemSelectedListener,IssuetybeViewEnglish,IssueTybeView,GetPriceView{
     Button btn_ShowPrice;
     Spinner spin_Service,Spin_Model,Spin_Color,Spin_Issue;
     EditText Edit_OtherIssue;
@@ -47,6 +51,7 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
     String Issue_id;
     Products y;
     GetPricePresenter getprice;
+    ArrayAdapter<IssueTybeEnglish> inssueneglish;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,17 +68,33 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
         String Lan=shared.getString("Lann",null);
 //        shareLanguage=getSharedPreferences("login",MODE_PRIVATE);
 //        String logi=shareLanguage.getString("logggin",null);
-        otherissue=Edit_OtherIssue.getText().toString();
 
-        getIssue=new GetIssuePresenter(this,(IssueTybeView) this);
+
+        getIssue=new GetIssuePresenter(this,(IssueTybeView) this,(IssuetybeViewEnglish)this);
         getlist=new GetProductsPresenter(this,(ProductView)this);
         progressBar.setVisibility(View.VISIBLE);
-        getlist.GetProducts(Lan);
-        getIssue.GetIssuetybe(Lan);
+
+            if(isRTL()){
+            getlist.GetProducts("ar");
+            getIssue.GetIssuetybeArabice("ar");
+        }else {
+                getlist.GetProducts("en");
+                getIssue.GetIssuetybeEnglish("en");
+
+            }
+
         Get_price();
         Spin_Service();
 
         Spin_Color();
+    }
+    public static boolean isRTL() {
+        return isRTL(Locale.getDefault());
+    }
+    public static boolean isRTL(Locale locale) {
+        final int directionality = Character.getDirectionality(locale.getDisplayName().charAt(0));
+        return directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT ||
+                directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC;
     }
    public void Spin_Service(){
 
@@ -118,9 +139,11 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
     public void Spin_Color(){
 
         List<String> categories = new ArrayList<String>();
-        categories.add(getResources().getString(R.string.White));
-        categories.add(getResources().getString(R.string.black));
+        categories.add(getResources().getString(R.string.Red));
+        categories.add(getResources().getString(R.string.Gold));
+        categories.add(getResources().getString(R.string.SpaceGray));
         categories.add(getResources().getString(R.string.silver));
+
 
         dataAd = new ArrayAdapter<String>(getApplicationContext(), R.layout.textcolorspinner, categories) {
             @Override
@@ -244,9 +267,11 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 issue=Spin_Issue.getSelectedItem().toString();
-                for(i = 0; i<a.size(); i++){
-                    if(a.get(i).getNameTypeAr().equals(issue)){
-                        Issue_id=a.get(i).getId();
+                if(issue!=null) {
+                    for (i = 0; i < a.size(); i++) {
+                        if (a.get(i).getNameTypeAr().equals(issue)) {
+                            Issue_id = a.get(i).getId();
+                        }
                     }
                 }
             }
@@ -268,6 +293,7 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
     public void Price(String Price) {
        progressBar.setVisibility(View.GONE);
         Intent inty=new Intent(Maintaince.this,Maintincetwo.class);
+        otherissue=Edit_OtherIssue.getText().toString();
         inty.putExtra("tybe",service);
         inty.putExtra("Product_id",String.valueOf(Model_id));
         inty.putExtra("color",color);
@@ -281,6 +307,47 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
 
     @Override
     public void ErrorPrice() {
+
+    }
+
+    @Override
+    public void GetissuetybeEnglish(final List<IssueTybeEnglish> list) {
+        progressBar.setVisibility(View.GONE);
+        inssueneglish = new ArrayAdapter<IssueTybeEnglish>(getApplicationContext(), R.layout.textcolorspinner,list) {
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
+                textView.setTextColor(Color.BLACK);
+                return textView;
+            }
+        };
+        inssueneglish.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spin_Issue.setOnItemSelectedListener(this);
+        Spin_Issue.setAdapter(inssueneglish);
+        Spin_Issue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                issue=Spin_Issue.getSelectedItem().toString();
+                if(issue!=null) {
+                    for (i = 0; i < list.size(); i++) {
+                        if (list.get(i).getNameTypeEn().equals(issue)) {
+                            Issue_id = list.get(i).getId();
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+    }
+
+    @Override
+    public void ErrorIssuetybeenglish() {
 
     }
 }

@@ -1,17 +1,17 @@
-package ikon.ikon.Activites;
+package ikon.ikon.Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by HP on 04/09/2018.
+ * Created by ic on 9/8/2018.
  */
 
-public class RegisterResponse {
+public class IssueTubeEnglishResponse {
 
     @SerializedName("data")
     @Expose
-    private String data;
+    private IssueTybeen data;
     @SerializedName("status")
     @Expose
     private Boolean status;
@@ -19,11 +19,11 @@ public class RegisterResponse {
     @Expose
     private String error;
 
-    public String getData() {
+    public IssueTybeen getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(IssueTybeen data) {
         this.data = data;
     }
 

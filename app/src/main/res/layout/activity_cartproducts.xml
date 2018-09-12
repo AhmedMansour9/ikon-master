@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#d9d9d9"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_contain"
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_Cart"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_40sdp"
+    android:layout_alignParentBottom="true"
+    android:layout_marginLeft="@dimen/_10sdp"
+    android:layout_marginRight="@dimen/_10sdp"
+    android:text="@string/rquestorder"
+    android:textSize="@dimen/_18sdp"
+    android:id="@+id/orderr"
+    android:layout_marginBottom="@dimen/_20sdp"
+    android:background="@drawable/btnregister"
+    />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -5,11 +5,14 @@ import java.util.Map;
 import ikon.ikon.Model.AccessoriesResponse;
 import ikon.ikon.Model.GetPriceResponse;
 import ikon.ikon.Model.IssueResponse;
+import ikon.ikon.Model.IssueTubeEnglishResponse;
+import ikon.ikon.Model.OrderResponse;
 import ikon.ikon.Model.PeoductResponse;
+import ikon.ikon.Model.SpartsResponse;
 import ikon.ikon.Model.UserLoginResponse;
 import ikon.ikon.Model.UserRegisterResponse;
 import ikon.ikon.Model.phonesResponse;
-import ikon.ikon.PreSenter.Registergoogle;
+import ikon.ikon.Model.RegisterFaceResponse;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
@@ -28,7 +31,7 @@ public interface Apiinterface {
     Call<UserLoginResponse> Login(@QueryMap Map<String,String> queryMab);
 
     @POST("signupMobileFacebook")
-    Call<UserLoginResponse> RegisterFace_Book(@QueryMap Map<String,String> queryMab);
+    Call<RegisterFaceResponse> RegisterFace_Book(@QueryMap Map<String,String> queryMab);
 
     @POST("signupMobileGoogle")
     Call<UserLoginResponse> RegisterGoogle(@QueryMap Map<String,String> queryMab);
@@ -39,6 +42,9 @@ public interface Apiinterface {
     @POST("issueTypeList")
     Call<IssueResponse> GetIssueTybe(@QueryMap Map<String,String> queryMab);
 
+    @POST("issueTypeList")
+    Call<IssueTubeEnglishResponse> GetIssueEnglish(@QueryMap Map<String,String> queryMab);
+
     @POST("issuePrice")
     Call<GetPriceResponse> GetPrice(@QueryMap Map<String,String> queryMab);
 
@@ -48,4 +54,11 @@ public interface Apiinterface {
     @POST("showAccessoriesShop")
     Call<AccessoriesResponse> GetAccessories(@QueryMap Map<String,String> queryMab);
 
+    @POST("showSparePartsShop")
+    Call<SpartsResponse> GetSparts(@QueryMap Map<String,String> queryMab);
+
+    @POST("maintenanceOrder")
+    Call<OrderResponse> Showorder(@QueryMap Map<String,String> queryMab);
+
 }
+

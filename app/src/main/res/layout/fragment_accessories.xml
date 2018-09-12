@@ -1,7 +1,7 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#fff"
+    android:background="#d9d9d9"
     android:layout_height="match_parent"
     tools:context="ikon.ikon.Fragments.Accessories">
 
@@ -11,7 +11,7 @@
 
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_container"
+        android:id="@+id/swipe_contain"
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
         android:layout_height="match_parent">
@@ -26,4 +26,4 @@
     </android.support.v4.widget.SwipeRefreshLayout>
     </RelativeLayout>
 
-</FrameLayout>
+</RelativeLayout>
