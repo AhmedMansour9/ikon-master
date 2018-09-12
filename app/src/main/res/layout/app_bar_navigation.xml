@@ -16,11 +16,13 @@
 
 
 
+
+
                 <ImageView
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_40sdp"
                     android:src="@drawable/logotoolbar"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/_30sdp"
                     />
 
             </RelativeLayout>

@@ -13,6 +13,7 @@ import ikon.ikon.Model.UserLoginResponse;
 import ikon.ikon.Model.UserRegisterResponse;
 import ikon.ikon.Model.phonesResponse;
 import ikon.ikon.Model.RegisterFaceResponse;
+import ikon.ikon.PreSenter.OrderShoppinPresenter;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
@@ -59,6 +60,9 @@ public interface Apiinterface {
 
     @POST("maintenanceOrder")
     Call<OrderResponse> Showorder(@QueryMap Map<String,String> queryMab);
+
+    @POST("shopOrder")
+    Call<OrderShoppinPresenter> Ordershop(@QueryMap Map<String,String> queryMab);
 
 }
 

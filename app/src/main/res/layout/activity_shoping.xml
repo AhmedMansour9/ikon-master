@@ -8,64 +8,91 @@
     tools:context="ikon.ikon.Activites.Shoping">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_180sdp"
+        android:layout_height="wrap_content"
         android:id="@+id/relativeLayout">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_180sdp"
-        android:background="@drawable/header"
-        />
-   <ImageView
-       android:layout_width="@dimen/_180sdp"
-       android:layout_height="@dimen/_100sdp"
-       android:layout_centerHorizontal="true"
-       android:layout_marginTop="@dimen/_30sdp"
-       android:background="@drawable/logoheader"
-       />
 
-        <ImageView
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:background="@drawable/carttoolbar"
-            android:id="@+id/btncart"
-                android:layout_alignParentRight="true"
-            android:layout_above="@+id/bar"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/T_Cart"
-            android:textColor="#fff"
-            android:layout_alignParentRight="true"
-            android:layout_above="@+id/bar"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:textSize="@dimen/_15sdp"
-            />
+
+
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bar"
         android:background="@color/transparent"
-        android:layout_alignParentBottom="true"
         app:popupTheme="@style/PopupOverlay">
 
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#0783e7"
+            android:id="@+id/toolbarnavigation">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/carticonn"
+                android:id="@+id/btncartshop"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/T_Cartshop"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="#000000"
+                android:textSize="@dimen/_17sdp"
+
+                />
+
+            <ImageView
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:src="@drawable/logotoolbar"
+                android:layout_centerHorizontal="true"
+                />
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+
+    </android.support.design.widget.AppBarLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_below="@+id/bar"
+            android:background="#0783e7"
             app:tabMode="fixed"
             app:tabGravity="fill"/>
-    </android.support.design.widget.AppBarLayout>
 
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/relativeLayout"
+        android:background="@drawable/sliderfour"
+        android:id="@+id/img"
+        android:layout_height="@dimen/_120sdp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayout"
+        android:layout_below="@+id/img"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </RelativeLayout>

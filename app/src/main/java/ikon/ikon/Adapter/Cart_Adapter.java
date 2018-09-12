@@ -89,7 +89,7 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
 
 
         holder.T_Name.setText(filteredList.get(position).getName());
-        holder.count.setText(filteredList.get(position).getCount());
+//        holder.count.setText(filteredList.get(position).getCount());
         String a = filteredList.get(position).getDiscroption();
         holder.T_Discrption.setText(a.replace("<p>","").replace("</p>",""));
 
@@ -124,6 +124,7 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
             @Override
             public void onClick(View view) {
             filteredList.remove(position);
+                Shoping.T_Cartshop.setText(String.valueOf(filteredList.size()));
             notifyDataSetChanged();
             }
         });

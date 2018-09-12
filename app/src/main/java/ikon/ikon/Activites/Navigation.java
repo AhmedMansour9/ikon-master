@@ -24,17 +24,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
+import ikon.ikon.Bussiness.ListItemCart;
 import ikon.ikon.Fragments.GuesFragment;
+import ikon.ikon.Model.Cart;
+import ikon.ikon.Viewes.CountView;
 import ikonNNN.ikonN.R;
 
 public class Navigation extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements CountView , NavigationView.OnNavigationItemSelectedListener {
     Fragment fr;
     private int mCurrentSelectedPosition = 0;
     NavigationView navigationView;
@@ -42,6 +48,9 @@ public class Navigation extends AppCompatActivity
     ActionBarDrawerToggle toggle;
     DrawerLayout drawer;
     SharedPreferences shared;
+    private List<Cart> liscart=new LinkedList<>();
+    public static TextView T_Cart;
+    ImageView btncart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +68,8 @@ public class Navigation extends AppCompatActivity
 
          toolbar = findViewById(R.id.toolbarnavigation);
         setSupportActionBar(toolbar);
+//        btncart=findViewById(R.id.btncart);
+//        T_Cart=findViewById(R.id.T_Cart);
 
 
 
@@ -70,7 +81,12 @@ public class Navigation extends AppCompatActivity
          drawer = findViewById(R.id.drawer_layout);
 
 
-//
+//        btncart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(Navigation.this,cartproducts.class));
+//            }
+//        });
 
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -149,6 +165,10 @@ public class Navigation extends AppCompatActivity
         }
     }
 
+    @Override
+    public void Count(String count) {
+        T_Cart.setText(count);
+    }
 
 
 
@@ -195,5 +215,10 @@ public class Navigation extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 }

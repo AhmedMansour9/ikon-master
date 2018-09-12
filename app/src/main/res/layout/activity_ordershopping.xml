@@ -8,10 +8,15 @@
     tools:context="ikon.ikon.Activites.Maintincetwo">
 
 
-
+    <ProgressBar
+        android:id="@+id/progressBarorder"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_400sdp"
+    android:layout_height="@dimen/_450sdp"
     android:paddingLeft="@dimen/_20sdp"
     android:paddingRight="@dimen/_20sdp"
     android:background="@drawable/bglogin"
@@ -69,13 +74,13 @@
         android:layout_height="@dimen/_40sdp" />
 
     <Button
-        android:layout_width="@dimen/_170sdp"
+        android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_50sdp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/T_Address"
         android:background="#ffce20"
         android:id="@+id/getlocat"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:text="@string/getlocation"
         android:textSize="@dimen/_15sdp"
         android:textColor="#000"
@@ -88,6 +93,20 @@
         android:layout_below="@+id/getlocat"
         android:background="#fffd38"
         android:id="@+id/ordershoping"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/servicerequest"
+        android:textSize="@dimen/_15sdp"
+        android:textAllCaps="false"
+        android:textColor="#000"
+        android:layout_marginBottom="@dimen/_10sdp"
+        />
+    <Button
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/getlocat"
+        android:background="#fffd38"
+        android:id="@+id/servicerequest"
         android:layout_marginTop="@dimen/_20sdp"
         android:text="@string/servicerequest"
         android:textSize="@dimen/_15sdp"

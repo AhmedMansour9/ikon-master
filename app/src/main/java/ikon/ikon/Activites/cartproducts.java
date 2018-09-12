@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -39,19 +40,11 @@ import ikonNNN.ikonN.R;
 public class cartproducts extends AppCompatActivity {
 
     View view;
-    Gbs e;
     RecyclerView recyclerView;
-    SharedPreferences shared;
     Cart_Adapter adapter;
-    String Lan;
-    SwipeRefreshLayout mSwipeRefreshLayout;
     ListItemCart list=new ListItemCart();
-   Dialog dialog;
    Button btnorder;
     GPSTracker gbs;
-    double latitude,longitude;
-    String addres;
-    List<Address> addresses;
     double total_price;
     double res = 0;
 
@@ -82,7 +75,12 @@ public class cartproducts extends AppCompatActivity {
         btnorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(cartproducts.this, ikon.ikon.Activites.Dialog.class));
+                Intent inty=new Intent(cartproducts.this, ikon.ikon.Activites.Dialog.class);
+
+                inty.putExtra("totalpric",String.valueOf(res));
+
+
+                startActivity(inty);
 
             }
         });

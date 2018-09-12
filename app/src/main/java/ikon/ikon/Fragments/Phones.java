@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,26 +15,32 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import ikon.ikon.Activites.Navigation;
 import ikon.ikon.Activites.Shoping;
+import ikon.ikon.Activites.ShowProduct;
 import ikon.ikon.Adapter.Phones_Adapter;
 import ikon.ikon.Model.Cart;
+import ikon.ikon.Model.Count;
 import ikon.ikon.Model.phonesResponse;
+import ikon.ikon.PreSenter.CounterPresenter;
 import ikon.ikon.PreSenter.GetPhonesPresenter;
 import ikon.ikon.Viewes.PhonesView;
 import ikonNNN.ikonN.R;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.OnRefreshListener{
+public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.OnRefreshListener,Count{
 
-
+    private List<Cart> liscart=new LinkedList<>();
     public Phones() {
         // Required empty public constructor
     }
@@ -44,7 +51,9 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
      Phones_Adapter adapter;
      String Lan;
      SwipeRefreshLayout mSwipeRefreshLayout;
+     GridLayoutManager gridLayoutManager;
     private List<Cart> filteredList=new ArrayList<>();
+    CounterPresenter cn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,9 +62,11 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
        phons=new GetPhonesPresenter(getContext(),this);
         shared=getActivity().getSharedPreferences("Language",MODE_PRIVATE);
          Lan=shared.getString("Lann",null);
-        Shoping.T_Cart.setText(String.valueOf(filteredList.size()));
+        cn=new CounterPresenter(getContext(),this);
          Recyclview();
         SwipRefresh();
+
+
 
 
         return view;
@@ -65,9 +76,13 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
     public void getPhones(List<ikon.ikon.Model.Phones> phone) {
         adapter = new Phones_Adapter(phone,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -130,5 +145,18 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
                 phons.GetPhones("en");
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    public void count(String con) {
+//        Navigation.T_Cart.setText(con);
+//        Shoping.T_Cartshop.setText(con);
+
     }
 }

@@ -20,9 +20,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import ikon.ikon.Activites.Navigation;
 import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Activites.ShowProduct;
 import ikon.ikon.Bussiness.ListItemCart;
+import ikon.ikon.Fragments.GuesFragment;
 import ikon.ikon.Model.Accessory;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Phones;
@@ -63,9 +65,9 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
             mobile=view.findViewById(R.id.Image_Phone);
             progressBar=view.findViewById(R.id.progrossimage);
             btncart=view.findViewById(R.id.btncard);
-            count=view.findViewById(R.id.contuner);
-            plus=view.findViewById(R.id.plus);
-            minus=view.findViewById(R.id.minus);
+//            count=view.findViewById(R.id.contuner);
+//            plus=view.findViewById(R.id.plus);
+//            minus=view.findViewById(R.id.minus);
 
 
 
@@ -92,13 +94,12 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
 
 
         holder.T_Name.setText(filteredList.get(position).getProductsName());
-        holder.T_Model.setText(filteredList.get(position).getProductsModel());
+//        holder.T_Model.setText(filteredList.get(position).getProductsModel());
         String a = filteredList.get(position).getProductsDescription();
-        holder.T_Discrption.setText(a.replace("<p>","").replace("</p>",""));
+//        holder.T_Discrption.setText(a.replace("<p>","").replace("</p>",""));
 
         holder.T_Price.setText(filteredList.get(position).getProductsPrice());
         String i = filteredList.get(position).getProductsImage();
-
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(getApplicationContext())
@@ -118,31 +119,31 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
 
         Typeface typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/no.otf");
         holder.T_Name.setTypeface(typeface);
-        holder.T_Model.setTypeface(typeface);
-        holder.T_Discrption.setTypeface(typeface);
+//        holder.T_Model.setTypeface(typeface);
+//        holder.T_Discrption.setTypeface(typeface);
         holder.T_Price.setTypeface(typeface);
-        holder.btncart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int a=Integer.parseInt(holder.count.getText().toString());
-                Cart car=new Cart(String.valueOf(a),filteredList.get(position).getProductsId(),filteredList.get(position).getProductsName()
-                        ,filteredList.get(position).getProductsDescription(),filteredList.get(position).getProductsPrice()
-                ,filteredList.get(position).getProductsImage());
-                liscart.add(car);
-               Shoping.T_Cart.setText(String.valueOf(liscart.size()));
-                ListItemCart lisst=new ListItemCart();
-                lisst.Listitem(car);
-
-
-            }
-        });
+//        holder.btncart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int a=Integer.parseInt(holder.count.getText().toString());
+//                Cart car=new Cart(String.valueOf(a),filteredList.get(position).getProductsId(),filteredList.get(position).getProductsName()
+//                        ,filteredList.get(position).getProductsDescription(),filteredList.get(position).getProductsPrice()
+//                ,filteredList.get(position).getProductsImage());
+//                liscart.add(car);
+//                Navigation.T_Cart.setText(String.valueOf(liscart.size()));
+//                ListItemCart lisst=new ListItemCart();
+//                lisst.Listitem(car);
+//
+//
+//            }
+//        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent inty=new Intent(con, ShowProduct.class);
-                int a=Integer.parseInt(holder.count.getText().toString());
+//                int a=Integer.parseInt(holder.count.getText().toString());
                 inty.putExtra("id",filteredList.get(position).getProductsId());
-                inty.putExtra("count",String.valueOf(a));
+//                inty.putExtra("count",String.valueOf(a));
                 inty.putExtra("photo",filteredList.get(position).getProductsImage());
                 inty.putExtra("name",filteredList.get(position).getProductsName());
                 inty.putExtra("discrption",filteredList.get(position).getProductsDescription());
@@ -153,25 +154,25 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
         });
 
 
-        holder.plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int a=Integer.parseInt(holder.count.getText().toString());
-                a++;
-                holder.count.setText(String.valueOf(a));
-
-            }
-        });
-        holder.minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int a=Integer.parseInt(holder.count.getText().toString());
-                if(a>1) {
-                    a--;
-                    holder.count.setText(String.valueOf(a));
-                }
-            }
-        });
+//        holder.plus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int a=Integer.parseInt(holder.count.getText().toString());
+//                a++;
+//                holder.count.setText(String.valueOf(a));
+//
+//            }
+//        });
+//        holder.minus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int a=Integer.parseInt(holder.count.getText().toString());
+//                if(a>1) {
+//                    a--;
+//                    holder.count.setText(String.valueOf(a));
+//                }
+//            }
+//        });
 
 
     }

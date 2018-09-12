@@ -7,15 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import ikon.ikon.Bussiness.ListItemCart;
+import ikon.ikon.Fragments.GuesFragment;
 import ikon.ikon.Model.Cart;
+import ikon.ikon.Model.Count;
+import ikon.ikon.PreSenter.CounterPresenter;
 import ikonNNN.ikonN.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -24,12 +29,17 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * Created by ic on 9/10/2018.
  */
 
-public class ShowProduct extends AppCompatActivity{
-    String Name,Discrp,Price,photo,id,count;
+public class ShowProduct extends AppCompatActivity implements Count{
+    String Name,Discrp,Price,photo,id,count="";
     TextView T_Name,T_Discrp,T_Price;
     ImageView Imgphone;
-    private List<Cart> liscart=new LinkedList<>();
+    public static List<Cart> liscart=new ArrayList<>();
+    TextView counter;
     Button btncart;
+    ImageView plus,minus;
+    Count cont;
+    CounterPresenter contpresen;
+    String countt="1";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +49,10 @@ public class ShowProduct extends AppCompatActivity{
         T_Discrp=findViewById(R.id.T_Discrp);
         T_Price=findViewById(R.id.T_Price);
         btncart=findViewById(R.id.btncard);
-        count=getIntent().getStringExtra("count");
+//        plus=findViewById(R.id.plus);
+//        counter=findViewById(R.id.contuner);
+//        minus=findViewById(R.id.minus);
+        contpresen=new CounterPresenter(this,this);
         id=getIntent().getStringExtra("id");
       Name=getIntent().getStringExtra("name");
       Discrp=getIntent().getStringExtra("discrption");
@@ -49,8 +62,29 @@ public class ShowProduct extends AppCompatActivity{
       T_Name.setText(Name);
       T_Price.setText(Price);
 
+
         T_Discrp.setText(Discrp.replace("<p>","").replace("</p>",""));
 
+
+//        plus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int a=Integer.parseInt(counter.getText().toString());
+//                a++;
+//                counter.setText(String.valueOf(a));
+//
+//            }
+//        });
+//        minus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int a=Integer.parseInt(counter.getText().toString());
+//                if(a>1) {
+//                    a--;
+//                    counter.setText(String.valueOf(a));
+//                }
+//            }
+//        });
         Picasso.with(getApplicationContext())
                 .load("http://ikongo.com/site/"+photo)
                 .resize(500,500)
@@ -59,10 +93,16 @@ public class ShowProduct extends AppCompatActivity{
         btncart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cart car=new Cart(count,id,Name,Discrp,Price,photo);
+
+                Cart car=new Cart(countt,id,Name,Discrp,Price,photo);
                 liscart.add(car);
-                Shoping.T_Cart.setText(String.valueOf(liscart.size()));
+
+                contpresen.GetCount(String.valueOf(liscart.size()));
+                Toast.makeText(ShowProduct.this, Name+"  Add to cart ", Toast.LENGTH_SHORT).show();
                 ListItemCart lisst=new ListItemCart();
+
+                Shoping.T_Cartshop.setText(String.valueOf(liscart.size()));
+//
                 lisst.Listitem(car);
             }
         });
@@ -70,4 +110,8 @@ public class ShowProduct extends AppCompatActivity{
 
     }
 
+    @Override
+    public void count(String con) {
+
+    }
 }

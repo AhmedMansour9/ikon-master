@@ -6,24 +6,31 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import ikon.ikon.Activites.Navigation;
+import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Adapter.Accessories_Adapter;
 import ikon.ikon.Adapter.Phones_Adapter;
 import ikon.ikon.Model.Accessory;
+import ikon.ikon.Model.Cart;
 import ikon.ikon.PreSenter.GetAccessoriesPresenter;
 import ikon.ikon.Viewes.AccessoriesView;
 import ikon.ikon.Viewes.CountView;
 import ikonNNN.ikonN.R;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
@@ -42,7 +49,7 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
     Accessories_Adapter adapter;
     String Lan;
     SwipeRefreshLayout mSwipeRefreshLayout;
-
+    GridLayoutManager gridLayoutManager;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,6 +60,7 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
         Lan=shared.getString("Lann",null);
         Recyclview();
         SwipRefresh();
+
 
       mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
           @Override
@@ -111,9 +119,13 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
     public void GetAccessories(List<Accessory> list) {
         adapter = new Accessories_Adapter(list,getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -153,4 +165,10 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
 
     @Override
     public void Count(String count) {}
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        Shoping.T_Cartshop.setText(String.valueOf(liscart.size()));
+    }
 }

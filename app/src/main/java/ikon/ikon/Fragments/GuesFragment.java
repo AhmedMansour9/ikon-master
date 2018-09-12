@@ -17,15 +17,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import ikon.ikon.Activites.Maintaince;
+import ikon.ikon.Activites.Navigation;
 import ikon.ikon.Activites.Shoping;
+import ikon.ikon.Activites.ShowProduct;
+import ikon.ikon.Model.Cart;
+import ikon.ikon.Model.Count;
+import ikon.ikon.PreSenter.CounterPresenter;
+import ikon.ikon.Viewes.CountView;
 import ikonNNN.ikonN.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GuesFragment extends Fragment {
+public class GuesFragment extends Fragment implements Count {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
@@ -35,8 +45,10 @@ public class GuesFragment extends Fragment {
     private Handler handler;
     private int delay = 2000; //milliseconds
     ImageView main,shoping;
+    public static TextView T_Cart;
+    CounterPresenter cn;
     View view;
-
+    private List<Cart> filteredList=new ArrayList<>();
     public GuesFragment() {
         // Required empty public constructor
     }
@@ -48,12 +60,15 @@ public class GuesFragment extends Fragment {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_gues, container, false);
         handler = new Handler();
+        cn=new CounterPresenter(getContext(),this);
        GoTo_Maintaince();
        GoTo_Shooping();
+
+
         viewPager =view.findViewById(R.id.view_pager);
         dotsLayout =view.findViewById(R.id.layoutDots);
         layouts = new int[]{
-                R.layout.slidertwo,
+                R.layout.sliderfour,
                 R.layout.sliderthree,
                 R.layout.sliderone,
         };
@@ -146,6 +161,13 @@ public class GuesFragment extends Fragment {
 
         if (dots.length > 0)
             dots[currentPage].setTextColor(colorsActive[currentPage]);
+
+    }
+
+    @Override
+    public void count(String con) {
+
+//        Shoping.T_Cartshop.setText(con);
 
     }
 

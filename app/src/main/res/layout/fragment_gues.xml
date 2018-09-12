@@ -12,18 +12,17 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/toolbar"
         android:id="@+id/rela"
-        android:layout_height="@dimen/_220sdp">
+        android:layout_height="@dimen/_180sdp">
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp" />
+            android:layout_height="@dimen/_150sdp" />
 
         <LinearLayout
             android:id="@+id/layoutDots"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -33,13 +32,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rela2"
-        android:layout_marginTop="@dimen/_10sdp"
         android:layout_below="@+id/rela">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:text="@string/chooseservice"
+            android:layout_marginLeft="@dimen/_20sdp"
             android:textSize="@dimen/_17sdp"
             android:textColor="#0783e7"
             android:textStyle="bold"
@@ -50,59 +48,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/rela3"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/_5sdp"
         android:paddingRight="@dimen/_5sdp"
         android:layout_below="@+id/rela2"
-        android:layout_marginTop="@dimen/_10sdp"
         android:weightSum="2"
-        android:layout_height="wrap_content">
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="match_parent">
+
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_140sdp"
-            android:background="@drawable/shopping"
+            android:background="@drawable/shop"
             android:id="@+id/shoping"
+            android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_width="match_parent"
             />
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_140sdp"
-            android:background="@drawable/maintance"
+            android:layout_height="0dp"
+            android:background="@drawable/maintenance"
             android:id="@+id/main"
             android:layout_weight="1"
-
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/_20sdp"
+             android:layout_marginTop="@dimen/_30sdp"
             />
 
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:id="@+id/linear"
-        android:layout_below="@+id/rela3"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:weightSum="2"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="@string/shooping"
-            android:textSize="@dimen/_17sdp"
-            android:textColor="#0783e7"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="@string/maintin"
-            android:textSize="@dimen/_17sdp"
-            android:textColor="#0783e7"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            android:textStyle="bold"
-            />
 
     </LinearLayout>
 

@@ -14,36 +14,41 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import ikon.ikon.Bussiness.ListItemCart;
 import ikon.ikon.Fragments.Accessories;
 import ikon.ikon.Fragments.Phones;
 import ikon.ikon.Fragments.Sparts;
 import ikon.ikon.Model.Cart;
+import ikon.ikon.Model.Count;
+import ikon.ikon.PreSenter.CounterPresenter;
 import ikon.ikon.Viewes.CountView;
 import ikonNNN.ikonN.R;
 
-public class Shoping extends AppCompatActivity implements CountView{
+public class Shoping extends AppCompatActivity implements Count{
     public static TabLayout tabLayout;
     private ViewPager viewPager;
-   public static TextView T_Cart;
-   ImageView btncart;
+   public static TextView T_Cartshop;
     private List<Cart> liscart=new LinkedList<>();
+    ImageView btncartshop;
+    CounterPresenter cn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shoping);
         viewPager = findViewById(R.id.viewpager);
-        btncart=findViewById(R.id.btncart);
+        T_Cartshop=findViewById(R.id.T_Cartshop);
+        btncartshop=findViewById(R.id.btncartshop);
         setupViewPager(viewPager);
-        T_Cart=findViewById(R.id.T_Cart);
+     cn=new CounterPresenter(this,this);
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-        T_Cart.setText(String.valueOf(liscart.size()));
         tabLayout.setTabTextColors(
                 ColorStateList.valueOf(getResources().getColor(R.color.White)));
 //        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#fffc00"));
@@ -60,12 +65,14 @@ public class Shoping extends AppCompatActivity implements CountView{
             tabLayout.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
 
-        btncart.setOnClickListener(new View.OnClickListener() {
+        btncartshop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Shoping.this,cartproducts.class));
             }
         });
+
+
     }
 
 
@@ -104,9 +111,12 @@ public class Shoping extends AppCompatActivity implements CountView{
     }
 
     @Override
-    public void Count(String count) {
-        T_Cart.setText(count);
+    public void count(String con) {
+
+        T_Cartshop.setText(con);
+
     }
+
 
     static  class Adapter extends FragmentStatePagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -139,4 +149,9 @@ public class Shoping extends AppCompatActivity implements CountView{
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 }

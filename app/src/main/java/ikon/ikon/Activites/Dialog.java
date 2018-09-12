@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -18,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,16 +42,23 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
+import ikon.ikon.Bussiness.ListItemCart;
 import ikon.ikon.GPSTracker;
+import ikon.ikon.Model.Cart;
+import ikon.ikon.Model.OrderShop;
+import ikon.ikon.PreSenter.OrderShoppinPresenter;
+import ikon.ikon.Viewes.OrderView;
 import ikonNNN.ikonN.R;
 
 /**
  * Created by ic on 9/12/2018.
  */
 
-public class Dialog  extends AppCompatActivity implements OnMapReadyCallback, com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class Dialog  extends AppCompatActivity implements OrderView,OnMapReadyCallback, com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     TextView T_address,T_Price,T_Phone;
     Button ordershoping;
@@ -62,6 +71,18 @@ public class Dialog  extends AppCompatActivity implements OnMapReadyCallback, co
     private GoogleMap googleMap;
     GoogleApiClient mGoogleApiClient;
     double latitude,longitude;
+    private List<Cart> liscart=new LinkedList<>();
+    OrderShoppinPresenter orderpresent;
+    String lanuage;
+    String Totalprice;
+
+    String postalCode="";
+    String city="";
+    String country="";
+    SharedPreferences share;
+    ListItemCart list=new ListItemCart();
+    ProgressBar progressBarorder;
+    String y="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,16 +91,63 @@ public class Dialog  extends AppCompatActivity implements OnMapReadyCallback, co
         T_address=findViewById(R.id.T_Address);
         T_Phone=findViewById(R.id.T_Phone);
         T_Price=findViewById(R.id.T_Price);
-        btnlastorder=findViewById(R.id.servicerequest);
         location=findViewById(R.id.getlocat);
-        ordershoping=findViewById(R.id.ordershoping);
+        progressBarorder=findViewById(R.id.progressBarorder);
+        Totalprice=getIntent().getStringExtra("totalpric");
+        T_Price.setText(Totalprice);
+        if(isRTL()){
+            lanuage="ar";
+        }else {
+            lanuage="en";
+        }
+        ordershoping=findViewById(R.id.servicerequest);
+        orderpresent=new OrderShoppinPresenter(this,this);
         MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.maps);
         mapFragment.getMapAsync(this);
         GetLocation();
         ordershoping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                share=getSharedPreferences("login",MODE_PRIVATE);
+                y="";
+                String phone=T_Phone.getText().toString();
+                String logi=share.getString("logggin",null);
+                if(logi==null) {
+                    Toast.makeText(getBaseContext(), "Login First", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(Dialog.this, Login.class));
+                    finish();
+                }else {
+
+                    for(int i=0;i<ShowProduct.liscart.size();i++){
+                        int a=ShowProduct.liscart.size()-1;
+
+                        if(a==i){
+                         y=y+ShowProduct.liscart.get(i).getId();
+                        }else {
+                            y = y + ShowProduct.liscart.get(i).getId() + ",";
+                        }
+
+                    }
+                    if(ShowProduct.liscart.get(1).getId()!=null){
+
+                    }
+                    if(phone.equals("")){
+                        T_Phone.setError("Enter Your Phone");
+                    }
+                    if(addres!=null||phone!=null){
+
+                        OrderShop o=new OrderShop(addres,String.valueOf(latitude),String.valueOf(longitude),logi,lanuage
+                                ,phone,Totalprice,y,postalCode,city,country);
+
+                        orderpresent.Order(o);
+                        progressBarorder.setVisibility(View.VISIBLE);
+
+                    }
+
+                }
+
+
+
             }
         });
 
@@ -156,10 +224,10 @@ public class Dialog  extends AppCompatActivity implements OnMapReadyCallback, co
             Geocoder geocoder = new Geocoder(getApplicationContext());
             List<Address> addresses  = geocoder.getFromLocation(latitude,longitude, 1);
             String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-             String city = addresses.get(0).getLocality();
+              city = addresses.get(0).getLocality();
             String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
-            String postalCode = addresses.get(0).getPostalCode();
+             country = addresses.get(0).getCountryName();
+             postalCode = addresses.get(0).getPostalCode();
 
 
             addresses = geocoder.getFromLocation(latitude, longitude, 1);
@@ -256,4 +324,23 @@ public class Dialog  extends AppCompatActivity implements OnMapReadyCallback, co
     }
 
 
+    @Override
+    public void OrderSuccess() {
+        Toast.makeText(this, "Your Order Acceepted Will Call You Soon", Toast.LENGTH_SHORT).show();
+        progressBarorder.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void ErrorOrder() {
+        progressBarorder.setVisibility(View.INVISIBLE);
+    }
+
+    public static boolean isRTL() {
+        return isRTL(Locale.getDefault());
+    }
+    public static boolean isRTL(Locale locale) {
+        final int directionality = Character.getDirectionality(locale.getDisplayName().charAt(0));
+        return directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT ||
+                directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC;
+    }
 }
