@@ -111,7 +111,7 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
                     finish();
                 }else{
                     OrderMaintenence order=new OrderMaintenence(Product_id,issue_id,tybe,color,otherissue,addres,
-                            String.valueOf(latitude),String.valueOf(longitude),logi);
+                            String.valueOf(latitude),String.valueOf(longitude),logi,price);
 
              ord.Order(order);
                 }

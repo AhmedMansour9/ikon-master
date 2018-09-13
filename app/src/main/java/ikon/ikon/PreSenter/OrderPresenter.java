@@ -32,8 +32,7 @@ public class OrderPresenter {
         Map<String, String> queryMap = new HashMap<>();
 
         queryMap.put("api_token", "100");
-        queryMap.put("product_id",order.getProductid());
-        queryMap.put("issue_type", order.getIssueid());
+        queryMap.put("sparePart",order.getProductid());
         queryMap.put("type",order.getTybe());
         queryMap.put("color", order.getColor());
         if(order.getNote().equals("")) {
@@ -45,7 +44,8 @@ public class OrderPresenter {
         queryMap.put("latitude", order.getLatitude());
         queryMap.put("longitude", order.getLongetude());
         queryMap.put("user_token", order.getUser_token());
-
+        queryMap.put("issue", order.getIssueid());
+        queryMap.put("price", order.getPrice());
 
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
 

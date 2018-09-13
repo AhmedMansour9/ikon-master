@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sha=getSharedPreferences("login",MODE_PRIVATE);
-        String logi=sha.getString("loggg",null);
+        String logi=sha.getString("logggin",null);
         if(logi!=null){
             startActivity(new Intent(MainActivity.this,Navigation.class));
             finish();
