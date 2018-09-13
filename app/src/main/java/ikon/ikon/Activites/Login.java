@@ -286,7 +286,7 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
         Shared.putString("logggin",a);
         Shared.apply();
         progressBar.setVisibility(View.GONE);
-        startActivity(new Intent(Login.this, Language.class));
+        startActivity(new Intent(Login.this, Navigation.class));
         finish();
 
     }
@@ -301,7 +301,7 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
         Shared.putString("logggin",a);
         Shared.apply();
         progressBar.setVisibility(View.GONE);
-        startActivity(new Intent(Login.this, Language.class));
+        startActivity(new Intent(Login.this, Navigation.class));
         finish();
     }
 
@@ -315,7 +315,7 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
         Shared.putString("logggin",a);
         Shared.apply();
         progressBar.setVisibility(View.GONE);
-        startActivity(new Intent(Login.this, Language.class));
+        startActivity(new Intent(Login.this, Navigation.class));
         finish();
     }
 

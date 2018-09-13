@@ -25,7 +25,7 @@ public class Language extends AppCompatActivity {
         shared=getSharedPreferences("Language",MODE_PRIVATE);
        String Lan=shared.getString("Lann",null);
         if(Lan!=null){
-            startActivity(new Intent(Language.this,Navigation.class));
+            startActivity(new Intent(Language.this,MainActivity.class));
             finish();
         }
         setContentView(R.layout.language);
@@ -37,7 +37,7 @@ public class Language extends AppCompatActivity {
         btnAtabic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent y=new Intent(Language.this,Navigation.class);
+                Intent y=new Intent(Language.this,MainActivity.class);
                 share.putString("Lann","ar");
                 share.commit();
                 startActivity(y);
@@ -48,7 +48,7 @@ public class Language extends AppCompatActivity {
         btnEng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent y=new Intent(Language.this,Navigation.class);
+                Intent y=new Intent(Language.this,MainActivity.class);
                 share.putString("Lann","en");
                 share.commit();
                 startActivity(y);

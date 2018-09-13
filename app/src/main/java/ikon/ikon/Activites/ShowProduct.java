@@ -1,5 +1,7 @@
 package ikon.ikon.Activites;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +42,8 @@ public class ShowProduct extends AppCompatActivity implements Count{
     Count cont;
     CounterPresenter contpresen;
     String countt="1";
+    String disappear;
+    SharedPreferences.Editor share;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,7 @@ public class ShowProduct extends AppCompatActivity implements Count{
         T_Discrp=findViewById(R.id.T_Discrp);
         T_Price=findViewById(R.id.T_Price);
         btncart=findViewById(R.id.btncard);
+        share=getSharedPreferences("count",MODE_PRIVATE).edit();
 //        plus=findViewById(R.id.plus);
 //        counter=findViewById(R.id.contuner);
 //        minus=findViewById(R.id.minus);
@@ -58,9 +63,12 @@ public class ShowProduct extends AppCompatActivity implements Count{
       Discrp=getIntent().getStringExtra("discrption");
       Price=getIntent().getStringExtra("price");
       photo=getIntent().getStringExtra("photo");
-
+      disappear=getIntent().getStringExtra("Dissapear");
       T_Name.setText(Name);
       T_Price.setText(Price);
+      if(disappear!=null){
+          btncart.setVisibility(View.GONE);
+      }
 
 
         T_Discrp.setText(Discrp.replace("<p>","").replace("</p>",""));
@@ -96,14 +104,17 @@ public class ShowProduct extends AppCompatActivity implements Count{
 
                 Cart car=new Cart(countt,id,Name,Discrp,Price,photo);
                 liscart.add(car);
-
                 contpresen.GetCount(String.valueOf(liscart.size()));
                 Toast.makeText(ShowProduct.this, Name+"  Add to cart ", Toast.LENGTH_SHORT).show();
                 ListItemCart lisst=new ListItemCart();
+                share.putString("count",String.valueOf(String.valueOf(liscart.size())));
+                share.commit();
 
                 Shoping.T_Cartshop.setText(String.valueOf(liscart.size()));
-//
                 lisst.Listitem(car);
+                startActivity(new Intent(ShowProduct.this,Shoping.class));
+                finish();
+
             }
         });
 

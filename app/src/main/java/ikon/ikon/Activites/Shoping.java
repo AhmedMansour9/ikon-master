@@ -1,6 +1,7 @@
 package ikon.ikon.Activites;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -31,13 +32,14 @@ import ikon.ikon.PreSenter.CounterPresenter;
 import ikon.ikon.Viewes.CountView;
 import ikonNNN.ikonN.R;
 
-public class Shoping extends AppCompatActivity implements Count{
+public class Shoping extends AppCompatActivity{
     public static TabLayout tabLayout;
     private ViewPager viewPager;
    public static TextView T_Cartshop;
     private List<Cart> liscart=new LinkedList<>();
     ImageView btncartshop;
     CounterPresenter cn;
+    SharedPreferences share;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +47,13 @@ public class Shoping extends AppCompatActivity implements Count{
         viewPager = findViewById(R.id.viewpager);
         T_Cartshop=findViewById(R.id.T_Cartshop);
         btncartshop=findViewById(R.id.btncartshop);
+        share=getSharedPreferences("count",MODE_PRIVATE);
         setupViewPager(viewPager);
-     cn=new CounterPresenter(this,this);
+
+     String count=share.getString("count",null);
+     if(count!=null){
+         T_Cartshop.setText(count);
+     }
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabTextColors(
@@ -110,12 +117,7 @@ public class Shoping extends AppCompatActivity implements Count{
         return isRTL(Locale.getDefault());
     }
 
-    @Override
-    public void count(String con) {
 
-        T_Cartshop.setText(con);
-
-    }
 
 
     static  class Adapter extends FragmentStatePagerAdapter {

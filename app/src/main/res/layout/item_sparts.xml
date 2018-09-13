@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:background="@drawable/bcshopping"
         android:padding="@dimen/_5sdp"
-        android:layout_height="@dimen/_200sdp">
+        android:layout_height="@dimen/_190sdp">
         <ProgressBar
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
@@ -31,23 +31,26 @@
             />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_height="@dimen/_15sdp"
             android:layout_below="@+id/Image_Phone"
             android:layout_marginTop="@dimen/_10sdp"
             android:id="@+id/T_Name"
             android:layout_marginLeft="@dimen/_15sdp"
-            android:textColor="#000"
-
+            android:textColor="#013cff"
+            android:textStyle="bold"
+           android:layout_marginRight="@dimen/_20sdp"
+            android:textSize="@dimen/_12sdp"
             />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_3sdp"
             android:id="@+id/T_Price"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_below="@+id/T_Name"
-            android:textColor="#000"
+            android:textColor="#06dc0d"
+            android:textStyle="bold"
             />
 
 

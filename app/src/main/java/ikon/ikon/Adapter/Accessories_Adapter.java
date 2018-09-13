@@ -98,7 +98,7 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
         String a = filteredList.get(position).getProductsDescription();
 //        holder.T_Discrption.setText(a.replace("<p>","").replace("</p>",""));
 
-        holder.T_Price.setText(filteredList.get(position).getProductsPrice());
+        holder.T_Price.setText(filteredList.get(position).getProductsPrice()+"SR");
         String i = filteredList.get(position).getProductsImage();
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);

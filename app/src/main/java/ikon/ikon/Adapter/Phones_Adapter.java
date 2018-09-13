@@ -95,7 +95,7 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
 
 
 
-        holder.T_Price.setText(filteredList.get(position).getProductsPrice());
+        holder.T_Price.setText(filteredList.get(position).getProductsPrice()+"SR");
         String i = filteredList.get(position).getProductsImage();
 
         Uri u = Uri.parse(i);

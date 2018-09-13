@@ -31,9 +31,9 @@ public class GetPricePresenter {
 
     public void GetProducts(String Productid,String Issueid,String tybe) {
         Map<String, String> queryMap = new HashMap<>();
-        queryMap.put("product_id", Productid);
+        queryMap.put("sparePart", Productid);
         queryMap.put("api_token", "100");
-        queryMap.put("issue_id", Issueid);
+//        queryMap.put("issue_id", Issueid);
         queryMap.put("type", tybe);
 
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);

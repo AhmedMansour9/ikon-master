@@ -21,20 +21,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import ikon.ikon.Model.ColorResponse;
+import ikon.ikon.Model.Colors;
 import ikon.ikon.Model.IssueTybeEnglish;
 import ikon.ikon.Model.IssueTybeen;
 import ikon.ikon.Model.IssueType;
 import ikon.ikon.Model.Products;
+import ikon.ikon.PreSenter.ColorPresenter;
 import ikon.ikon.PreSenter.GetIssuePresenter;
 import ikon.ikon.PreSenter.GetPricePresenter;
 import ikon.ikon.PreSenter.GetProductsPresenter;
+import ikon.ikon.Viewes.ColorView;
 import ikon.ikon.Viewes.GetPriceView;
 import ikon.ikon.Viewes.IssueTybeView;
 import ikon.ikon.Viewes.IssuetybeViewEnglish;
 import ikon.ikon.Viewes.ProductView;
 import ikonNNN.ikonN.R;
 
-public class Maintaince extends AppCompatActivity implements ProductView,AdapterView.OnItemSelectedListener,IssuetybeViewEnglish,IssueTybeView,GetPriceView{
+public class Maintaince extends AppCompatActivity implements ColorView,ProductView,AdapterView.OnItemSelectedListener,IssuetybeViewEnglish,IssueTybeView,GetPriceView{
     Button btn_ShowPrice;
     Spinner spin_Service,Spin_Model,Spin_Color,Spin_Issue;
     EditText Edit_OtherIssue;
@@ -46,17 +50,20 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
     ArrayAdapter<String> dataAd;
     ArrayAdapter<Products> ListProduct;
     ArrayAdapter<IssueType> ListIssue;
+    ArrayAdapter<ikon.ikon.Model.Color> Arraycolor;
     String service,model,color,issue,otherissue;
     int Service_id,Model_id,Color_id;
     String Issue_id;
     Products y;
     GetPricePresenter getprice;
     ArrayAdapter<IssueTybeEnglish> inssueneglish;
+    ColorPresenter colorrespon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintaince);
         progressBar=findViewById(R.id.progressBarMaintenence);
+        colorrespon=new ColorPresenter(this,this);
         ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
         scrollView.setFocusableInTouchMode(true);
         scrollView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
@@ -77,10 +84,11 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
             if(isRTL()){
             getlist.GetProducts("ar");
             getIssue.GetIssuetybeArabice("ar");
+            colorrespon.GetColor("ar");
         }else {
                 getlist.GetProducts("en");
                 getIssue.GetIssuetybeEnglish("en");
-
+                colorrespon.GetColor("en");
             }
 
         Get_price();
@@ -297,7 +305,7 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
         inty.putExtra("tybe",service);
         inty.putExtra("Product_id",String.valueOf(Model_id));
         inty.putExtra("color",color);
-        inty.putExtra("issue_id",Issue_id);
+        inty.putExtra("issue_id",issue);
         inty.putExtra("otherissue",otherissue);
         inty.putExtra("price",Price);
         startActivity(inty);
@@ -348,6 +356,41 @@ public class Maintaince extends AppCompatActivity implements ProductView,Adapter
 
     @Override
     public void ErrorIssuetybeenglish() {
+
+    }
+
+    @Override
+    public void getColor(List<ikon.ikon.Model.Color> colo) {
+
+
+
+        Arraycolor = new ArrayAdapter<ikon.ikon.Model.Color>(getApplicationContext(), R.layout.textcolorspinner, colo) {
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
+                textView.setTextColor(Color.BLACK);
+                return textView;
+            }
+        };
+        Arraycolor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spin_Color.setOnItemSelectedListener(this);
+        Spin_Color.setAdapter(Arraycolor);
+        Spin_Color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                color=Spin_Color.getSelectedItem().toString();
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void ErrorColor() {
 
     }
 }

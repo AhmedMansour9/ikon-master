@@ -91,7 +91,7 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
 //        String a = filteredList.get(position).getProductsDescription();
 //        holder.T_Discrption.setText(a.replace("<p>","").replace("</p>",""));
 
-        holder.T_Price.setText(filteredList.get(position).getProductsPrice());
+        holder.T_Price.setText(filteredList.get(position).getProductsPrice()+"SR");
         String i = filteredList.get(position).getProductsImage();
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
@@ -158,12 +158,13 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
             public void onClick(View view) {
                 Intent inty=new Intent(con, ShowProduct.class);
                 int a=Integer.parseInt(holder.count.getText().toString());
-                inty.putExtra("id",filteredList.get(position).getProductsId());
+                inty.putExtra("id",String.valueOf(filteredList.get(position).getProductsId()));
                 inty.putExtra("count",String.valueOf(a));
                 inty.putExtra("photo",filteredList.get(position).getProductsImage());
                 inty.putExtra("name",filteredList.get(position).getProductsName());
                 inty.putExtra("discrption",filteredList.get(position).getProductsDescription());
                 inty.putExtra("price",filteredList.get(position).getProductsPrice());
+                inty.putExtra("Dissapear","disappear");
                 con.startActivity(inty);
 
             }

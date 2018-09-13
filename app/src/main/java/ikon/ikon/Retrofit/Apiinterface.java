@@ -3,6 +3,7 @@ package ikon.ikon.Retrofit;
 import java.util.Map;
 
 import ikon.ikon.Model.AccessoriesResponse;
+import ikon.ikon.Model.ColorResponse;
 import ikon.ikon.Model.GetPriceResponse;
 import ikon.ikon.Model.IssueResponse;
 import ikon.ikon.Model.IssueTubeEnglishResponse;
@@ -13,6 +14,7 @@ import ikon.ikon.Model.UserLoginResponse;
 import ikon.ikon.Model.UserRegisterResponse;
 import ikon.ikon.Model.phonesResponse;
 import ikon.ikon.Model.RegisterFaceResponse;
+import ikon.ikon.PreSenter.ColorPresenter;
 import ikon.ikon.PreSenter.OrderShoppinPresenter;
 import retrofit2.Call;
 import retrofit2.http.POST;
@@ -37,7 +39,7 @@ public interface Apiinterface {
     @POST("signupMobileGoogle")
     Call<UserLoginResponse> RegisterGoogle(@QueryMap Map<String,String> queryMab);
 
-    @POST("productList")
+    @POST("sparePartsList")
     Call<PeoductResponse> GetProducts(@QueryMap Map<String,String> queryMab);
 
     @POST("issueTypeList")
@@ -63,6 +65,9 @@ public interface Apiinterface {
 
     @POST("shopOrder")
     Call<OrderShoppinPresenter> Ordershop(@QueryMap Map<String,String> queryMab);
+
+    @POST("colorList")
+    Call<ColorResponse> GetColors(@QueryMap Map<String,String> queryMab);
 
 }
 

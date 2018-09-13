@@ -3,6 +3,7 @@ package ikon.ikon.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,8 @@ import ikon.ikon.PreSenter.CounterPresenter;
 import ikon.ikon.Viewes.CountView;
 import ikonNNN.ikonN.R;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +51,7 @@ public class GuesFragment extends Fragment implements Count {
     public static TextView T_Cart;
     CounterPresenter cn;
     View view;
+    SharedPreferences.Editor share;
     private List<Cart> filteredList=new ArrayList<>();
     public GuesFragment() {
         // Required empty public constructor
@@ -214,6 +218,15 @@ public class GuesFragment extends Fragment implements Count {
     public void onPause() {
         super.onPause();
         handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        share=getActivity().getSharedPreferences("count",MODE_PRIVATE).edit();
+        share.putString("count","");
+        share.commit();
+
     }
 }
 
