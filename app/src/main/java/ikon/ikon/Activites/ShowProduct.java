@@ -1,11 +1,14 @@
 package ikon.ikon.Activites;
 
+import android.app.*;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,6 +75,22 @@ public class ShowProduct extends AppCompatActivity implements Count{
 
 
         T_Discrp.setText(Discrp.replace("<p>","").replace("</p>",""));
+        Imgphone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog=new Dialog(ShowProduct.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.imageshopping);
+
+                ImageView imgshop=dialog.findViewById(R.id.Image_Shoping);
+                Picasso.with(getApplicationContext())
+                        .load("http://ikongo.com/site/"+photo)
+                        .into(imgshop);
+
+
+                dialog.show();
+            }
+        });
 
 
 //        plus.setOnClickListener(new View.OnClickListener() {

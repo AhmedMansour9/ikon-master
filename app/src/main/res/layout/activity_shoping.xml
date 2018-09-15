@@ -51,7 +51,6 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:textColor="#ff0000"
                 android:textSize="@dimen/_15sdp"
-               android:text="2"
                 android:textStyle="bold"
                 />
 

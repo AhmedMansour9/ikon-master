@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import ikon.ikon.Bussiness.ListItemCart;
 import ikon.ikon.Fragments.GuesFragment;
 import ikon.ikon.Model.Accessory;
 import ikon.ikon.Model.Cart;
+import ikon.ikon.Model.Phones;
 import ikon.ikon.Model.Spart;
 import ikonNNN.ikonN.R;
 
@@ -37,10 +40,11 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * Created by ic on 9/8/2018.
  */
 
-public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHolder> {
+public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHolder>implements Filterable {
 
 
-    String c;
+    public static List<Spart> filtered = new ArrayList<>();
+    private List<Spart> mArrayList;
     public List<Spart> filteredList=new ArrayList<>();
     View itemView;
     Context con;
@@ -72,6 +76,7 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
     public Sparts_Adapter(List<Spart> phon,Context context){
         filteredList=phon;
         this.con=context;
+         mArrayList=phon;
     }
 
 
@@ -82,6 +87,34 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
         return new Sparts_Adapter.MyViewHolder(itemView);
     }
 
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                filtered.clear();
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    filteredList = mArrayList;
+                } else {
+                    for (Spart androidVersion : mArrayList) {
+                        if (androidVersion.getProductsName().toLowerCase().contains(charString)) {
+                            filtered.add(androidVersion);}}
+                    filteredList = filtered;}
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredList = (List<Spart>) filterResults.values;
+
+                notifyDataSetChanged();
+            }
+        };
+
+    }
     @Override
     public void onBindViewHolder(final Sparts_Adapter.MyViewHolder holder, final int position) {
 
@@ -157,9 +190,8 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
             @Override
             public void onClick(View view) {
                 Intent inty=new Intent(con, ShowProduct.class);
-                int a=Integer.parseInt(holder.count.getText().toString());
+
                 inty.putExtra("id",String.valueOf(filteredList.get(position).getProductsId()));
-                inty.putExtra("count",String.valueOf(a));
                 inty.putExtra("photo",filteredList.get(position).getProductsImage());
                 inty.putExtra("name",filteredList.get(position).getProductsName());
                 inty.putExtra("discrption",filteredList.get(position).getProductsDescription());

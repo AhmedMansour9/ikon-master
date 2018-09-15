@@ -9,14 +9,17 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -51,6 +54,7 @@ public class GuesFragment extends Fragment implements Count {
     public static TextView T_Cart;
     CounterPresenter cn;
     View view;
+
     SharedPreferences.Editor share;
     private List<Cart> filteredList=new ArrayList<>();
     public GuesFragment() {
@@ -64,6 +68,7 @@ public class GuesFragment extends Fragment implements Count {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_gues, container, false);
         handler = new Handler();
+
         cn=new CounterPresenter(getContext(),this);
        GoTo_Maintaince();
        GoTo_Shooping();
@@ -99,6 +104,8 @@ public class GuesFragment extends Fragment implements Count {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(),Shoping.class));
+
+
             }
         });
     }
@@ -228,6 +235,7 @@ public class GuesFragment extends Fragment implements Count {
         share.commit();
 
     }
+
 }
 
 

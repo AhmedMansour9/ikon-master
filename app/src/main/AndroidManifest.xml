@@ -62,7 +62,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCJ6CfOZbzzEilL-dS9y-cfi5PXTTgWrNI" />
-   <activity android:name="ikon.ikon.Activites.Dialog"
+   <activity android:name="ikon.ikon.Activites.Dialogee"
        android:theme="@style/Theme.AppCompat.Dialog"></activity>
 
     </application>

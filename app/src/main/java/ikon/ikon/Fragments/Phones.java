@@ -9,9 +9,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -44,6 +48,7 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
     public Phones() {
         // Required empty public constructor
     }
+    EditText product;
      GetPhonesPresenter phons;
      View view;
      RecyclerView recyclerView;
@@ -52,20 +57,22 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
      String Lan;
      SwipeRefreshLayout mSwipeRefreshLayout;
      GridLayoutManager gridLayoutManager;
-    private List<Cart> filteredList=new ArrayList<>();
     CounterPresenter cn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_phones, container, false);
-       phons=new GetPhonesPresenter(getContext(),this);
+        product =view.findViewById(R.id.findyourproduct);
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        phons=new GetPhonesPresenter(getContext(),this);
         shared=getActivity().getSharedPreferences("Language",MODE_PRIVATE);
          Lan=shared.getString("Lann",null);
         cn=new CounterPresenter(getContext(),this);
          Recyclview();
         SwipRefresh();
-
+        RecycleviewSerach();
 
 
 
@@ -98,7 +105,25 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
         recyclerView = view.findViewById(R.id.recycler_phones);
         recyclerView.setHasFixedSize(true);
     }
+    public void RecycleviewSerach(){
+        product.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                adapter.getFilter().filter(charSequence);
+                adapter.notifyDataSetChanged();
+
+
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+    }
     public void SwipRefresh(){
         mSwipeRefreshLayout =  view.findViewById(R.id.swipe_container);
         mSwipeRefreshLayout.setOnRefreshListener(this);

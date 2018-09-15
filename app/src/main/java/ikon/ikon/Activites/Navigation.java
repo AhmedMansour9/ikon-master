@@ -1,5 +1,6 @@
 package ikon.ikon.Activites;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -12,6 +13,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.widget.PopupMenu;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -48,13 +51,15 @@ public class Navigation extends AppCompatActivity
     ActionBarDrawerToggle toggle;
     DrawerLayout drawer;
     SharedPreferences shared;
+    SharedPreferences.Editor sharededit;
     private List<Cart> liscart=new LinkedList<>();
     public static TextView T_Cart;
-    ImageView btncart;
+    ImageView imgdots;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         shared=getSharedPreferences("Language",MODE_PRIVATE);
+        sharededit=getSharedPreferences("Language",MODE_PRIVATE).edit();
         String Lan=shared.getString("Lann",null);
         if(Lan!=null) {
             Locale locale = new Locale(Lan);
@@ -65,7 +70,7 @@ public class Navigation extends AppCompatActivity
                     getBaseContext().getResources().getDisplayMetrics());
         }
         setContentView(R.layout.activity_navigation);
-
+        imgdots=findViewById(R.id.dotss);
          toolbar = findViewById(R.id.toolbarnavigation);
         setSupportActionBar(toolbar);
 //        btncart=findViewById(R.id.btncart);
@@ -79,7 +84,42 @@ public class Navigation extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
          drawer = findViewById(R.id.drawer_layout);
+        imgdots.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                PopupMenu popup = new PopupMenu(Navigation.this, imgdots);
+                //Inflating the Popup using xml file
 
+                Context wrapper = new ContextThemeWrapper(Navigation.this, R.style.Popmenu);
+                PopupMenu popup = new PopupMenu(wrapper, view);
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.english:
+                              sharededit.putString("Lann","en");
+                              sharededit.commit();
+                              startActivity(new Intent(Navigation.this,Navigation.class));
+                              finish();
+                            return true;
+                            case R.id.arabic:
+                                sharededit.putString("Lann","ar");
+                                sharededit.commit();
+                                startActivity(new Intent(Navigation.this,Navigation.class));
+                                finish();
+                                return true;
+                        }
+                        return true;
+                    }
+                });
+
+                popup.show();//showing popup menu
+            }
+
+
+        });
 
 //        btncart.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,14 +41,15 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * Created by ic on 9/7/2018.
  */
 
-public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHolder> {
+public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHolder> implements Filterable {
 
 
-    public static List<items> itemcart= new ArrayList<>();
+
     public List<Phones> filteredList=new ArrayList<>();
     View itemView;
     Context con;
-    private List<Cart> liscart=new LinkedList<>();
+    public static List<Phones> filtered = new ArrayList<>();
+    private List<Phones> mArrayList;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView T_Name,T_Discrption,T_Model,T_Price,count;
         ImageView mobile;
@@ -74,6 +77,7 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
     public Phones_Adapter(List<Phones> phon,Context context){
         filteredList=phon;
         this.con=context;
+        mArrayList=phon;
     }
 
 
@@ -172,14 +176,36 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
         });
 
 
-
-
-
-
-
-
     }
 
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                filtered.clear();
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    filteredList = mArrayList;
+                } else {
+                    for (Phones androidVersion : mArrayList) {
+                        if (androidVersion.getProductsName().toLowerCase().contains(charString)) {
+                            filtered.add(androidVersion);}}
+                    filteredList = filtered;}
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredList = (List<Phones>) filterResults.values;
+
+                notifyDataSetChanged();
+            }
+        };
+
+    }
     @Override
     public int getItemCount() {
         return filteredList.size();

@@ -9,9 +9,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -46,8 +50,7 @@ public class Sparts extends Fragment implements SpartsView,SwipeRefreshLayout.On
     String Lan;
     SwipeRefreshLayout mSwipeRefreshLayout;
     GridLayoutManager gridLayoutManager;
-    private List<Cart> filteredList=new ArrayList<>();
-    private List<Cart> liscart=new LinkedList<>();
+    EditText product;
     public Sparts() {
         // Required empty public constructor
     }
@@ -58,12 +61,15 @@ public class Sparts extends Fragment implements SpartsView,SwipeRefreshLayout.On
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_charges, container, false);
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        product =view.findViewById(R.id.findyourproduct);
         getSpartspresenter=new GetSpartspresenter(getContext(),this);
         shared=getActivity().getSharedPreferences("Language",MODE_PRIVATE);
         Lan=shared.getString("Lann",null);
         Recyclview();
         SwipRefresh();
-
+        RecycleviewSerach();
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -90,7 +96,25 @@ public class Sparts extends Fragment implements SpartsView,SwipeRefreshLayout.On
         recyclerView = view.findViewById(R.id.recycler_Sparts);
         recyclerView.setHasFixedSize(true);
     }
+    public void RecycleviewSerach(){
+        product.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+                adapter.getFilter().filter(charSequence);
+                adapter.notifyDataSetChanged();
+
+
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+    }
     @Override
     public void GetSparts(List<Spart> list) {
         adapter = new Sparts_Adapter(list,getContext());

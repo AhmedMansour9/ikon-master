@@ -2,7 +2,6 @@ package ikon.ikon.Activites;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -49,7 +48,6 @@ import java.util.List;
 import java.util.Locale;
 
 import ikon.ikon.Bussiness.ListItemCart;
-import ikon.ikon.GPSTracker;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.OrderShop;
 import ikon.ikon.PreSenter.OrderShoppinPresenter;
@@ -60,7 +58,7 @@ import ikonNNN.ikonN.R;
  * Created by ic on 9/12/2018.
  */
 
-public class Dialog  extends AppCompatActivity implements OrderView,OnMapReadyCallback, com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class Dialogee extends AppCompatActivity implements OrderView,OnMapReadyCallback, com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     TextView T_address,T_Price,T_Phone;
     Button ordershoping;
@@ -125,7 +123,7 @@ public class Dialog  extends AppCompatActivity implements OrderView,OnMapReadyCa
                 String logi=share.getString("logggin",null);
                 if(logi==null) {
                     Toast.makeText(getBaseContext(), "Login First", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Dialog.this, Login.class));
+                    startActivity(new Intent(Dialogee.this, Login.class));
                     finish();
                 }else {
 
@@ -192,7 +190,7 @@ public class Dialog  extends AppCompatActivity implements OrderView,OnMapReadyCa
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(Dialog.this,
+                                ActivityCompat.requestPermissions(Dialogee.this,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         REQUEST_LOCATION_CODE);
                             }
@@ -236,7 +234,7 @@ public class Dialog  extends AppCompatActivity implements OrderView,OnMapReadyCa
                     if (e instanceof ResolvableApiException) {
                         try {
                             ResolvableApiException resolvable = (ResolvableApiException) e;
-                            resolvable.startResolutionForResult(Dialog.this,
+                            resolvable.startResolutionForResult(Dialogee.this,
                                     REQUEST_LOCATION_CODE);
                         } catch (IntentSender.SendIntentException sendEx) {
                         }
@@ -382,7 +380,7 @@ public class Dialog  extends AppCompatActivity implements OrderView,OnMapReadyCa
     @Override
     public void OrderSuccess() {
         Toast.makeText(this, "Your Order Acceepted Will Call You Soon", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(Dialog.this,Shoping.class));
+        startActivity(new Intent(Dialogee.this,Shoping.class));
         finish();
         progressBarorder.setVisibility(View.INVISIBLE);
     }

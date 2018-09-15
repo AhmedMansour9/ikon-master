@@ -12,6 +12,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,7 +40,7 @@ public class Shoping extends AppCompatActivity{
    public static TextView T_Cartshop;
     private List<Cart> liscart=new LinkedList<>();
     ImageView btncartshop;
-    CounterPresenter cn;
+
     SharedPreferences share;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class Shoping extends AppCompatActivity{
         viewPager = findViewById(R.id.viewpager);
         T_Cartshop=findViewById(R.id.T_Cartshop);
         btncartshop=findViewById(R.id.btncartshop);
+
         share=getSharedPreferences("count",MODE_PRIVATE);
         setupViewPager(viewPager);
 
@@ -76,8 +79,11 @@ public class Shoping extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Shoping.this,cartproducts.class));
+
             }
         });
+
+
 
 
     }
