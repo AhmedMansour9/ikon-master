@@ -25,10 +25,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import ikon.ikon.Activites.ListOrdersShopping;
 import ikon.ikon.Activites.Maintaince;
 import ikon.ikon.Activites.Navigation;
 import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Activites.ShowProduct;
+import ikon.ikon.Activites.listordermaintenence;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Count;
 import ikon.ikon.PreSenter.CounterPresenter;
@@ -54,7 +56,8 @@ public class GuesFragment extends Fragment implements Count {
     public static TextView T_Cart;
     CounterPresenter cn;
     View view;
-
+    SharedPreferences shareRole;
+    String role;
     SharedPreferences.Editor share;
     private List<Cart> filteredList=new ArrayList<>();
     public GuesFragment() {
@@ -68,7 +71,8 @@ public class GuesFragment extends Fragment implements Count {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_gues, container, false);
         handler = new Handler();
-
+        shareRole=getActivity().getSharedPreferences("Role",MODE_PRIVATE);
+        role=shareRole.getString("Role",null);
         cn=new CounterPresenter(getContext(),this);
        GoTo_Maintaince();
        GoTo_Shooping();
@@ -78,8 +82,7 @@ public class GuesFragment extends Fragment implements Count {
         dotsLayout =view.findViewById(R.id.layoutDots);
         layouts = new int[]{
                 R.layout.sliderfour,
-                R.layout.sliderthree,
-                R.layout.sliderone,
+                R.layout.sliderthree
         };
 
         addBottomDots(0);
@@ -94,7 +97,12 @@ public class GuesFragment extends Fragment implements Count {
         main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),Maintaince.class));
+                if(role!=null){
+                    startActivity(new Intent(getActivity(),listordermaintenence.class));
+                }else {
+                    startActivity(new Intent(getActivity(),Maintaince.class));
+                }
+
             }
         });
     }
@@ -103,8 +111,11 @@ public class GuesFragment extends Fragment implements Count {
         shoping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),Shoping.class));
-
+                if(role!=null){
+                    startActivity(new Intent(getActivity(),ListOrdersShopping.class));
+                }else {
+                    startActivity(new Intent(getActivity(),Shoping.class));
+                }
 
             }
         });

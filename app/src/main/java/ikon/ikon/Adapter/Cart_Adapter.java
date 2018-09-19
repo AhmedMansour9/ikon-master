@@ -1,7 +1,6 @@
 package ikon.ikon.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -11,19 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import ikon.ikon.Activites.Shoping;
-import ikon.ikon.Activites.ShowProduct;
-import ikon.ikon.Bussiness.ListItemCart;
-import ikon.ikon.Model.Accessory;
 import ikon.ikon.Model.Cart;
 
 import ikon.ikon.Viewes.CountView;

@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,11 +49,13 @@ public class ShowProduct extends AppCompatActivity implements Count{
     String countt="1";
     String disappear;
     SharedPreferences.Editor share;
+    RelativeLayout RelativeProduct;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.showproduct);
         Imgphone=findViewById(R.id.Image_Phone);
+        RelativeProduct=findViewById(R.id.RelativeProduct);
         T_Name=findViewById(R.id.T_name);
         T_Discrp=findViewById(R.id.T_Discrp);
         T_Price=findViewById(R.id.T_Price);
@@ -124,7 +128,7 @@ public class ShowProduct extends AppCompatActivity implements Count{
                 Cart car=new Cart(countt,id,Name,Discrp,Price,photo);
                 liscart.add(car);
                 contpresen.GetCount(String.valueOf(liscart.size()));
-                Toast.makeText(ShowProduct.this, Name+"  Add to cart ", Toast.LENGTH_SHORT).show();
+                Snackbar.make(RelativeProduct,R.string.addcart,1500).show();
                 ListItemCart lisst=new ListItemCart();
                 share.putString("count",String.valueOf(String.valueOf(liscart.size())));
                 share.commit();
@@ -144,4 +148,5 @@ public class ShowProduct extends AppCompatActivity implements Count{
     public void count(String con) {
 
     }
+
 }

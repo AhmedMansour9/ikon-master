@@ -66,5 +66,9 @@ public class cartproducts extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 }

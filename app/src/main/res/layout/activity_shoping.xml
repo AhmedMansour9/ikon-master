@@ -34,23 +34,24 @@
 
 
             <ImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
                 android:background="@drawable/carticonn"
                 android:id="@+id/btncartshop"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
+                android:layout_alignParentBottom="true"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/T_Cartshop"
-                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_23sdp"
                 android:layout_alignParentRight="true"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:textColor="#ff0000"
+                android:textColor="#fff"
                 android:textSize="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:gravity="center"
                 android:textStyle="bold"
                 />
 

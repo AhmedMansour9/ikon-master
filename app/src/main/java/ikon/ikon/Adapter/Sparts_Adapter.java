@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -22,14 +21,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import ikon.ikon.Activites.Navigation;
-import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Activites.ShowProduct;
-import ikon.ikon.Bussiness.ListItemCart;
-import ikon.ikon.Fragments.GuesFragment;
-import ikon.ikon.Model.Accessory;
 import ikon.ikon.Model.Cart;
-import ikon.ikon.Model.Phones;
 import ikon.ikon.Model.Spart;
 import ikonNNN.ikonN.R;
 
@@ -58,15 +51,14 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
         public MyViewHolder(View view) {
             super(view);
             T_Name = view.findViewById(R.id.T_Name);
-            T_Discrption = view.findViewById(R.id.T_Discrption);
-            T_Model = view.findViewById(R.id.T_Model);
-            T_Price = view.findViewById(R.id.T_Price);
+//            T_Discrption = view.findViewById(R.id.T_Discrption);
+//            T_Model = view.findViewById(R.id.T_Model);
             mobile=view.findViewById(R.id.Image_Phone);
             progressBar=view.findViewById(R.id.progrossimage);
-            btncart=view.findViewById(R.id.btncard);
-            count=view.findViewById(R.id.contuner);
-            plus=view.findViewById(R.id.plus);
-            minus=view.findViewById(R.id.minus);
+//            btncart=view.findViewById(R.id.btncard);
+//            count=view.findViewById(R.id.contuner);
+//            plus=view.findViewById(R.id.plus);
+//            minus=view.findViewById(R.id.minus);
 
 
         }
@@ -124,7 +116,7 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
 //        String a = filteredList.get(position).getProductsDescription();
 //        holder.T_Discrption.setText(a.replace("<p>","").replace("</p>",""));
 
-        holder.T_Price.setText(filteredList.get(position).getProductsPrice()+"SR");
+//        holder.T_Price.setText(filteredList.get(position).getProductsPrice()+"SR");
         String i = filteredList.get(position).getProductsImage();
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
@@ -147,7 +139,7 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
         holder.T_Name.setTypeface(typeface);
 //        holder.T_Model.setTypeface(typeface);
 //        holder.T_Discrption.setTypeface(typeface);
-        holder.T_Price.setTypeface(typeface);
+//        holder.T_Price.setTypeface(typeface);
 
 //        holder.btncart.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,14 +19,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import ikon.ikon.Activites.Navigation;
-import ikon.ikon.Activites.Shoping;
+import ikon.ikon.Activites.Accessoriescategoryid;
 import ikon.ikon.Activites.ShowProduct;
-import ikon.ikon.Bussiness.ListItemCart;
-import ikon.ikon.Fragments.GuesFragment;
 import ikon.ikon.Model.Accessory;
+import ikon.ikon.Model.AccessorysubCategory;
 import ikon.ikon.Model.Cart;
-import ikon.ikon.Model.Phones;
 
 import ikon.ikon.Viewes.CountView;
 import ikonNNN.ikonN.R;
@@ -59,15 +55,9 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
         public MyViewHolder(View view) {
             super(view);
             T_Name = view.findViewById(R.id.T_Name);
-            T_Discrption = view.findViewById(R.id.T_Discrption);
-            T_Model = view.findViewById(R.id.T_Model);
-            T_Price = view.findViewById(R.id.T_Price);
             mobile=view.findViewById(R.id.Image_Phone);
             progressBar=view.findViewById(R.id.progrossimage);
             btncart=view.findViewById(R.id.btncard);
-//            count=view.findViewById(R.id.contuner);
-//            plus=view.findViewById(R.id.plus);
-//            minus=view.findViewById(R.id.minus);
 
 
 
@@ -76,7 +66,7 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
 
     }
 
-    public Accessories_Adapter(List<Accessory> phon,Context context){
+    public Accessories_Adapter(List<Accessory> phon, Context context){
         filteredList=phon;
         this.con=context;
     }
@@ -93,13 +83,13 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
     public void onBindViewHolder(final Accessories_Adapter.MyViewHolder holder, final int position) {
 
 
-        holder.T_Name.setText(filteredList.get(position).getProductsName());
+        holder.T_Name.setText(filteredList.get(position).getCategoriesName());
 //        holder.T_Model.setText(filteredList.get(position).getProductsModel());
-        String a = filteredList.get(position).getProductsDescription();
+//        String a = filteredList.get(position).getProductsDescription();
 //        holder.T_Discrption.setText(a.replace("<p>","").replace("</p>",""));
 
-        holder.T_Price.setText(filteredList.get(position).getProductsPrice()+"SR");
-        String i = filteredList.get(position).getProductsImage();
+//        holder.T_Price.setText(filteredList.get(position).getProductsPrice()+"SR");
+        String i = filteredList.get(position).getCategoriesImage();
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(getApplicationContext())
@@ -121,7 +111,7 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
         holder.T_Name.setTypeface(typeface);
 //        holder.T_Model.setTypeface(typeface);
 //        holder.T_Discrption.setTypeface(typeface);
-        holder.T_Price.setTypeface(typeface);
+//        holder.T_Price.setTypeface(typeface);
 //        holder.btncart.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -140,14 +130,14 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent inty=new Intent(con, ShowProduct.class);
+                Intent inty=new Intent(con, Accessoriescategoryid.class);
 //                int a=Integer.parseInt(holder.count.getText().toString());
-                inty.putExtra("id",filteredList.get(position).getProductsId());
+                inty.putExtra("id",filteredList.get(position).getCategoriesId());
 //                inty.putExtra("count",String.valueOf(a));
-                inty.putExtra("photo",filteredList.get(position).getProductsImage());
-                inty.putExtra("name",filteredList.get(position).getProductsName());
-                inty.putExtra("discrption",filteredList.get(position).getProductsDescription());
-                inty.putExtra("price",filteredList.get(position).getProductsPrice());
+//                inty.putExtra("photo",filteredList.get(position).getProductsImage());
+                inty.putExtra("name",filteredList.get(position).getCategoriesName());
+//                inty.putExtra("discrption",filteredList.get(position).getProductsDescription());
+//                inty.putExtra("price",filteredList.get(position).getProductsPrice());
                 con.startActivity(inty);
 
             }

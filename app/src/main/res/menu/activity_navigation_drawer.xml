@@ -8,8 +8,8 @@
             android:id="@+id/home"
             android:title="@string/home" />
         <item
-            android:id="@+id/profile"
-            android:title="@string/Profile" />
+            android:id="@+id/logout"
+            android:title="@string/Logout" />
 
 
     </group>

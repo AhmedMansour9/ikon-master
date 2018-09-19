@@ -3,27 +3,24 @@ package ikon.ikon.Fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import ikon.ikon.Activites.Navigation;
-import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Adapter.Accessories_Adapter;
-import ikon.ikon.Adapter.Phones_Adapter;
+import ikon.ikon.CheckgbsAndNetwork;
 import ikon.ikon.Model.Accessory;
-import ikon.ikon.Model.Cart;
+import ikon.ikon.Model.AccessorysubCategory;
 import ikon.ikon.PreSenter.GetAccessoriesPresenter;
 import ikon.ikon.Viewes.AccessoriesView;
 import ikon.ikon.Viewes.CountView;
@@ -50,6 +47,8 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
     String Lan;
     SwipeRefreshLayout mSwipeRefreshLayout;
     GridLayoutManager gridLayoutManager;
+    CheckgbsAndNetwork checknetwork;
+    RelativeLayout RelativePhone;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +56,8 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
         view=inflater.inflate(R.layout.fragment_accessories, container, false);
        getAccessoriesP=new GetAccessoriesPresenter(getContext(),this);
         shared=getActivity().getSharedPreferences("Language",MODE_PRIVATE);
+        checknetwork=new CheckgbsAndNetwork(getApplicationContext());
+        RelativePhone=view.findViewById(R.id.RelativeAccessories);
         Lan=shared.getString("Lann",null);
         Recyclview();
         SwipRefresh();
@@ -65,6 +66,7 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
       mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
           @Override
           public void onRefresh() {
+              if(checknetwork.isNetworkAvailable(getApplicationContext())){
               mSwipeRefreshLayout.setRefreshing(true);
               mSwipeRefreshLayout.setEnabled(true);
               if(Lan!=null) {
@@ -76,6 +78,9 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
                   }else {
                       getAccessoriesP.GetAccessories("en");
                   }
+              }
+              }else {
+                  Snackbar.make(RelativePhone,R.string.internet,1000).show();
               }
           }
       });
@@ -98,6 +103,7 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
+                if(checknetwork.isNetworkAvailable(getApplicationContext())){
                 mSwipeRefreshLayout.setRefreshing(true);
                 mSwipeRefreshLayout.setEnabled(true);
                 if(Lan!=null) {
@@ -111,6 +117,9 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
                     }
                 }
 
+            }else{
+                    Snackbar.make(RelativePhone,R.string.internet,1000).show();
+                }
             }
         });
     }
@@ -141,18 +150,22 @@ public class Accessories extends Fragment implements AccessoriesView,SwipeRefres
 
     @Override
     public void onRefresh() {
-        mSwipeRefreshLayout.setEnabled(true);
-        if(Lan!=null) {
-            getAccessoriesP.GetAccessories(Lan);
-        }else {
+        if(checknetwork.isNetworkAvailable(getApplicationContext())) {
+            mSwipeRefreshLayout.setEnabled(true);
+            if (Lan != null) {
+                getAccessoriesP.GetAccessories(Lan);
+            } else {
 
-                if(isRTL()){
+                if (isRTL()) {
                     getAccessoriesP.GetAccessories("ar");
-                }else {
+                } else {
                     getAccessoriesP.GetAccessories("en");
                 }
             }
 
+        }else{
+            Snackbar.make(RelativePhone,R.string.internet,1000).show();
+        }
     }
     public static boolean isRTL() {
         return isRTL(Locale.getDefault());

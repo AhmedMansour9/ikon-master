@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,9 +60,9 @@ import ikonNNN.ikonN.R;
  * Created by ic on 9/12/2018.
  */
 
-public class Dialogee extends AppCompatActivity implements OrderView,OnMapReadyCallback, com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class Dialogee extends AppCompatActivity implements OrderView, OnMapReadyCallback, com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    TextView T_address,T_Price,T_Phone;
+    TextView T_address, T_Price, T_Phone;
     Button ordershoping;
     Button btnlastorder;
     Button location;
@@ -70,39 +72,44 @@ public class Dialogee extends AppCompatActivity implements OrderView,OnMapReadyC
     final int REQUEST_LOCATION_CODE = 99;
     private GoogleMap googleMap;
     GoogleApiClient mGoogleApiClient;
-    double latitude,longitude;
-    private List<Cart> liscart=new LinkedList<>();
+    double latitude, longitude;
+    private List<Cart> liscart = new LinkedList<>();
     OrderShoppinPresenter orderpresent;
     String lanuage;
     String Totalprice;
 
-    String postalCode="";
-    String city="";
-    String country="";
+    String postalCode = "";
+    String city = "";
+    String country = "";
     SharedPreferences share;
-    ListItemCart list=new ListItemCart();
+    ListItemCart list = new ListItemCart();
     ProgressBar progressBarorder;
-    String y="";
+    SharedPreferences.Editor sharesss;
+    RelativeLayout RelativeOrder;
+    String y = "";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_ordershopping);
-        T_address=findViewById(R.id.T_Address);
-        T_Phone=findViewById(R.id.T_Phone);
-        T_Price=findViewById(R.id.T_Price);
-        location=findViewById(R.id.getlocat);
-        progressBarorder=findViewById(R.id.progressBarorder);
-        Totalprice=getIntent().getStringExtra("totalpric");
+        RelativeOrder = findViewById(R.id.RelativeOrder);
+        T_address = findViewById(R.id.T_Address);
+        T_Phone = findViewById(R.id.T_Phone);
+        T_Price = findViewById(R.id.T_Price);
+        location = findViewById(R.id.getlocat);
+        progressBarorder = findViewById(R.id.progressBarorder);
+        Totalprice = getIntent().getStringExtra("totalpric");
         T_Price.setText(Totalprice);
-        if(isRTL()){
-            lanuage="ar";
-        }else {
-            lanuage="en";
+        sharesss = getSharedPreferences("count", MODE_PRIVATE).edit();
+        if (isRTL()) {
+            lanuage = "ar";
+        } else {
+            lanuage = "en";
         }
-        ordershoping=findViewById(R.id.servicerequest);
-        orderpresent=new OrderShoppinPresenter(this,this);
-        MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.maps);
+        ordershoping = findViewById(R.id.servicerequest);
+        orderpresent = new OrderShoppinPresenter(this, this);
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.maps);
         mapFragment.getMapAsync(this);
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
         if (SDK_INT > 8) {
@@ -117,44 +124,43 @@ public class Dialogee extends AppCompatActivity implements OrderView,OnMapReadyC
         ordershoping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                share=getSharedPreferences("login",MODE_PRIVATE);
-                y="";
-                String phone=T_Phone.getText().toString();
-                String logi=share.getString("logggin",null);
-                if(logi==null) {
+                share = getSharedPreferences("login", MODE_PRIVATE);
+                y = "";
+                String phone = T_Phone.getText().toString();
+                String logi = share.getString("logggin", null);
+                if (logi == null) {
                     Toast.makeText(getBaseContext(), "Login First", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Dialogee.this, Login.class));
                     finish();
-                }else {
+                } else {
 
-                    for(int i=0;i<ShowProduct.liscart.size();i++){
-                        int a=ShowProduct.liscart.size()-1;
+                    for (int i = 0; i < ShowProduct.liscart.size(); i++) {
+                        int a = ShowProduct.liscart.size() - 1;
 
-                        if(a==i){
-                         y=y+ShowProduct.liscart.get(i).getId();
-                        }else {
+                        if (a == i) {
+                            y = y + ShowProduct.liscart.get(i).getId();
+                        } else {
                             y = y + ShowProduct.liscart.get(i).getId() + ",";
                         }
 
                     }
-                    if(ShowProduct.liscart.get(1).getId()!=null){
+                    if (String.valueOf(ShowProduct.liscart.size()) != null) {
 
                     }
-                    if(phone.equals("")){
+                    if (phone.equals("")) {
                         T_Phone.setError("Enter Your Phone");
                     }
-                    if(addres!=null||phone!=null){
-
-                        OrderShop o=new OrderShop(addres,String.valueOf(latitude),String.valueOf(longitude),logi,lanuage
-                                ,phone,Totalprice,y,postalCode,city,country);
-
-                        orderpresent.Order(o);
+                    if (addres != null || phone != null) {
                         progressBarorder.setVisibility(View.VISIBLE);
+                        OrderShop o = new OrderShop(addres, String.valueOf(latitude), String.valueOf(longitude), logi, lanuage
+                                , phone, Totalprice, y, postalCode, city, country);
+                        ordershoping.setEnabled(false);
+                        orderpresent.Order(o);
+
 
                     }
 
                 }
-
 
 
             }
@@ -171,6 +177,7 @@ public class Dialogee extends AppCompatActivity implements OrderView,OnMapReadyC
         }
 
     }
+
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -210,6 +217,7 @@ public class Dialogee extends AppCompatActivity implements OrderView,OnMapReadyC
             return true;
         }
     }
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationReques = new LocationRequest();
@@ -217,10 +225,11 @@ public class Dialogee extends AppCompatActivity implements OrderView,OnMapReadyC
         locationReques.setFastestInterval(10000);
         locationReques.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
-        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationReques, this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationReques, this);
             LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                     .addLocationRequest(locationReques);
 
@@ -241,9 +250,7 @@ public class Dialogee extends AppCompatActivity implements OrderView,OnMapReadyC
                     }
                 }
             });
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-        }
+
 
     }
 
@@ -379,14 +386,15 @@ public class Dialogee extends AppCompatActivity implements OrderView,OnMapReadyC
 
     @Override
     public void OrderSuccess() {
-        Toast.makeText(this, "Your Order Acceepted Will Call You Soon", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(Dialogee.this,Shoping.class));
+        ordershoping.setEnabled(true);
+        startActivity(new Intent(Dialogee.this,RequestedSuccessfully.class));
         finish();
         progressBarorder.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void ErrorOrder() {
+        ordershoping.setEnabled(true);
         progressBarorder.setVisibility(View.INVISIBLE);
     }
 

@@ -2,7 +2,6 @@ package ikon.ikon.Viewes;
 
 import java.util.List;
 
-import ikon.ikon.Model.Accessory;
 import ikon.ikon.Model.Spart;
 
 /**

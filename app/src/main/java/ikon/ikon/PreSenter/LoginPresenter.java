@@ -43,7 +43,13 @@ public class LoginPresenter {
             public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
 
                 if (response.isSuccessful()) {
+                    if(response.body().getData().getRole()!=null){
+                        loginvieew.OpenRole(response.body().getData().getRole(),response.body().getData().getUserToken());
+
+                    }else {
                         loginvieew.openMain(response.body().getData().getUserToken());
+
+                    }
 
                 } else {
                     loginvieew.showError("");

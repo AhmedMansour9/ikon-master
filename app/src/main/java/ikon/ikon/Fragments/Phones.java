@@ -3,6 +3,7 @@ package ikon.ikon.Fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import ikon.ikon.Activites.Navigation;
 import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Activites.ShowProduct;
 import ikon.ikon.Adapter.Phones_Adapter;
+import ikon.ikon.CheckgbsAndNetwork;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Count;
 import ikon.ikon.Model.phonesResponse;
@@ -58,6 +61,8 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
      SwipeRefreshLayout mSwipeRefreshLayout;
      GridLayoutManager gridLayoutManager;
     CounterPresenter cn;
+    CheckgbsAndNetwork checkNetWork;
+    RelativeLayout RelativePhone;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,11 +73,13 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         phons=new GetPhonesPresenter(getContext(),this);
         shared=getActivity().getSharedPreferences("Language",MODE_PRIVATE);
+        RelativePhone=view.findViewById(R.id.RelativePhone);
          Lan=shared.getString("Lann",null);
         cn=new CounterPresenter(getContext(),this);
+        checkNetWork=new CheckgbsAndNetwork(getApplicationContext());
          Recyclview();
         SwipRefresh();
-        RecycleviewSerach();
+
 
 
 
@@ -95,6 +102,7 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
         adapter.notifyDataSetChanged();
 
         mSwipeRefreshLayout.setEnabled(false);
+        RecycleviewSerach();
     }
 
     @Override
@@ -135,7 +143,9 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
+                if(checkNetWork.isNetworkAvailable(getApplicationContext())){
                 mSwipeRefreshLayout.setEnabled(true);
+                mSwipeRefreshLayout.setRefreshing(true);
                 if(Lan!=null) {
                     phons.GetPhones(Lan);
                 }else {
@@ -146,6 +156,9 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
                     }
                 }
 
+            }else {
+                    Snackbar.make(RelativePhone,R.string.internet,1000).show();
+                }
             }
         });
     }
@@ -160,15 +173,19 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
     }
     @Override
     public void onRefresh() {
-        mSwipeRefreshLayout.setEnabled(true);
-        if(Lan!=null) {
-            phons.GetPhones(Lan);
-        }else {
-            if(isRTL()){
-                phons.GetPhones("ar");
-            }else {
-                phons.GetPhones("en");
+        if(checkNetWork.isNetworkAvailable(getApplicationContext())) {
+            mSwipeRefreshLayout.setEnabled(true);
+            if (Lan != null) {
+                phons.GetPhones(Lan);
+            } else {
+                if (isRTL()) {
+                    phons.GetPhones("ar");
+                } else {
+                    phons.GetPhones("en");
+                }
             }
+        }else {
+            Snackbar.make(RelativePhone,R.string.internet,1000).show();
         }
     }
 

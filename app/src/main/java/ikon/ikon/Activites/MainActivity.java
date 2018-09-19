@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         share=getSharedPreferences("count",MODE_PRIVATE).edit();
-        share.putString("count","");
+        share.putString("count",null);
         share.commit();
 
     }

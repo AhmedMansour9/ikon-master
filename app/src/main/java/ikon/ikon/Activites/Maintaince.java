@@ -3,6 +3,7 @@ package ikon.ikon.Activites;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import ikon.ikon.CheckgbsAndNetwork;
 import ikon.ikon.Model.ColorResponse;
 import ikon.ikon.Model.Colors;
 import ikon.ikon.Model.IssueTybeEnglish;
@@ -51,13 +54,15 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
     ArrayAdapter<Products> ListProduct;
     ArrayAdapter<IssueType> ListIssue;
     ArrayAdapter<ikon.ikon.Model.Color> Arraycolor;
-    String service,model,color,issue,otherissue;
+    String service,model,color,issue,otherissue,T_spare;
     int Service_id,Model_id,Color_id;
     String Issue_id;
     Products y;
     GetPricePresenter getprice;
     ArrayAdapter<IssueTybeEnglish> inssueneglish;
     ColorPresenter colorrespon;
+    RelativeLayout RelativeMaintenence;
+    CheckgbsAndNetwork checkNetWork;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +75,9 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
         init();
         getprice=new GetPricePresenter(this,(GetPriceView)this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+        RelativeMaintenence=findViewById(R.id.RelativeMaintenence);
         shared=getSharedPreferences("Language",MODE_PRIVATE);
+        checkNetWork=new CheckgbsAndNetwork(getApplicationContext());
         String Lan=shared.getString("Lann",null);
 //        shareLanguage=getSharedPreferences("login",MODE_PRIVATE);
 //        String logi=shareLanguage.getString("logggin",null);
@@ -80,16 +86,25 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
         getIssue=new GetIssuePresenter(this,(IssueTybeView) this,(IssuetybeViewEnglish)this);
         getlist=new GetProductsPresenter(this,(ProductView)this);
         progressBar.setVisibility(View.VISIBLE);
+          if(checkNetWork.isNetworkAvailable(this)) {
+              if (isRTL()) {
+                  getlist.GetProducts("ar");
+                  getIssue.GetIssuetybeArabice("ar");
+                  colorrespon.GetColor("ar");
+              } else {
+                  getlist.GetProducts("en");
+                  getIssue.GetIssuetybeEnglish("en");
+                  colorrespon.GetColor("en");
+              }
+          }else {
 
-            if(isRTL()){
-            getlist.GetProducts("ar");
-            getIssue.GetIssuetybeArabice("ar");
-            colorrespon.GetColor("ar");
-        }else {
-                getlist.GetProducts("en");
-                getIssue.GetIssuetybeEnglish("en");
-                colorrespon.GetColor("en");
-            }
+              Snackbar snackbar;
+              snackbar = Snackbar.make(RelativeMaintenence,R.string.internet, 1500);
+              View snackBarView = snackbar.getView();
+              snackBarView.setBackgroundColor(Color.RED);
+              snackbar.show();
+
+          }
 
         Get_price();
         Spin_Service();
@@ -308,6 +323,7 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
         inty.putExtra("issue_id",issue);
         inty.putExtra("otherissue",otherissue);
         inty.putExtra("price",Price);
+        inty.putExtra("model",model);
         startActivity(inty);
 
 
@@ -315,7 +331,7 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
 
     @Override
     public void ErrorPrice() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -356,13 +372,13 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
 
     @Override
     public void ErrorIssuetybeenglish() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void getColor(List<ikon.ikon.Model.Color> colo) {
 
-
+        progressBar.setVisibility(View.GONE);
 
         Arraycolor = new ArrayAdapter<ikon.ikon.Model.Color>(getApplicationContext(), R.layout.textcolorspinner, colo) {
             @Override
@@ -391,6 +407,6 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
 
     @Override
     public void ErrorColor() {
-
+        progressBar.setVisibility(View.GONE);
     }
 }

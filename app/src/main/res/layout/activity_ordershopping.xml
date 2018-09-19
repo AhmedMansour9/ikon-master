@@ -4,16 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="#dedede"
+    android:id="@+id/RelativeOrder"
     android:layout_height="wrap_content"
     tools:context="ikon.ikon.Activites.Maintincetwo">
 
 
-    <ProgressBar
-        android:id="@+id/progressBarorder"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="@dimen/_450sdp"
@@ -54,6 +50,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_20sdp"
         android:textColor="#000"
+        android:inputType="number"
         android:paddingRight="@dimen/_10sdp"
         android:paddingLeft="@dimen/_10sdp"
         android:layout_height="@dimen/_40sdp" />
@@ -115,5 +112,10 @@
         android:layout_marginBottom="@dimen/_10sdp"
         />
 </RelativeLayout>
-
+    <ProgressBar
+        android:id="@+id/progressBarorder"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 </RelativeLayout>

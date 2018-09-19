@@ -4,75 +4,40 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by ic on 9/8/2018.
+ * Created by ic on 9/16/2018.
  */
 
 public class Accessory {
-
-    @SerializedName("products_id")
+    @SerializedName("categories_name")
     @Expose
-    private String productsId;
-    @SerializedName("products_name")
+    private String categoriesName;
+    @SerializedName("categories_id")
     @Expose
-    private String productsName;
-    @SerializedName("products_description")
+    private String categoriesId;
+    @SerializedName("categories_image")
     @Expose
-    private String productsDescription;
-    @SerializedName("products_model")
-    @Expose
-    private String productsModel;
-    @SerializedName("products_image")
-    @Expose
-    private String productsImage;
-    @SerializedName("products_price")
-    @Expose
-    private String productsPrice;
+    private String categoriesImage;
 
-    public String getProductsId() {
-        return productsId;
+    public String getCategoriesName() {
+        return categoriesName;
     }
 
-    public void setProductsId(String productsId) {
-        this.productsId = productsId;
+    public void setCategoriesName(String categoriesName) {
+        this.categoriesName = categoriesName;
     }
 
-    public String getProductsName() {
-        return productsName;
+    public String getCategoriesId() {
+        return categoriesId;
     }
 
-    public void setProductsName(String productsName) {
-        this.productsName = productsName;
+    public void setCategoriesId(String categoriesId) {
+        this.categoriesId = categoriesId;
     }
 
-    public String getProductsDescription() {
-        return productsDescription;
+    public String getCategoriesImage() {
+        return categoriesImage;
     }
 
-    public void setProductsDescription(String productsDescription) {
-        this.productsDescription = productsDescription;
-    }
-
-    public String getProductsModel() {
-        return productsModel;
-    }
-
-    public void setProductsModel(String productsModel) {
-        this.productsModel = productsModel;
-    }
-
-    public String getProductsImage() {
-        return productsImage;
-    }
-
-    public void setProductsImage(String productsImage) {
-        this.productsImage = productsImage;
-    }
-
-    public String getProductsPrice() {
-        return productsPrice;
-    }
-
-    public void setProductsPrice(String productsPrice) {
-        this.productsPrice = productsPrice;
-    }
-}
+    public void setCategoriesImage(String categoriesImage) {
+        this.categoriesImage = categoriesImage;
+    }}

@@ -7,6 +7,7 @@ package ikon.ikon.Viewes;
 public interface LoginView {
 
     void openMain(String a);
+    void OpenRole(String role,String usertoken);
     void showError(String error);
 
 }

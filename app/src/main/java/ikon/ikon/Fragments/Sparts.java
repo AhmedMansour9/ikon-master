@@ -4,6 +4,8 @@ package ikon.ikon.Fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -69,7 +71,7 @@ public class Sparts extends Fragment implements SpartsView,SwipeRefreshLayout.On
         Lan=shared.getString("Lann",null);
         Recyclview();
         SwipRefresh();
-        RecycleviewSerach();
+
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -131,6 +133,7 @@ public class Sparts extends Fragment implements SpartsView,SwipeRefreshLayout.On
         adapter.notifyDataSetChanged();
 
         mSwipeRefreshLayout.setEnabled(false);
+        RecycleviewSerach();
     }
 
     @Override

@@ -39,11 +39,12 @@
         <activity android:name="ikon.ikon.Activites.Language" />
         <activity android:name="ikon.ikon.Activites.ShowProduct" />
         <activity android:name="ikon.ikon.Activites.cartproducts" />
+        <activity android:name="ikon.ikon.Activites.listordermaintenence" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            tools:replace="android:value"
-            android:value="@string/facebook_app_id" />
+            android:value="@string/facebook_app_id"
+            tools:replace="android:value" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -62,9 +63,16 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCJ6CfOZbzzEilL-dS9y-cfi5PXTTgWrNI" />
-   <activity android:name="ikon.ikon.Activites.Dialogee"
-       android:theme="@style/Theme.AppCompat.Dialog"></activity>
 
+        <activity
+            android:name="ikon.ikon.Activites.Dialogee"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity android:name="ikon.ikon.Activites.Accessoriescategoryid" />
+        <activity android:name="ikon.ikon.Activites.OrderLocation" />
+        <activity android:name="ikon.ikon.Activites.ListOrdersShopping" />
+        <activity android:name="ikon.ikon.Activites.ShowProductsId" />
+        <activity android:name="ikon.ikon.Activites.RequestedSuccessfully" />
+        <activity android:name="ikon.ikon.Activites.RequestedSuccesfullyMaintenence"></activity>
     </application>
 
 </manifest>

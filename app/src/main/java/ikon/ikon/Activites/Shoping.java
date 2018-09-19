@@ -50,12 +50,14 @@ public class Shoping extends AppCompatActivity{
         T_Cartshop=findViewById(R.id.T_Cartshop);
         btncartshop=findViewById(R.id.btncartshop);
 
+
         share=getSharedPreferences("count",MODE_PRIVATE);
         setupViewPager(viewPager);
 
      String count=share.getString("count",null);
      if(count!=null){
          T_Cartshop.setText(count);
+         T_Cartshop.setBackgroundResource(R.drawable.circlecart);
      }
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -79,7 +81,7 @@ public class Shoping extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Shoping.this,cartproducts.class));
-
+                 finish();
             }
         });
 
@@ -94,6 +96,11 @@ public class Shoping extends AppCompatActivity{
         final int directionality = Character.getDirectionality(locale.getDisplayName().charAt(0));
         return directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT ||
                 directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC;
+    }
+    @Override
+    public void onBackPressed() {
+//        startActivity(new Intent(Shoping.this,Navigation.class));
+        finish();
     }
 
     private void setupViewPager(ViewPager viewPager) {

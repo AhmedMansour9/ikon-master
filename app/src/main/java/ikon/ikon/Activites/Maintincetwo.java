@@ -19,6 +19,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,17 +68,19 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
     LocationRequest locationReques;
     Gbs e;
     TextView T_address,T_Price,T_Phone;
-    String tybe,Product_id,color,issue_id,otherissue,price;
+    String tybe,Product_id,color,issue_id,otherissue,price,Spare;
     Button btnorder;
     SharedPreferences share;
     double latitude,longitude;
     OrderPresenter ord;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintancetwo);
          ord=new OrderPresenter(this,this);
         gbs=new GPSTracker(this);
+        progressBar=findViewById(R.id.progressmaintenence);
         btnorder=findViewById(R.id.servicerequest);
         T_address=findViewById(R.id.T_Address);
         T_Phone=findViewById(R.id.T_Phone);
@@ -109,7 +112,9 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
                     Toast.makeText(getBaseContext(), "Login First", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Maintincetwo.this,Login.class));
                     finish();
-                }else{
+                }
+                else{
+                    progressBar.setVisibility(View.VISIBLE);
                     OrderMaintenence order=new OrderMaintenence(Product_id,issue_id,tybe,color,otherissue,addres,
                             String.valueOf(latitude),String.valueOf(longitude),logi,price);
 
@@ -167,6 +172,7 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
         issue_id=getIntent().getStringExtra("issue_id");
         otherissue=getIntent().getStringExtra("otherissue");
         price=getIntent().getStringExtra("price");
+        Spare=getIntent().getStringExtra("model");
     }
 
     public void GetLocation(){
@@ -199,15 +205,18 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
 
     @Override
     public void OrderSuccess() {
-        Toast.makeText(getApplicationContext(), getResources().getString(R.string.requestedsuccfuly), Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(Maintincetwo.this,Navigation.class));
+        progressBar.setVisibility(View.GONE);
+        Intent inty=new Intent(Maintincetwo.this,RequestedSuccesfullyMaintenence.class);
+        inty.putExtra("spare",Spare);
+        inty.putExtra("price",price);
+        startActivity(inty);
         finish();
     }
 
     @Override
     public void ErrorOrder() {
         Toast.makeText(getApplicationContext(), "Failed order", Toast.LENGTH_SHORT).show();
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:id="@+id/friendCardView2"
+        android:background="@drawable/bcshopping"
+        >
+
+        <RelativeLayout
+            android:id="@+id/resturantLinearLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/activity_horizontal_margin">
+            <ImageView
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/Image_Product"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:id="@+id/T_Name"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_marginRight="@dimen/_10sdp"
+                 android:layout_toRightOf="@+id/Image_Product"
+                android:textSize="@dimen/_12sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/T_Price"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_below="@+id/T_Name"
+                android:layout_toRightOf="@+id/Image_Product"
+                android:textColor="#000"
+                android:textStyle="bold"
+                />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

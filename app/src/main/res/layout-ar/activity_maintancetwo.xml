@@ -37,6 +37,7 @@
         android:paddingLeft="@dimen/_10sdp"
         android:gravity="center_vertical"
         android:text="@string/Phone"
+        android:inputType="number"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_20sdp"
         android:textColor="#000"
@@ -85,4 +86,10 @@
         android:textColor="#000"
         android:layout_marginBottom="@dimen/_10sdp"
         />
+    <ProgressBar
+        android:id="@+id/progressmaintenence"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 </RelativeLayout>

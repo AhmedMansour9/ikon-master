@@ -14,6 +14,9 @@ public class UserLogin {
     @SerializedName("user_token")
     @Expose
     private String userToken;
+    @SerializedName("role")
+    @Expose
+    private String role;
 
     public String getMessage() {
         return message;
@@ -31,6 +34,13 @@ public class UserLogin {
         this.userToken = userToken;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
 
 }

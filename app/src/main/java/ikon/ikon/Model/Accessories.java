@@ -13,7 +13,7 @@ public class Accessories {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("products")
+    @SerializedName("categories")
     @Expose
     private List<Accessory> products = null;
 

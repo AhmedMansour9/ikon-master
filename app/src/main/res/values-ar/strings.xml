@@ -29,12 +29,19 @@
     <string name="selectvolor">اختار اللون</string>
     <string name="selectissue">المشكلة</string>
     <string name="price">السعر</string>
+    <string name="ordr">الطلبات</string>
+    <string name="ShowOrders">اظهر الاوردرات</string>
+    <string name="internet">لا يوجد  شبكة متاحة</string>
+    <string name="addcart">أضف الي العربة</string>
+    <string name="Logout">تسجيل خروج</string>
+    <string name="invalidemail">البريد الالكتروني خطأ</string>
     <string name="showprice">حدد السعر </string>
     <string name="title_activity_navigation">Navigation</string>
     <string name="address">العنوان</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="getlocation">حدد موقعك</string>
+    <string name="Direction">الاتجاهات</string>
     <string name="action_settings">Settings</string>
     <string name="servicerequest">اطلب الان</string>
     <string name="search">ابحث</string>
@@ -57,4 +64,11 @@
     <string name="requestedsuccfuly">تم طلب الاوردر بنجاح</string>
     <string name="Name">الاسم </string>
     <string name="discrp">الوصف </string>
+    <string name="tybe">النوع</string>
+    <string name="spare">قطع الغيار </string>
+      <string name="Color">الالوان</string>
+    <string name="Issue">المشكلة </string>
+    <string name="Note">ملحوظة</string>
+    <string name="Date">التاريخ</string>
+
 </resources>

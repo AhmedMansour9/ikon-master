@@ -6,12 +6,14 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import ikon.ikon.CheckgbsAndNetwork;
 import ikon.ikon.Model.UserRegister;
 import ikon.ikon.PreSenter.RegisterFace_Presenter;
 import ikon.ikon.PreSenter.LoginPresenter;
@@ -70,6 +73,12 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
     Registergoogle Registergoogl;
     SharedPreferences.Editor Shared;
     TextView Register;
+    SharedPreferences.Editor shareRole;
+    CheckgbsAndNetwork checknetwork;
+    RelativeLayout Relativelogin;
+    String useer;
+    String email;
+    String useergoogle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,14 +88,16 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
         signin=findViewById(R.id.signin);
         loginfac=findViewById(R.id.loginfac);
         Register=findViewById(R.id.Register);
+        Relativelogin=findViewById(R.id.Relativelogin);
         Shared=getSharedPreferences("login",MODE_PRIVATE).edit();
-
+        shareRole=getSharedPreferences("Role",MODE_PRIVATE).edit();
         google=findViewById(R.id.google);
         progressBar=findViewById(R.id.progressBarlogin);
         regist=new RegisterFace_Presenter(this,this);
         Registergoogl=new Registergoogle(this,this);
         mCallbackManager = CallbackManager.Factory.create();
         mAuth = FirebaseAuth.getInstance();
+        checknetwork=new CheckgbsAndNetwork(this);
         logiin=new LoginPresenter(this,this);
         GoogleSignOpition();
         LoginGoogle();
@@ -110,30 +121,59 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FUtilsValidation.isEmpty(E_Email, "please insert Mail");
-                FUtilsValidation.isEmpty(E_Password, "please insert Password");
 
-                if(!E_Email.getText().toString().equals("")&&!E_Password.getText().toString().equals("")) {
-                    UserRegister user = new UserRegister();
-                    user.setEmail(E_Email.getText().toString());
-                    user.setPassword(E_Password.getText().toString());
-                    progressBar.setVisibility(View.VISIBLE);
+                if(!ValidateEmail()){
+                    return;
+                }
+                if(checknetwork.isNetworkAvailable(getBaseContext())) {
 
-                    logiin.Login(user);
+
+                    FUtilsValidation.isEmpty(E_Email, "please insert Mail");
+                    FUtilsValidation.isEmpty(E_Password, "please insert Password");
+
+                    if (!E_Email.getText().toString().equals("") && !E_Password.getText().toString().equals("")) {
+                        UserRegister user = new UserRegister();
+                        user.setEmail(E_Email.getText().toString());
+                        user.setPassword(E_Password.getText().toString());
+                        progressBar.setVisibility(View.VISIBLE);
+                        email=E_Email.getText().toString();
+                        logiin.Login(user);
+                    }
+                }else {
+                    Toast.makeText(Login.this,getResources().getString(R.string.internet), Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
 
+    private Boolean ValidateEmail(){
+        String EMAIL=E_Email.getText().toString().trim();
+        if (EMAIL.isEmpty()||!isValidEmail(EMAIL)){
+            E_Email.setError(getResources().getString(R.string.invalidemail));
+
+            return false;
+        }else if(!E_Email.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z-Z0-9._-]+\\.+[a-z]+")){
+            E_Email.setError(getResources().getString(R.string.invalidemail));
+            return false;
+        }
+        return true;
+    }
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
     private void LoginGoogle() {
 
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent AuthIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-                startActivityForResult(AuthIntent, RequestSignInCode);
+                if(checknetwork.isNetworkAvailable(getBaseContext())) {
+                    Intent AuthIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+                    startActivityForResult(AuthIntent, RequestSignInCode);
+                }else {
+                    Toast.makeText(Login.this,getResources().getString(R.string.internet), Toast.LENGTH_LONG).show();
 
+                }
             }
         });
     }
@@ -180,12 +220,12 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
                         if (AuthResultTask.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            final String useer=user.getDisplayName();
+                             useergoogle=user.getDisplayName();
                             final String emaail=user.getEmail();
                             UserRegister use=new UserRegister();
                             String y =googleSignInAccount.getId();
 
-                            use.setFirstName(useer);
+                            use.setFirstName(useergoogle);
                             use.setEmail(emaail);
                             use.setId(y);
 
@@ -205,14 +245,16 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
         loginfac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (checknetwork.isNetworkAvailable(getBaseContext())) {
 
                     LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("email", "public_profile"));
+
                     LoginManager.getInstance().registerCallback(mCallbackManager,
                             new FacebookCallback<LoginResult>() {
                                 @Override
                                 public void onSuccess(LoginResult loginResult) {
                                     Log.d("Success", "LoginPresenter");
-                                    loginResu=loginResult;
+                                    loginResu = loginResult;
                                     handleFacebookAccessToken(loginResult.getAccessToken());
                                 }
 
@@ -223,10 +265,12 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
 
                                 @Override
                                 public void onError(FacebookException exception) {
-                                    Toast.makeText(Login.this, ""+exception.toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Login.this, getResources().getString(R.string.internet), Toast.LENGTH_LONG).show();
                                 }
                             });
-
+                }else {
+                    Toast.makeText(Login.this,getResources().getString(R.string.internet), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -253,7 +297,7 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
                                                 progressBar.setVisibility(View.GONE);
                                                 FirebaseUser user = mAuth.getCurrentUser();
 
-                                                final String useer=user.getDisplayName();
+                                                useer=user.getDisplayName();
                                                 final String emaail=user.getEmail();
                                                 final String id=user.getUid();
 
@@ -286,6 +330,21 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
         Shared.putString("logggin",a);
         Shared.apply();
         progressBar.setVisibility(View.GONE);
+        Intent inty=new Intent(Login.this,Navigation.class);
+        inty.putExtra("username",email);
+        startActivity(inty);
+        finish();
+
+    }
+
+    @Override
+    public void OpenRole(String role,String a) {
+
+        shareRole.putString("Role",role);
+        shareRole.commit();
+        Shared.putString("logggin",a);
+        Shared.apply();
+
         startActivity(new Intent(Login.this, Navigation.class));
         finish();
 
@@ -293,6 +352,7 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
 
     @Override
     public void showError(String error) {
+        Toast.makeText(this, ""+getResources().getString(R.string.invalidemail), Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.GONE);
     }
 
@@ -301,7 +361,9 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
         Shared.putString("logggin",a);
         Shared.apply();
         progressBar.setVisibility(View.GONE);
-        startActivity(new Intent(Login.this, Navigation.class));
+        Intent inty=new Intent(Login.this,Navigation.class);
+        inty.putExtra("username",useer);
+        startActivity(inty);
         finish();
     }
 
@@ -315,7 +377,9 @@ public class Login extends AppCompatActivity implements LoginView,RegisterFaceVi
         Shared.putString("logggin",a);
         Shared.apply();
         progressBar.setVisibility(View.GONE);
-        startActivity(new Intent(Login.this, Navigation.class));
+        Intent inty=new Intent(Login.this,Navigation.class);
+        inty.putExtra("username",useergoogle);
+        startActivity(inty);
         finish();
     }
 
