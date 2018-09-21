@@ -8,6 +8,12 @@
             android:id="@+id/home"
             android:title="@string/home" />
         <item
+            android:id="@+id/shoporder"
+            android:title="@string/shoporder" />
+        <item
+            android:id="@+id/maintenenceorder"
+            android:title="@string/maintenenceorder" />
+        <item
             android:id="@+id/logout"
             android:title="@string/Logout" />
 

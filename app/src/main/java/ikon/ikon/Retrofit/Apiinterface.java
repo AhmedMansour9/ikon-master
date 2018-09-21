@@ -4,12 +4,14 @@ import java.util.Map;
 
 import ikon.ikon.Model.AccessoriesResponse;
 import ikon.ikon.Model.AccessorySubCategoryResoonse;
+import ikon.ikon.Model.BannerResponse;
 import ikon.ikon.Model.ColorResponse;
 import ikon.ikon.Model.GetPriceResponse;
 import ikon.ikon.Model.IssueResponse;
 import ikon.ikon.Model.IssueTubeEnglishResponse;
 import ikon.ikon.Model.ListOrderResponse;
 import ikon.ikon.Model.ListOrderShoppingResponse;
+import ikon.ikon.Model.MyorderShopingResponse;
 import ikon.ikon.Model.OrderResponse;
 import ikon.ikon.Model.PeoductResponse;
 import ikon.ikon.Model.ShowProductsResponse;
@@ -78,6 +80,9 @@ public interface Apiinterface {
     @POST("colorList")
     Call<ColorResponse> GetColors(@QueryMap Map<String,String> queryMab);
 
+    @POST("mobileBanner")
+    Call<BannerResponse> GetBanner(@QueryMap Map<String,String> queryMab);
+
     @POST("listMaintenanceOrder")
     Call<ListOrderResponse> GetListOrder(@QueryMap Map<String,String> queryMab);
     @POST("listShopOrder")
@@ -85,6 +90,9 @@ public interface Apiinterface {
 
     @POST("productByID")
     Call<ShowProductsResponse> GetListOrderShoppingById(@QueryMap Map<String,String> queryMab);
+
+    @POST("orderShopCustomer")
+    Call<MyorderShopingResponse> GetListMyOrderShoping(@QueryMap Map<String,String> queryMab);
 
 
 }

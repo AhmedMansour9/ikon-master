@@ -35,6 +35,7 @@
     <string name="addcart">أضف الي العربة</string>
     <string name="Logout">تسجيل خروج</string>
     <string name="invalidemail">البريد الالكتروني خطأ</string>
+    <string name="shoporder">طلبات الشراء</string>
     <string name="showprice">حدد السعر </string>
     <string name="title_activity_navigation">Navigation</string>
     <string name="address">العنوان</string>
@@ -50,6 +51,7 @@
     <string name="charges">قطع غيار</string>
     <string name="notes">وصف المشاكل</string>
     <string name="home">الصفحة الرئيسية</string>
+    <string name="maintenenceorder">طلبات الصيانة </string>
     <string name="Profile">الصفحة الشخصية</string>
     <string name="Visit">زيارة</string>
     <string name="maintennce">صيانة</string>
@@ -60,7 +62,7 @@
     <string name="Gold">ذهبي </string>
     <string name="silver">فضة</string>
     <string name="rquestorder">أطلب الان </string>
-
+    <string name="noorders">لا يوجد منتجات لديك </string>
     <string name="requestedsuccfuly">تم طلب الاوردر بنجاح</string>
     <string name="Name">الاسم </string>
     <string name="discrp">الوصف </string>

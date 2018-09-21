@@ -27,8 +27,10 @@ public class RequestedSuccessfully extends AppCompatActivity {
     GPSTracker gbs;
     double total_price;
     double res = 0;
+    ListItemCart listItemCar;
     TextView TextDone;
     SharedPreferences.Editor sharesss;
+    ListItemCart listItemCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class RequestedSuccessfully extends AppCompatActivity {
         sharesss=getSharedPreferences("count",MODE_PRIVATE).edit();
         TextDone=findViewById(R.id.TextDone);
         recyclerView.setHasFixedSize(true);
+        listItemCart=new ListItemCart();
         adapter = new adorder_Succesfull_Adapter(list.getlist(),this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -51,6 +54,7 @@ public class RequestedSuccessfully extends AppCompatActivity {
 
 
                 Intent inty=new Intent(RequestedSuccessfully.this,Navigation.class);
+                ListItemCart.item.clear();
                 ShowProduct.liscart.clear();
                 sharesss.putString("count","0");
                 sharesss.commit();

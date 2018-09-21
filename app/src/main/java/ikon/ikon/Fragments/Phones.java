@@ -63,6 +63,7 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
     CounterPresenter cn;
     CheckgbsAndNetwork checkNetWork;
     RelativeLayout RelativePhone;
+    SharedPreferences share;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,7 +80,12 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
         checkNetWork=new CheckgbsAndNetwork(getApplicationContext());
          Recyclview();
         SwipRefresh();
-
+        share=getActivity().getSharedPreferences("count",MODE_PRIVATE);
+        String count=share.getString("count",null);
+        if(count!=null){
+            Shoping.T_Cartshop.setText(count);
+            Shoping.T_Cartshop.setBackgroundResource(R.drawable.circlecart);
+        }
 
 
 

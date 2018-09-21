@@ -1,6 +1,7 @@
 package ikon.ikon.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import ikon.ikon.Model.Cart;
 import ikon.ikon.Viewes.CountView;
 import ikonNNN.ikonN.R;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
@@ -34,7 +36,7 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
 
 
     private List<Cart> filteredList=new ArrayList<>();
-
+    SharedPreferences.Editor share;
     CountView count;
     public static String TotalPrice;
     View itemView;
@@ -79,7 +81,7 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
 
     @Override
     public void onBindViewHolder(final Cart_Adapter.MyViewHolder holder, final int position) {
-
+        share=con.getSharedPreferences("count",MODE_PRIVATE).edit();
 
 
         holder.T_Name.setText(filteredList.get(position).getName());
@@ -117,9 +119,13 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             filteredList.remove(position);
                 Shoping.T_Cartshop.setText(String.valueOf(filteredList.size()));
-            notifyDataSetChanged();
+                notifyDataSetChanged();
+                share.putString("count",String.valueOf(filteredList.size()));
+                share.commit();
+
             }
         });
 

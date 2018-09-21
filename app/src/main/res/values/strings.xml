@@ -46,6 +46,8 @@
     <string name="facebook_app_id">588552121560489</string>
     <string name="notes">Other Issue Descroption</string>
     <string name="home">Home</string>
+    <string name="maintenenceorder">Maintenence Shop</string>
+    <string name="shoporder">Order Shop</string>
     <string name="Logout">Log out</string>
     <string name="invalidemail">Invalid Email</string>
     <string name="Profile">Profile</string>
@@ -69,4 +71,5 @@
     <string name="Date">Date</string>
     <string name="internet">Turn on Internet</string>
     <string name="addcart">Add to Cart</string>
+    <string name="noorders">No Orders For you</string>
 </resources>

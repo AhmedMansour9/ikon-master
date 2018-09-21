@@ -44,7 +44,6 @@ public class ShowOrdersByid_Presenter {
                 if (response.isSuccessful()) {
                     getListorder.GetListOrderShopping(response.body().getData().getProductsOrder());
 
-
                 } else {
                     getListorder.Errorlistorder();
                 }

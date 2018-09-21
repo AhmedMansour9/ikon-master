@@ -21,9 +21,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import ikon.ikon.Activites.ListOrdersShopping;
 import ikon.ikon.Activites.Maintaince;
@@ -31,9 +34,12 @@ import ikon.ikon.Activites.Navigation;
 import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Activites.ShowProduct;
 import ikon.ikon.Activites.listordermaintenence;
+import ikon.ikon.Model.Banner;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Count;
+import ikon.ikon.PreSenter.BannerPresenter;
 import ikon.ikon.PreSenter.CounterPresenter;
+import ikon.ikon.Viewes.BannerView;
 import ikon.ikon.Viewes.CountView;
 import ikonNNN.ikonN.R;
 
@@ -43,7 +49,7 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GuesFragment extends Fragment implements Count {
+public class GuesFragment extends Fragment implements BannerView{
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
@@ -54,12 +60,13 @@ public class GuesFragment extends Fragment implements Count {
     private int delay = 2000; //milliseconds
     ImageView main,shoping;
     public static TextView T_Cart;
-    CounterPresenter cn;
     View view;
     SharedPreferences shareRole;
     String role;
     SharedPreferences.Editor share;
     private List<Cart> filteredList=new ArrayList<>();
+    BannerPresenter baner;
+    List<Banner> bannr;
     public GuesFragment() {
         // Required empty public constructor
     }
@@ -73,7 +80,14 @@ public class GuesFragment extends Fragment implements Count {
         handler = new Handler();
         shareRole=getActivity().getSharedPreferences("Role",MODE_PRIVATE);
         role=shareRole.getString("Role",null);
-        cn=new CounterPresenter(getContext(),this);
+        bannr=new ArrayList<>();
+       baner=new BannerPresenter(getActivity(),this);
+       if(isRTL()){
+           baner.GetBanner("ar");
+       }else {
+           baner.GetBanner("en");
+       }
+
        GoTo_Maintaince();
        GoTo_Shooping();
 
@@ -91,6 +105,14 @@ public class GuesFragment extends Fragment implements Count {
 
 
         return view;
+    }
+    public static boolean isRTL() {
+        return isRTL(Locale.getDefault());
+    }
+    public static boolean isRTL(Locale locale) {
+        final int directionality = Character.getDirectionality(locale.getDisplayName().charAt(0));
+        return directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT ||
+                directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC;
     }
     public void GoTo_Maintaince(){
         main=view.findViewById(R.id.main);
@@ -186,10 +208,14 @@ public class GuesFragment extends Fragment implements Count {
 
     }
 
-    @Override
-    public void count(String con) {
 
-//        Shoping.T_Cartshop.setText(con);
+    @Override
+    public void getBanner(List<Banner> banners) {
+        bannr=banners;
+    }
+
+    @Override
+    public void Errorbaner() {
 
     }
 
@@ -201,17 +227,28 @@ public class GuesFragment extends Fragment implements Count {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//
+//            View view = layoutInflater.inflate(layouts[position], container, false);
+//            container.addView(view);
 
-            View view = layoutInflater.inflate(layouts[position], container, false);
-            container.addView(view);
+            View itemView = layoutInflater.inflate(R.layout.banner, container, false);
+
+            ImageView imageView = (ImageView) itemView.findViewById(R.id.viewPagerItem_image1);
+
+
+            Picasso.with(getActivity()).load("http://ikongo.com/site/"+bannr.get(position).getImage()).into(imageView);
+            container.addView(itemView);
 
             return view;
         }
 
         @Override
         public int getCount() {
-            return layouts.length;
+            if(bannr != null){
+                return bannr.size();
+            }
+            return 0;
         }
 
         @Override

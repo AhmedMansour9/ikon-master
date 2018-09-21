@@ -81,7 +81,7 @@ public class Shoping extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Shoping.this,cartproducts.class));
-                 finish();
+               finish();
             }
         });
 
@@ -99,7 +99,7 @@ public class Shoping extends AppCompatActivity{
     }
     @Override
     public void onBackPressed() {
-//        startActivity(new Intent(Shoping.this,Navigation.class));
+        startActivity(new Intent(Shoping.this,Navigation.class));
         finish();
     }
 

@@ -87,7 +87,6 @@ public class Dialogee extends AppCompatActivity implements OrderView, OnMapReady
     SharedPreferences.Editor sharesss;
     RelativeLayout RelativeOrder;
     String y = "";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -387,6 +386,7 @@ public class Dialogee extends AppCompatActivity implements OrderView, OnMapReady
     @Override
     public void OrderSuccess() {
         ordershoping.setEnabled(true);
+        ShowProduct.liscart.clear();
         startActivity(new Intent(Dialogee.this,RequestedSuccessfully.class));
         finish();
         progressBarorder.setVisibility(View.INVISIBLE);

@@ -27,6 +27,14 @@ public class cartproducts extends AppCompatActivity {
     double res = 0;
 
     Context con;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(cartproducts.this,Shoping.class));
+      finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,4 +79,5 @@ public class cartproducts extends AppCompatActivity {
         super.onStop();
         finish();
     }
+
 }

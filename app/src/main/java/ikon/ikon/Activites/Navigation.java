@@ -43,6 +43,8 @@ import java.util.Locale;
 
 import ikon.ikon.Bussiness.ListItemCart;
 import ikon.ikon.Fragments.GuesFragment;
+import ikon.ikon.Fragments.MyOrdersMaintenence;
+import ikon.ikon.Fragments.Users_Orders;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Viewes.CountView;
 import ikonNNN.ikonN.R;
@@ -122,38 +124,6 @@ public class Navigation extends AppCompatActivity
                     finish();
 
                 }
-
-//                PopupMenu popup = new PopupMenu(Navigation.this, imgdots);
-                //Inflating the Popup using xml file
-
-//                Context wrapper = new ContextThemeWrapper(Navigation.this, R.style.Popmenu);
-//                PopupMenu popup = new PopupMenu(wrapper, view);
-//                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-//
-//                //registering popup with OnMenuItemClickListener
-//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    public boolean onMenuItemClick(MenuItem item) {
-//                        switch (item.getItemId()){
-//                            case R.id.english:
-//                              sharededit.putString("Lann","en");
-//                              sharededit.commit();
-//
-//                              startActivity(new Intent(Navigation.this,Navigation.class));
-//                              finish();
-//                            return true;
-//                            case R.id.arabic:
-//                                sharededit.putString("Lann","ar");
-//                                sharededit.commit();
-//
-//                                startActivity(new Intent(Navigation.this,Navigation.class));
-//                                finish();
-//                                return true;
-//                        }
-//                        return true;
-//                    }
-//                });
-//
-//                popup.show();//showing popup menu
             }
 
 
@@ -190,7 +160,10 @@ public class Navigation extends AppCompatActivity
         });
 
         User=getIntent().getStringExtra("username");
-        Snackbar.make(drawer,"Welcome "+User,1500).show();
+        if(User!=null){
+            Snackbar.make(drawer,"Welcome "+User,1500).show();
+        }
+
 
 
     }
@@ -270,8 +243,16 @@ public class Navigation extends AppCompatActivity
                 mCurrentSelectedPosition = 0;
                 fr = new GuesFragment();
                 break;
-            case R.id.logout:
+            case R.id.shoporder:
                 mCurrentSelectedPosition = 1;
+                fr = new Users_Orders();
+                break;
+            case R.id.maintenenceorder:
+                mCurrentSelectedPosition = 2;
+                fr = new MyOrdersMaintenence();
+                break;
+            case R.id.logout:
+                mCurrentSelectedPosition = 3;
 
                 shareRole.putString("Role",null);
                 shareRole.commit();

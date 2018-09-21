@@ -6,16 +6,16 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by ic on 9/17/2018.
+ * Created by ic on 9/20/2018.
  */
 
-public class ShowProductsByid {
+public class MyorderShoping {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("Products_Order")
+    @SerializedName("ShopOrder")
     @Expose
-    private List<ShowOrdersyid> productsOrder = null;
+    private List<Myordershop> maintenanceOrder = null;
 
     public String getMessage() {
         return message;
@@ -25,11 +25,11 @@ public class ShowProductsByid {
         this.message = message;
     }
 
-    public List<ShowOrdersyid> getProductsOrder() {
-        return productsOrder;
+    public List<Myordershop> getMaintenanceOrder() {
+        return maintenanceOrder;
     }
 
-    public void setProductsOrder(List<ShowOrdersyid> productsOrder) {
-        this.productsOrder = productsOrder;
+    public void setMaintenanceOrder(List<Myordershop> maintenanceOrder) {
+        this.maintenanceOrder = maintenanceOrder;
     }
 }

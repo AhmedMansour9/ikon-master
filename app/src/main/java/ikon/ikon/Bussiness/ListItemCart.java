@@ -11,7 +11,7 @@ import ikon.ikon.Model.Cart;
 
 public class ListItemCart {
 
-    static List<Cart> item=new ArrayList<>();
+   public static List<Cart> item=new ArrayList<>();
 
     public void Listitem(Cart list){
 

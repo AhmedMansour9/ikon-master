@@ -45,7 +45,7 @@ public class ListOrdersMaintenence_Adapter  extends RecyclerView.Adapter<ListOrd
 
     View itemView;
     Context con;
-
+    String a;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView T_Name,T_tybe,T_Spare,T_Color,T_Issue,T_Note,T_Date,T_Price;
         ProgressBar progressBar;
@@ -74,7 +74,11 @@ public class ListOrdersMaintenence_Adapter  extends RecyclerView.Adapter<ListOrd
         filteredList=phon;
         this.con=context;
     }
-
+    public ListOrdersMaintenence_Adapter(List<MaintenanceOrder> phon, Context context,String y){
+        filteredList=phon;
+        this.con=context;
+        this.a=y;
+    }
 
     @Override
     public ListOrdersMaintenence_Adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -86,6 +90,9 @@ public class ListOrdersMaintenence_Adapter  extends RecyclerView.Adapter<ListOrd
     @Override
     public void onBindViewHolder(final ListOrdersMaintenence_Adapter.MyViewHolder holder, final int position) {
 
+        if(a!=null){
+            holder.getlocationn.setVisibility(View.GONE);
+        }
       if(filteredList.get(position).getCustomersLastname()!=null){
           holder.T_Name.setText(filteredList.get(position).getCustomersFirstname()+filteredList.get(position).getCustomersLastname());
       }else {

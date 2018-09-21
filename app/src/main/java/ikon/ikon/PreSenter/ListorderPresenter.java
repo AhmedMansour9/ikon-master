@@ -61,4 +61,36 @@ public class ListorderPresenter {
         });
     }
 
+    public void GetListOrder(String lang,String usertoken) {
+        Map<String, String> queryMap = new HashMap<>();
+        queryMap.put("lang", lang);
+        queryMap.put("api_token", "100");
+        queryMap.put("user_token", usertoken);
+
+        Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
+
+
+        Call<ListOrderResponse> call = apiInterface.GetListOrder(queryMap);
+        call.enqueue(new Callback<ListOrderResponse>() {
+            @Override
+            public void onResponse(Call<ListOrderResponse> call, Response<ListOrderResponse> response) {
+
+                if (response.isSuccessful()) {
+                    getListorder.GetListOrderShopping(response.body().getData().getMaintenanceOrder());
+
+
+                } else {
+                    getListorder.Errorlistorder();
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<ListOrderResponse> call, Throwable t) {
+                getListorder.Errorlistorder();
+
+            }
+        });
+    }
+
 }
