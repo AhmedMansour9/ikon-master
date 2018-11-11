@@ -27,7 +27,7 @@ import ikon.ikon.Model.AccessorysubCategory;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.MaintenanceOrder;
 import ikon.ikon.Viewes.CountView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -110,7 +110,7 @@ public class ListOrdersMaintenence_Adapter  extends RecyclerView.Adapter<ListOrd
         Uri u = Uri.parse(i);
 
         Picasso.with(getApplicationContext())
-                .load("http://ikongo.com/site/"+u)
+                .load("https://ikongo.com/"+u)
                 .resize(500,500)
                 .into(holder.imagespare, new Callback() {
                     @Override

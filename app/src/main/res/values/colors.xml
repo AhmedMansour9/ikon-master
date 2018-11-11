@@ -3,12 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="darkwhite">#d7d7d7</color>
 
     <color name="transparent">#00000000</color>
     <color name="White">#ffffff</color>
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">#c9c8c8</color>
     <color name="background">#14476a7e</color>
+    <color name="Red">#ff0011</color>
 
     <!-- dots active colors -->
     <color name="dot_light_screen1">#003c5c</color>

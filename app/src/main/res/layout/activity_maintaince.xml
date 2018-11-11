@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/RelativeMaintenence"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context="ikon.ikon.Activites.Maintaince">
+
     <ProgressBar
         android:id="@+id/progressBarMaintenence"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:theme="@style/RedAccent"
+        />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -59,9 +62,11 @@
                 android:layout_below="@+id/relaa"
                 android:id="@+id/scroll"
                 android:layout_height="wrap_content">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,49 +80,72 @@
                 />
             <Spinner
                 android:layout_width="@dimen/_200sdp"
-                android:background="@drawable/bcmaintaince"
                 android:layout_below="@+id/selectservice"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_centerHorizontal="true"
                 android:text="@string/maintin"
-                android:popupBackground="#EAEAEA"
-                android:gravity="center"
-                android:spinnerMode="dropdown"
+                android:background="@drawable/bcmaintaince"
                 android:id="@+id/spin_Service"
                 android:textColor="#000"
-                android:paddingLeft="@dimen/_10sdp"
+               android:paddingLeft="@dimen/_10sdp"
                 android:layout_height="@dimen/_40sdp" />
 
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/selectmodel"
-                android:textColor="#a09e9e"
-                android:layout_below="@+id/spin_Service"
-                android:id="@+id/selectmodel"
-                android:textStyle="bold"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:textSize="@dimen/_16sdp"
-                />
-            <Spinner
-                android:layout_width="@dimen/_200sdp"
-                android:background="@drawable/bcmaintaince"
-                android:layout_below="@+id/selectmodel"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/Spin_Model"
-                android:text="@string/fixedrepair"
-                android:popupBackground="#EAEAEA"
-                android:gravity="center"
-                android:spinnerMode="dropdown"
-                android:textColor="#000"
-                android:paddingLeft="@dimen/_10sdp"
-                android:layout_height="@dimen/_40sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/selectpho"
+                        android:textColor="#a09e9e"
+                        android:layout_below="@+id/spin_Service"
+                        android:id="@+id/selectphone"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:textSize="@dimen/_16sdp"
+                        />
 
-            <TextView
+                    <Spinner
+                        android:id="@+id/Spin_Phone"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_alignLeft="@+id/Spin_Model"
+                        android:layout_alignStart="@+id/Spin_Model"
+                        android:layout_below="@+id/selectphone"
+                        android:layout_marginTop="14dp"
+                        android:background="@drawable/bcmaintaince"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/selectmodel"
+                        android:textColor="#a09e9e"
+                        android:layout_below="@+id/Spin_Phone"
+                        android:id="@+id/selectmodel"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:textSize="@dimen/_16sdp"
+                        />
+
+                    <Spinner
+                        android:id="@+id/Spin_Model"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_alignLeft="@+id/Spin_Color"
+                        android:layout_alignStart="@+id/Spin_Color"
+                        android:layout_below="@+id/selectmodel"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bcmaintaince"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:spinnerMode="dropdown"
+                        android:textColor="#000" />
+
+
+                    <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/selectvolor"
@@ -136,12 +164,11 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/Spin_Color"
-                android:popupBackground="#EAEAEA"
                 android:gravity="center"
                 android:spinnerMode="dropdown"
+                android:textColor="#000"
 
                 android:text="@string/fixedrepair"
-                android:textColor="#000"
                 android:paddingLeft="@dimen/_10sdp"
                 android:layout_height="@dimen/_40sdp" />
 
@@ -168,7 +195,6 @@
                         android:id="@+id/Spin_Issue"
                         android:text="@string/fixedrepair"
                         android:textColor="#000"
-                        android:popupBackground="#EAEAEA"
                         android:gravity="center"
                         android:spinnerMode="dropdown"
 

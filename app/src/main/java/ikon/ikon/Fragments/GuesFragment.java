@@ -9,7 +9,11 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -27,6 +31,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ikon.ikon.Activites.ListOrdersShopping;
 import ikon.ikon.Activites.Maintaince;
@@ -34,6 +40,8 @@ import ikon.ikon.Activites.Navigation;
 import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Activites.ShowProduct;
 import ikon.ikon.Activites.listordermaintenence;
+import ikon.ikon.Adapter.Banner_Adapter;
+import ikon.ikon.Adapter.Sparts_Adapter;
 import ikon.ikon.Model.Banner;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Count;
@@ -41,15 +49,17 @@ import ikon.ikon.PreSenter.BannerPresenter;
 import ikon.ikon.PreSenter.CounterPresenter;
 import ikon.ikon.Viewes.BannerView;
 import ikon.ikon.Viewes.CountView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
+
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GuesFragment extends Fragment implements BannerView{
+public class GuesFragment extends Fragment implements BannerView {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
@@ -67,6 +77,11 @@ public class GuesFragment extends Fragment implements BannerView{
     private List<Cart> filteredList=new ArrayList<>();
     BannerPresenter baner;
     List<Banner> bannr;
+    Banner_Adapter banerAdapter;
+    RecyclerView recyclerView;
+    List<Banner> bnnr=new ArrayList<>();
+    int position;
+    Boolean end;
     public GuesFragment() {
         // Required empty public constructor
     }
@@ -79,29 +94,30 @@ public class GuesFragment extends Fragment implements BannerView{
         view=inflater.inflate(R.layout.fragment_gues, container, false);
         handler = new Handler();
         shareRole=getActivity().getSharedPreferences("Role",MODE_PRIVATE);
+        Recyclview();
         role=shareRole.getString("Role",null);
         bannr=new ArrayList<>();
-       baner=new BannerPresenter(getActivity(),this);
-       if(isRTL()){
-           baner.GetBanner("ar");
-       }else {
-           baner.GetBanner("en");
-       }
+        baner=new BannerPresenter(getActivity(),this);
+        if(isRTL()){
+            baner.GetBanner("ar");
+        }else {
+            baner.GetBanner("en");
+        }
 
-       GoTo_Maintaince();
-       GoTo_Shooping();
+        GoTo_Maintaince();
+        GoTo_Shooping();
 
 
         viewPager =view.findViewById(R.id.view_pager);
-        dotsLayout =view.findViewById(R.id.layoutDots);
-        layouts = new int[]{
-                R.layout.sliderfour,
-                R.layout.sliderthree
-        };
+//        dotsLayout =view.findViewById(R.id.layoutDots);
+//        layouts = new int[]{
+//                R.layout.sliderfour,
+//                R.layout.sliderthree
+//        };
 
-        addBottomDots(0);
-        Viewpadger();
+//        addBottomDots(0);
 
+//        Viewpadger();
 
 
         return view;
@@ -128,6 +144,10 @@ public class GuesFragment extends Fragment implements BannerView{
             }
         });
     }
+    public void Recyclview(){
+        recyclerView = view.findViewById(R.id.recycler_banner);
+        recyclerView.setHasFixedSize(true);
+    }
     public void GoTo_Shooping(){
         shoping=view.findViewById(R.id.shoping);
         shoping.setOnClickListener(new View.OnClickListener() {
@@ -144,12 +164,13 @@ public class GuesFragment extends Fragment implements BannerView{
     }
 
     private void Viewpadger() {
+
         //	viewpager change listener
         ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
             @Override
             public void onPageSelected(int position) {
-                addBottomDots(position);
+//                addBottomDots(position);
                 page = position;
 
                 // changing the next button text 'NEXT' / 'GOT IT'
@@ -212,12 +233,44 @@ public class GuesFragment extends Fragment implements BannerView{
     @Override
     public void getBanner(List<Banner> banners) {
         bannr=banners;
+        banerAdapter = new Banner_Adapter(banners,getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+//        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+//
+//        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(banerAdapter);
+        banerAdapter.notifyDataSetChanged();
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new GuesFragment.AutoScrollTask(), 1000, 2000);
+
+    }
+    private class AutoScrollTask extends TimerTask {
+        @Override
+        public void run() {
+            if(position == bannr.size() -1){
+                end = true;
+            } else if (position == 0) {
+                end = false;
+            }
+            if(!end){
+                position++;
+            } else {
+                position--;
+            }
+            recyclerView.smoothScrollToPosition(position);
+        }
     }
 
     @Override
     public void Errorbaner() {
 
     }
+
 
     public class MyViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
@@ -227,19 +280,24 @@ public class GuesFragment extends Fragment implements BannerView{
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-//            layoutInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //
 //            View view = layoutInflater.inflate(layouts[position], container, false);
 //            container.addView(view);
 
             View itemView = layoutInflater.inflate(R.layout.banner, container, false);
 
-            ImageView imageView = (ImageView) itemView.findViewById(R.id.viewPagerItem_image1);
+            ImageView imageView = itemView.findViewById(R.id.viewPagerItem_image1);
+//            String imagee="http://ikongo.com/site/public/images/mobile_banner/"+bannr.get(position).getImage();
+//            imageView.setTag(imagee);
 
 
-            Picasso.with(getActivity()).load("http://ikongo.com/site/"+bannr.get(position).getImage()).into(imageView);
+            Picasso.with(getActivity())
+                    .load("http://ikongo.com/site/public/images/mobile_banner/7566641914197734949_1537717070.jpeg")
+                    .into(imageView);
+
             container.addView(itemView);
-
+            myViewPagerAdapter.notifyDataSetChanged();
             return view;
         }
 
@@ -267,12 +325,12 @@ public class GuesFragment extends Fragment implements BannerView{
     @Override
     public void onResume() {
         super.onResume();
-        handler.postDelayed(runnable, delay);
+//        handler.postDelayed(runnable, delay);
     }
     @Override
     public void onPause() {
         super.onPause();
-        handler.removeCallbacks(runnable);
+//        handler.removeCallbacks(runnable);
     }
 
     @Override

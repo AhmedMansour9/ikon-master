@@ -75,4 +75,9 @@ public class Phones {
     public void setProductsPrice(String productsPrice) {
         this.productsPrice = productsPrice;
     }
+
+    @Override
+    public String toString() {
+        return productsName;
+    }
 }

@@ -56,8 +56,10 @@
                 />
 
             <ImageView
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_centerVertical="true"
+                android:layout_height="@dimen/_30sdp"
+                android:scaleType="fitXY"
                 android:src="@drawable/ikon"
                 android:layout_centerHorizontal="true"
                 />
@@ -82,18 +84,20 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
+
+    <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/relativeLayout"
-        android:background="@drawable/sliderfour"
-        android:id="@+id/img"
-        android:layout_height="@dimen/_120sdp" />
+        android:id="@+id/recycler_banner2"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"/>
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/img"
+        android:layout_below="@+id/recycler_banner2"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </RelativeLayout>

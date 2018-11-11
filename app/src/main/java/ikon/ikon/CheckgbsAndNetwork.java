@@ -5,7 +5,7 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import ikonNNN.ikonN.R;
+
 
 /**
  * Created by ic on 9/18/2018.

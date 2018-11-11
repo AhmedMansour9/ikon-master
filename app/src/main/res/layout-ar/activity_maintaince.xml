@@ -10,6 +10,7 @@
         android:id="@+id/progressBarMaintenence"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:theme="@style/RedAccent"
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
@@ -63,6 +64,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,21 +85,45 @@
                     android:layout_centerHorizontal="true"
                     android:text="@string/maintin"
                     android:id="@+id/spin_Service"
-                    android:popupBackground="#EAEAEA"
                     android:gravity="center"
                     android:spinnerMode="dropdown"
                     android:textColor="#000"
 
-                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
                     android:layout_height="@dimen/_40sdp" />
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/selectpho"
+                    android:textColor="#a09e9e"
+                    android:layout_below="@+id/spin_Service"
+                    android:id="@+id/selectphone"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/_16sdp"
+                    />
+                <Spinner
+                    android:layout_width="@dimen/_200sdp"
+                    android:background="@drawable/bcmaintaince"
+                    android:layout_below="@+id/selectphone"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/Spin_Phone"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown"
+                    android:text="@string/fixedrepair"
+                    android:textColor="#000"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:layout_height="@dimen/_40sdp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/selectmodel"
                     android:textColor="#a09e9e"
-                    android:layout_below="@+id/spin_Service"
+                    android:layout_below="@+id/Spin_Phone"
                     android:id="@+id/selectmodel"
                     android:textStyle="bold"
                     android:layout_marginTop="@dimen/_20sdp"
@@ -112,13 +138,12 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/Spin_Model"
-                    android:popupBackground="#EAEAEA"
                     android:gravity="center"
                     android:spinnerMode="dropdown"
 
                     android:text="@string/fixedrepair"
                     android:textColor="#000"
-                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
                     android:layout_height="@dimen/_40sdp" />
 
                 <TextView
@@ -142,10 +167,9 @@
                     android:layout_centerHorizontal="true"
                     android:id="@+id/Spin_Color"
                     android:text="@string/fixedrepair"
-                    android:popupBackground="#EAEAEA"
                     android:gravity="center"
                     android:spinnerMode="dropdown"
-                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
                     android:layout_height="@dimen/_40sdp" />
 
 
@@ -170,12 +194,11 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/Spin_Issue"
-                    android:popupBackground="#EAEAEA"
                     android:gravity="center"
                     android:spinnerMode="dropdown"
                     android:text="@string/fixedrepair"
                     android:textColor="#000"
-                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
                     android:layout_height="@dimen/_40sdp" />
 
                 <TextView

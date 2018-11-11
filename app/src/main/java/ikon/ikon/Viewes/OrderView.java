@@ -6,6 +6,6 @@ package ikon.ikon.Viewes;
 
 public interface OrderView {
 
-    void OrderSuccess();
+    void OrderSuccess(String idٍ);
     void ErrorOrder();
 }

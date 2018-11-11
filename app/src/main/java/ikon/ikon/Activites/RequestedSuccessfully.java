@@ -15,7 +15,7 @@ import ikon.ikon.Adapter.Cart_Adapter;
 import ikon.ikon.Adapter.adorder_Succesfull_Adapter;
 import ikon.ikon.Bussiness.ListItemCart;
 import ikon.ikon.GPSTracker;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 public class RequestedSuccessfully extends AppCompatActivity {
 
@@ -31,15 +31,18 @@ public class RequestedSuccessfully extends AppCompatActivity {
     TextView TextDone;
     SharedPreferences.Editor sharesss;
     ListItemCart listItemCart;
+    TextView txtorder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requested_successfully);
         recyclerView =findViewById(R.id.recycler_ordersuccesfull);
+        txtorder=findViewById(R.id.T_Orderss);
         sharesss=getSharedPreferences("count",MODE_PRIVATE).edit();
         TextDone=findViewById(R.id.TextDone);
         recyclerView.setHasFixedSize(true);
         listItemCart=new ListItemCart();
+        txtorder.setText(getIntent().getStringExtra("id"));
         adapter = new adorder_Succesfull_Adapter(list.getlist(),this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

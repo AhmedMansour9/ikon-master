@@ -22,7 +22,8 @@ import ikon.ikon.Activites.Shoping;
 import ikon.ikon.Model.Cart;
 
 import ikon.ikon.Viewes.CountView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
+
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -95,7 +96,7 @@ public class Cart_Adapter  extends RecyclerView.Adapter<Cart_Adapter.MyViewHolde
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(getApplicationContext())
-                .load("http://ikongo.com/site/"+u)
+                .load("https://ikongo.com/"+u)
                 .resize(500,500)
                 .into(holder.mobile, new Callback() {
                     @Override

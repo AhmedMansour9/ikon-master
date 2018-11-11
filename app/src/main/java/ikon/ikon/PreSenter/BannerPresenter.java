@@ -5,12 +5,10 @@ import android.content.Context;
 import java.util.HashMap;
 import java.util.Map;
 
-import ikon.ikon.Model.BannerResponse;
-import ikon.ikon.Model.ColorResponse;
+import ikon.ikon.Model.BannserResponsse;
 import ikon.ikon.Retrofit.ApiCLint;
 import ikon.ikon.Retrofit.Apiinterface;
 import ikon.ikon.Viewes.BannerView;
-import ikon.ikon.Viewes.ColorView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,13 +34,13 @@ public class BannerPresenter {
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
 
 
-        Call<BannerResponse> call = apiInterface.GetBanner(queryMap);
-        call.enqueue(new Callback<BannerResponse>() {
+        Call<BannserResponsse> call = apiInterface.GetBanner(queryMap);
+        call.enqueue(new Callback<BannserResponsse>() {
             @Override
-            public void onResponse(Call<BannerResponse> call, Response<BannerResponse> response) {
+            public void onResponse(Call<BannserResponsse> call, Response<BannserResponsse> response) {
 
                 if (response.isSuccessful()) {
-                    getbanner.getBanner(response.body().getBanner());
+                    getbanner.getBanner(response.body().getData().getBanner());
 
                 } else {
                     getbanner.Errorbaner();
@@ -51,7 +49,7 @@ public class BannerPresenter {
 
 
             @Override
-            public void onFailure(Call<BannerResponse> call, Throwable t) {
+            public void onFailure(Call<BannserResponsse> call, Throwable t) {
                 getbanner.Errorbaner();
 
             }

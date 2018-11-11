@@ -8,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -29,9 +30,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -41,13 +48,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import ikon.ikon.Bussiness.ListItemCart;
 import ikon.ikon.Fragments.GuesFragment;
 import ikon.ikon.Fragments.MyOrdersMaintenence;
 import ikon.ikon.Fragments.Users_Orders;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Viewes.CountView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
+
 
 public class Navigation extends AppCompatActivity
         implements CountView , NavigationView.OnNavigationItemSelectedListener {
@@ -66,6 +75,9 @@ public class Navigation extends AppCompatActivity
     SharedPreferences.Editor shareRole;
     SharedPreferences.Editor share;
     String User;
+    FirebaseUser user;
+    TextView texName;
+    FirebaseAuth firebaseAuthl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +92,8 @@ public class Navigation extends AppCompatActivity
             getBaseContext().getResources().updateConfiguration(config,
                     getBaseContext().getResources().getDisplayMetrics());
         }
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+
         setContentView(R.layout.activity_navigation);
         imgdots=findViewById(R.id.dotss);
          toolbar = findViewById(R.id.toolbarnavigation);
@@ -89,6 +103,7 @@ public class Navigation extends AppCompatActivity
         setSupportActionBar(toolbar);
 //        btncart=findViewById(R.id.btncart);
 //        T_Cart=findViewById(R.id.T_Cart);
+        user=FirebaseAuth.getInstance().getCurrentUser();
         if(isRTL()){
             imgdots.setBackgroundResource(R.drawable.united);
         }else {
@@ -100,6 +115,9 @@ public class Navigation extends AppCompatActivity
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
+//        navigationView.setBackgroundColor(Color.CYAN);
+//        navigationView.setBackgroundColor(getResources().getColor(R.color.White));
+
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
 
 
@@ -128,6 +146,7 @@ public class Navigation extends AppCompatActivity
 
 
         });
+
 
 
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -163,7 +182,42 @@ public class Navigation extends AppCompatActivity
         if(User!=null){
             Snackbar.make(drawer,"Welcome "+User,1500).show();
         }
+   if(user!=null){
+       View headerView = navigationView.getHeaderView(0);
+       texName = headerView.findViewById(R.id.texkName);
+       texName.setText(user.getDisplayName());
 
+
+       if (user.getPhotoUrl() != null) {
+           View headerVi = navigationView.getHeaderView(0);
+
+           CircleImageView c = headerView.findViewById(R.id.person_image);
+           String photoUrl = FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString();
+           for (UserInfo profile : FirebaseAuth.getInstance().getCurrentUser().getProviderData()) {
+               System.out.println(profile.getProviderId());
+               // check if the provider id matches "facebook.com"
+               if (profile.getProviderId().equals("facebook.com")) {
+
+                   String facebookUserId = profile.getUid();
+
+
+                   photoUrl = "https://graph.facebook.com/" + facebookUserId + "/picture?height=800";
+
+                   Picasso.with(getApplicationContext())
+                           .load(photoUrl)
+                           .placeholder(R.drawable.profile)
+                           .into(c);
+
+
+               } else {
+                   Picasso.with(getApplicationContext())
+                           .load(user.getPhotoUrl())
+                           .placeholder(R.drawable.profile)
+                           .into(c);
+
+
+               }}}
+   }
 
 
     }
@@ -229,7 +283,7 @@ public class Navigation extends AppCompatActivity
 
     @Override
     public void Count(String count) {
-        T_Cart.setText(count);
+//        T_Cart.setText(count);
     }
 
 

@@ -59,5 +59,34 @@ public class GetPhonesPresenter {
             }
         });
     }
+    public void GetotherPhones(String lang) {
+        Map<String, String> queryMap = new HashMap<>();
+        queryMap.put("lang", lang);
+        queryMap.put("api_token", "100");
 
+        Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
+
+
+        Call<phonesResponse> call = apiInterface.GetPotherHones(queryMap);
+        call.enqueue(new Callback<phonesResponse>() {
+            @Override
+            public void onResponse(Call<phonesResponse> call, Response<phonesResponse> response) {
+
+                if (response.isSuccessful()) {
+                    getPhones.getPhones(response.body().getData().getProducts());
+
+
+                } else {
+                    getPhones.Errorphones();
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<phonesResponse> call, Throwable t) {
+                getPhones.Errorphones();
+
+            }
+        });
+    }
 }

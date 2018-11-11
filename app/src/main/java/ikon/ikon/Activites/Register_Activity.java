@@ -16,7 +16,7 @@ import ikon.ikon.CheckgbsAndNetwork;
 import ikon.ikon.Model.UserRegister;
 import ikon.ikon.PreSenter.Register;
 import ikon.ikon.Viewes.RegisterView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 public class Register_Activity extends AppCompatActivity implements RegisterView {
     String gender;

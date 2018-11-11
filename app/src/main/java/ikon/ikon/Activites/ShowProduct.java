@@ -28,7 +28,7 @@ import ikon.ikon.Fragments.GuesFragment;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Count;
 import ikon.ikon.PreSenter.CounterPresenter;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -38,7 +38,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class ShowProduct extends AppCompatActivity implements Count{
     String Name,Discrp,Price,photo,id,count="";
-    TextView T_Name,T_Discrp,T_Price;
+    TextView T_Name,T_Discrp,T_Price,price;
     ImageView Imgphone;
     public static List<Cart> liscart=new ArrayList<>();
     TextView counter;
@@ -56,6 +56,7 @@ public class ShowProduct extends AppCompatActivity implements Count{
         setContentView(R.layout.showproduct);
         Imgphone=findViewById(R.id.Image_Phone);
         RelativeProduct=findViewById(R.id.RelativeProduct);
+        price=findViewById(R.id.price);
         T_Name=findViewById(R.id.T_name);
         T_Discrp=findViewById(R.id.T_Discrp);
         T_Price=findViewById(R.id.T_Price);
@@ -75,6 +76,8 @@ public class ShowProduct extends AppCompatActivity implements Count{
       T_Price.setText(Price);
       if(disappear!=null){
           btncart.setVisibility(View.GONE);
+          T_Price.setText("");
+          price.setVisibility(View.INVISIBLE);
       }
 
 

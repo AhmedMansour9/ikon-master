@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by ic on 9/21/2018.
+ * Created by ic on 9/23/2018.
  */
 
-public class BannerResponse {
+public class Banners {
     @SerializedName("message")
     @Expose
     private String message;
@@ -32,4 +32,5 @@ public class BannerResponse {
     public void setBanner(List<Banner> banner) {
         this.banner = banner;
     }
+
 }

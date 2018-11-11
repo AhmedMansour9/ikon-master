@@ -23,7 +23,7 @@ import ikon.ikon.Activites.ShowProduct;
 import ikon.ikon.Model.AccessorysubCategory;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Viewes.CountView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -94,7 +94,7 @@ public class SubCaetgory_Adapter  extends RecyclerView.Adapter<SubCaetgory_Adapt
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(getApplicationContext())
-                .load("http://ikongo.com/site/" + u)
+                .load("https://ikongo.com/" + u)
                 .resize(500, 500)
                 .into(holder.mobile, new Callback() {
                     @Override

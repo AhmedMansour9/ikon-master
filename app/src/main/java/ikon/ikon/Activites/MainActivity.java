@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import java.util.Locale;
 
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -53,7 +53,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
+
 
 public class OrderLocation extends AppCompatActivity implements RoutingListener,OnMapReadyCallback, com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 

@@ -34,7 +34,7 @@ import ikon.ikon.Model.Spart;
 import ikon.ikon.PreSenter.GetAccessoriesPresenter;
 import ikon.ikon.PreSenter.GetSpartspresenter;
 import ikon.ikon.Viewes.SpartsView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.facebook.FacebookSdk.getApplicationContext;

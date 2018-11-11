@@ -40,4 +40,5 @@ public class Accessory {
 
     public void setCategoriesImage(String categoriesImage) {
         this.categoriesImage = categoriesImage;
-    }}
+    }
+}

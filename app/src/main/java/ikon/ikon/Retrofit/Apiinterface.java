@@ -4,7 +4,7 @@ import java.util.Map;
 
 import ikon.ikon.Model.AccessoriesResponse;
 import ikon.ikon.Model.AccessorySubCategoryResoonse;
-import ikon.ikon.Model.BannerResponse;
+import ikon.ikon.Model.BannserResponsse;
 import ikon.ikon.Model.ColorResponse;
 import ikon.ikon.Model.GetPriceResponse;
 import ikon.ikon.Model.IssueResponse;
@@ -13,6 +13,7 @@ import ikon.ikon.Model.ListOrderResponse;
 import ikon.ikon.Model.ListOrderShoppingResponse;
 import ikon.ikon.Model.MyorderShopingResponse;
 import ikon.ikon.Model.OrderResponse;
+import ikon.ikon.Model.OrderShopping_Response;
 import ikon.ikon.Model.PeoductResponse;
 import ikon.ikon.Model.ShowProductsResponse;
 import ikon.ikon.Model.SpartsResponse;
@@ -20,9 +21,7 @@ import ikon.ikon.Model.UserLoginResponse;
 import ikon.ikon.Model.UserRegisterResponse;
 import ikon.ikon.Model.phonesResponse;
 import ikon.ikon.Model.RegisterFaceResponse;
-import ikon.ikon.PreSenter.ColorPresenter;
 import ikon.ikon.PreSenter.OrderShoppinPresenter;
-import ikon.ikon.PreSenter.ShowOrdersByid_Presenter;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
@@ -61,7 +60,10 @@ public interface Apiinterface {
     @POST("showProductShop")
     Call<phonesResponse> GetPHones(@QueryMap Map<String,String> queryMab);
 
-    @POST("getAccessoriesCategories")
+    @POST("mobileType")
+    Call<phonesResponse> GetPotherHones(@QueryMap Map<String,String> queryMab);
+
+        @POST("getAccessoriesCategories")
     Call<AccessoriesResponse> GetAccessories(@QueryMap Map<String,String> queryMab);
 
     @POST("showAccessoriesShopByCatID")
@@ -75,16 +77,20 @@ public interface Apiinterface {
     Call<OrderResponse> Showorder(@QueryMap Map<String,String> queryMab);
 
     @POST("shopOrder")
-    Call<OrderShoppinPresenter> Ordershop(@QueryMap Map<String,String> queryMab);
+    Call<OrderShopping_Response> Ordershop(@QueryMap Map<String,String> queryMab);
 
     @POST("colorList")
     Call<ColorResponse> GetColors(@QueryMap Map<String,String> queryMab);
 
     @POST("mobileBanner")
-    Call<BannerResponse> GetBanner(@QueryMap Map<String,String> queryMab);
+    Call<BannserResponsse> GetBanner(@QueryMap Map<String,String> queryMab);
 
     @POST("listMaintenanceOrder")
     Call<ListOrderResponse> GetListOrder(@QueryMap Map<String,String> queryMab);
+
+    @POST("orderMaintenanceCustomer")
+    Call<ListOrderResponse> GetListOrdercustomer(@QueryMap Map<String,String> queryMab);
+
     @POST("listShopOrder")
     Call<ListOrderShoppingResponse> GetListOrderShopping(@QueryMap Map<String,String> queryMab);
 

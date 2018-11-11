@@ -54,7 +54,7 @@ import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.OrderShop;
 import ikon.ikon.PreSenter.OrderShoppinPresenter;
 import ikon.ikon.Viewes.OrderView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 /**
  * Created by ic on 9/12/2018.
@@ -384,10 +384,13 @@ public class Dialogee extends AppCompatActivity implements OrderView, OnMapReady
 
 
     @Override
-    public void OrderSuccess() {
+    public void OrderSuccess(String id) {
         ordershoping.setEnabled(true);
         ShowProduct.liscart.clear();
-        startActivity(new Intent(Dialogee.this,RequestedSuccessfully.class));
+        Intent inty=new Intent(Dialogee.this,RequestedSuccessfully.class);
+        inty.putExtra("id",id);
+        startActivity(inty);
+
         finish();
         progressBarorder.setVisibility(View.INVISIBLE);
     }

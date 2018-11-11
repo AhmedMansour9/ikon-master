@@ -54,7 +54,7 @@ import ikon.ikon.PreSenter.Registergoogle;
 import ikon.ikon.Viewes.RegisterFaceView;
 import ikon.ikon.Viewes.LoginView;
 import ikon.ikon.Viewes.RegistergoogleView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 public class Login extends AppCompatActivity implements LoginView,RegisterFaceView,RegistergoogleView{
     ImageView loginfac,google;

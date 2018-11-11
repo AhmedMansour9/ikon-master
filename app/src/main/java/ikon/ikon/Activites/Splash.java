@@ -12,7 +12,8 @@ import android.widget.ImageView;
 import java.util.Locale;
 
 import ikon.ikon.Activites.MainActivity;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
+
 
 public class Splash extends AppCompatActivity {
      SharedPreferences shared;

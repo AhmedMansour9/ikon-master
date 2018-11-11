@@ -22,7 +22,7 @@ import ikon.ikon.PreSenter.GetPhonesPresenter;
 import ikon.ikon.PreSenter.ListorderPresenter;
 import ikon.ikon.Viewes.AccessoriesView;
 import ikon.ikon.Viewes.ListOrderView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 

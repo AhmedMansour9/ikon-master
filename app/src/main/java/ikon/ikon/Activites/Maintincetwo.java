@@ -36,6 +36,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -50,7 +51,7 @@ import ikon.ikon.Gbs;
 import ikon.ikon.Model.OrderMaintenence;
 import ikon.ikon.PreSenter.OrderPresenter;
 import ikon.ikon.Viewes.OrderView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 /**
  * Created by HP on 03/09/2018.
@@ -74,6 +75,15 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
     double latitude,longitude;
     OrderPresenter ord;
     ProgressBar progressBar;
+    String phoneid;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Maintincetwo.this,Maintaince.class));
+        finish();
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,9 +123,13 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
                     startActivity(new Intent(Maintincetwo.this,Login.class));
                     finish();
                 }
+                String phone=T_Phone.getText().toString();
+                if(phone.isEmpty()){
+                    T_Phone.setError("Enter Your phone Number");
+                }
                 else{
                     progressBar.setVisibility(View.VISIBLE);
-                    OrderMaintenence order=new OrderMaintenence(Product_id,issue_id,tybe,color,otherissue,addres,
+                    OrderMaintenence order=new OrderMaintenence(phone,phoneid,Product_id,issue_id,tybe,color,otherissue,addres,
                             String.valueOf(latitude),String.valueOf(longitude),logi,price);
 
              ord.Order(order);
@@ -129,14 +143,8 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
                 new android.app.AlertDialog.Builder(this)
                         .setTitle("info")
                         .setMessage("Enable gbs")
@@ -173,6 +181,7 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
         otherissue=getIntent().getStringExtra("otherissue");
         price=getIntent().getStringExtra("price");
         Spare=getIntent().getStringExtra("model");
+        phoneid=getIntent().getStringExtra("phoneid");
     }
 
     public void GetLocation(){
@@ -204,11 +213,12 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
     }
 
     @Override
-    public void OrderSuccess() {
+    public void OrderSuccess(String id) {
         progressBar.setVisibility(View.GONE);
         Intent inty=new Intent(Maintincetwo.this,RequestedSuccesfullyMaintenence.class);
         inty.putExtra("spare",Spare);
         inty.putExtra("price",price);
+        inty.putExtra("id",id);
         startActivity(inty);
         finish();
     }
@@ -267,7 +277,7 @@ public class Maintincetwo extends AppCompatActivity implements OrderView,OnMapRe
                         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             return;
                         }
-                        googleMap.setMyLocationEnabled(true);
+
                         break;
                     case Activity.RESULT_CANCELED:
 

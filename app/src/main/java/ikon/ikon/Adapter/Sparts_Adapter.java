@@ -24,7 +24,7 @@ import java.util.List;
 import ikon.ikon.Activites.ShowProduct;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Spart;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -121,7 +121,7 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(getApplicationContext())
-                .load("http://ikongo.com/site/"+u)
+                .load("https://ikongo.com/"+u)
                 .resize(500,500)
                 .into(holder.mobile, new Callback() {
                     @Override
@@ -141,41 +141,6 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
 //        holder.T_Discrption.setTypeface(typeface);
 //        holder.T_Price.setTypeface(typeface);
 
-//        holder.btncart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int a=Integer.parseInt(holder.count.getText().toString());
-//                Cart car=new Cart(String.valueOf(a),filteredList.get(position).getProductsId(),filteredList.get(position).getProductsName()
-//                        ,filteredList.get(position).getProductsDescription(),filteredList.get(position).getProductsPrice(),filteredList.get(position).getProductsImage());
-//                liscart.add(car);
-//                Navigation.T_Cart.setText(String.valueOf(liscart.size()));
-//                ListItemCart lisst=new ListItemCart();
-//                lisst.Listitem(car);
-//
-//
-//            }
-//        });
-
-//        holder.plus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int a=Integer.parseInt(holder.count.getText().toString());
-//                a++;
-//                holder.count.setText(String.valueOf(a));
-//
-//            }
-//        });
-//        holder.minus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int a=Integer.parseInt(holder.count.getText().toString());
-//                if(a>1) {
-//                    a--;
-//                    holder.count.setText(String.valueOf(a));
-//                }
-//            }
-//        });
-
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -189,6 +154,7 @@ public class Sparts_Adapter extends RecyclerView.Adapter<Sparts_Adapter.MyViewHo
                 inty.putExtra("discrption",filteredList.get(position).getProductsDescription());
                 inty.putExtra("price",filteredList.get(position).getProductsPrice());
                 inty.putExtra("Dissapear","disappear");
+
                 con.startActivity(inty);
 
             }

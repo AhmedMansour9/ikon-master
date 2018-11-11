@@ -29,21 +29,25 @@ import ikon.ikon.Model.Colors;
 import ikon.ikon.Model.IssueTybeEnglish;
 import ikon.ikon.Model.IssueTybeen;
 import ikon.ikon.Model.IssueType;
+import ikon.ikon.Model.Phones;
 import ikon.ikon.Model.Products;
 import ikon.ikon.PreSenter.ColorPresenter;
 import ikon.ikon.PreSenter.GetIssuePresenter;
+import ikon.ikon.PreSenter.GetPhonesPresenter;
 import ikon.ikon.PreSenter.GetPricePresenter;
 import ikon.ikon.PreSenter.GetProductsPresenter;
 import ikon.ikon.Viewes.ColorView;
 import ikon.ikon.Viewes.GetPriceView;
 import ikon.ikon.Viewes.IssueTybeView;
 import ikon.ikon.Viewes.IssuetybeViewEnglish;
+import ikon.ikon.Viewes.PhonesView;
 import ikon.ikon.Viewes.ProductView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
-public class Maintaince extends AppCompatActivity implements ColorView,ProductView,AdapterView.OnItemSelectedListener,IssuetybeViewEnglish,IssueTybeView,GetPriceView{
+
+public class Maintaince extends AppCompatActivity implements ColorView,PhonesView,ProductView,AdapterView.OnItemSelectedListener,IssuetybeViewEnglish,IssueTybeView,GetPriceView{
     Button btn_ShowPrice;
-    Spinner spin_Service,Spin_Model,Spin_Color,Spin_Issue;
+    Spinner spin_Service,Spin_Model,Spin_Color,Spin_Issue,Spin_Phone;
     EditText Edit_OtherIssue;
     GetProductsPresenter getlist;
     GetIssuePresenter getIssue;
@@ -53,9 +57,10 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
     ArrayAdapter<String> dataAd;
     ArrayAdapter<Products> ListProduct;
     ArrayAdapter<IssueType> ListIssue;
+    ArrayAdapter<Phones> listPhones;
     ArrayAdapter<ikon.ikon.Model.Color> Arraycolor;
-    String service,model,color,issue,otherissue,T_spare;
-    int Service_id,Model_id,Color_id;
+    String service,model,color,issue,otherissue,T_spare,T_Phone;
+    int Service_id,Model_id,Color_id,phoneid;
     String Issue_id;
     Products y;
     GetPricePresenter getprice;
@@ -63,16 +68,19 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
     ColorPresenter colorrespon;
     RelativeLayout RelativeMaintenence;
     CheckgbsAndNetwork checkNetWork;
+    GetPhonesPresenter Getphones;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintaince);
         progressBar=findViewById(R.id.progressBarMaintenence);
         colorrespon=new ColorPresenter(this,this);
+        Getphones=new GetPhonesPresenter(this,this);
         ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
         scrollView.setFocusableInTouchMode(true);
         scrollView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
         init();
+        Spin_Phone=findViewById(R.id.Spin_Phone);
         getprice=new GetPricePresenter(this,(GetPriceView)this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         RelativeMaintenence=findViewById(R.id.RelativeMaintenence);
@@ -85,16 +93,18 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
 
         getIssue=new GetIssuePresenter(this,(IssueTybeView) this,(IssuetybeViewEnglish)this);
         getlist=new GetProductsPresenter(this,(ProductView)this);
-        progressBar.setVisibility(View.VISIBLE);
+
           if(checkNetWork.isNetworkAvailable(this)) {
+              progressBar.setVisibility(View.VISIBLE);
               if (isRTL()) {
-                  getlist.GetProducts("ar");
                   getIssue.GetIssuetybeArabice("ar");
                   colorrespon.GetColor("ar");
+                  Getphones.GetotherPhones("ar");
               } else {
-                  getlist.GetProducts("en");
+
                   getIssue.GetIssuetybeEnglish("en");
                   colorrespon.GetColor("en");
+                  Getphones.GetotherPhones("en");
               }
           }else {
 
@@ -109,7 +119,6 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
         Get_price();
         Spin_Service();
 
-        Spin_Color();
     }
     public static boolean isRTL() {
         return isRTL(Locale.getDefault());
@@ -128,7 +137,7 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
            @Override
            public View getDropDownView(int position, View convertView, ViewGroup parent) {
                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
-               textView.setTextColor(Color.BLACK);
+               textView.setTextColor(Color.WHITE);
                return textView;
            }
        };
@@ -139,7 +148,7 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
            @Override
            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-               if(spin_Service.getSelectedItem().toString().equals("زيارة")){
+               if(spin_Service.getSelectedItem().toString().equals("زيارة للفحص")){
                    service="visit";
                }else if(spin_Service.getSelectedItem().toString().equals("صيانة")){
                    service="maintenance";
@@ -159,40 +168,6 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
 
    }
 
-    public void Spin_Color(){
-
-        List<String> categories = new ArrayList<String>();
-        categories.add(getResources().getString(R.string.Red));
-        categories.add(getResources().getString(R.string.Gold));
-        categories.add(getResources().getString(R.string.SpaceGray));
-        categories.add(getResources().getString(R.string.silver));
-
-
-        dataAd = new ArrayAdapter<String>(getApplicationContext(), R.layout.textcolorspinner, categories) {
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
-                textView.setTextColor(Color.BLACK);
-                return textView;
-            }
-        };
-        dataAd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spin_Color.setOnItemSelectedListener(this);
-        Spin_Color.setAdapter(dataAd);
-        Spin_Color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-               color=Spin_Color.getSelectedItem().toString();
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-    }
-
 
     public void init(){
         btn_ShowPrice=findViewById(R.id.getprice);
@@ -210,11 +185,8 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
             public void onClick(View view) {
                  if(service!=null&&Issue_id!=null){
                      progressBar.setVisibility(View.VISIBLE);
-                   getprice.GetProducts(String.valueOf(Model_id),Issue_id,service);
+                   getprice.GetProducts(String.valueOf(phoneid),String.valueOf(Model_id),Issue_id,service);
                 }
-
-
-
 
 
             }
@@ -228,7 +200,7 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
                @Override
                public View getDropDownView(int position, View convertView, ViewGroup parent) {
                    TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
-                   textView.setTextColor(Color.BLACK);
+                   textView.setTextColor(Color.WHITE);
                    return textView;
                }
            };
@@ -245,6 +217,8 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
                           Model_id=a.get(i).getProductsId();
                        }
                    }
+
+
                }
                @Override
                public void onNothingSelected(AdapterView<?> adapterView) {
@@ -279,7 +253,7 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
-                textView.setTextColor(Color.BLACK);
+                textView.setTextColor(Color.WHITE);
                 return textView;
             }
         };
@@ -324,7 +298,9 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
         inty.putExtra("otherissue",otherissue);
         inty.putExtra("price",Price);
         inty.putExtra("model",model);
+        inty.putExtra("phoneid",String.valueOf(phoneid));
         startActivity(inty);
+        finish();
 
 
     }
@@ -341,7 +317,7 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
-                textView.setTextColor(Color.BLACK);
+                textView.setTextColor(Color.WHITE);
                 return textView;
             }
         };
@@ -384,7 +360,7 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
-                textView.setTextColor(Color.BLACK);
+                textView.setTextColor(Color.WHITE);
                 return textView;
             }
         };
@@ -407,6 +383,53 @@ public class Maintaince extends AppCompatActivity implements ColorView,ProductVi
 
     @Override
     public void ErrorColor() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void getPhones(final List<Phones> phone) {
+        progressBar.setVisibility(View.GONE);
+        listPhones = new ArrayAdapter<Phones>(getApplicationContext(), R.layout.textcolorspinner,phone) {
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
+                textView.setTextColor(Color.WHITE);
+                return textView;
+            }
+        };
+        listPhones.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spin_Phone.setOnItemSelectedListener(this);
+        Spin_Phone.setAdapter(listPhones);
+        Spin_Phone.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                T_Phone=Spin_Phone.getSelectedItem().toString();
+                if(T_Phone!=null) {
+                    for (i = 0; i < phone.size(); i++) {
+                        if (phone.get(i).getProductsName().equals(T_Phone)) {
+                            phoneid = phone.get(i).getProductsId();
+                        }
+                    }
+                }
+                progressBar.setVisibility(View.VISIBLE);
+                if(isRTL()){
+                    getlist.GetProducts("ar",String.valueOf(phoneid));
+                }else {
+                    getlist.GetProducts("en",String.valueOf(phoneid));
+                }
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void Errorphones() {
         progressBar.setVisibility(View.GONE);
     }
 }

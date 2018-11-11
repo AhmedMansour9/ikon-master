@@ -4,10 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by ic on 9/9/2018.
+ * Created by Ahmed on 15/10/2018.
  */
 
-public class Order {
+public class OrdderSopping {
 
     @SerializedName("message")
     @Expose

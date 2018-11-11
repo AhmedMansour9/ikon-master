@@ -36,7 +36,7 @@ import ikon.ikon.Model.phonesResponse;
 import ikon.ikon.PreSenter.CounterPresenter;
 import ikon.ikon.PreSenter.GetPhonesPresenter;
 import ikon.ikon.Viewes.PhonesView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -126,11 +126,8 @@ public class Phones extends Fragment implements PhonesView,SwipeRefreshLayout.On
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
                 adapter.getFilter().filter(charSequence);
                 adapter.notifyDataSetChanged();
-
-
 
             }
             @Override

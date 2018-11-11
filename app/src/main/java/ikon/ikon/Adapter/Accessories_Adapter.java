@@ -26,7 +26,7 @@ import ikon.ikon.Model.AccessorysubCategory;
 import ikon.ikon.Model.Cart;
 
 import ikon.ikon.Viewes.CountView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -45,7 +45,7 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
     View itemView;
     Context con;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements RecyclerView.OnClickListener{
         public TextView T_Name,T_Discrption,T_Model,T_Price,count;
         ImageView mobile;
         ProgressBar progressBar;
@@ -64,6 +64,10 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
         }
 
 
+        @Override
+        public void onClick(View view) {
+            
+        }
     }
 
     public Accessories_Adapter(List<Accessory> phon, Context context){
@@ -93,7 +97,7 @@ public class Accessories_Adapter extends RecyclerView.Adapter<Accessories_Adapte
         Uri u = Uri.parse(i);
         holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(getApplicationContext())
-                .load("http://ikongo.com/site/"+u)
+                .load("https://ikongo.com/"+u)
                 .resize(500,500)
                 .into(holder.mobile, new Callback() {
                     @Override

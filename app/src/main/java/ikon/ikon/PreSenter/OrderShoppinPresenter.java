@@ -8,6 +8,7 @@ import java.util.Map;
 import ikon.ikon.Model.OrderMaintenence;
 import ikon.ikon.Model.OrderResponse;
 import ikon.ikon.Model.OrderShop;
+import ikon.ikon.Model.OrderShopping_Response;
 import ikon.ikon.Retrofit.ApiCLint;
 import ikon.ikon.Retrofit.Apiinterface;
 import ikon.ikon.Viewes.OrderView;
@@ -64,13 +65,13 @@ public class OrderShoppinPresenter {
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
 
 
-        Call<OrderShoppinPresenter> call = apiInterface.Ordershop(queryMap);
-        call.enqueue(new Callback<OrderShoppinPresenter>() {
+        Call<OrderShopping_Response> call = apiInterface.Ordershop(queryMap);
+        call.enqueue(new Callback<OrderShopping_Response>() {
             @Override
-            public void onResponse(Call<OrderShoppinPresenter> call, Response<OrderShoppinPresenter> response) {
+            public void onResponse(Call<OrderShopping_Response> call, Response<OrderShopping_Response> response) {
 
                 if (response.isSuccessful()) {
-                    orderss.OrderSuccess();
+                    orderss.OrderSuccess(String.valueOf(response.body().getData().getOrderId()));
                 } else {
                     orderss.ErrorOrder();
                 }
@@ -78,7 +79,7 @@ public class OrderShoppinPresenter {
 
 
             @Override
-            public void onFailure(Call<OrderShoppinPresenter> call, Throwable t) {
+            public void onFailure(Call<OrderShopping_Response> call, Throwable t) {
                 orderss.ErrorOrder();
 
             }

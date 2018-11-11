@@ -26,7 +26,7 @@ import ikon.ikon.PreSenter.CounterPresenter;
 import ikon.ikon.PreSenter.ListOrderShopping_Presenter;
 import ikon.ikon.PreSenter.MyOrderShoppingPresenter;
 import ikon.ikon.Viewes.MyOrderShopingView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 import static android.content.Context.MODE_PRIVATE;
 

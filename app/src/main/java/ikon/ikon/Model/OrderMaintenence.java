@@ -15,9 +15,13 @@ public class OrderMaintenence {
     private String longetude;
     private String user_token;
     private String price;
+    private String phoneid;
+    private String phone;
 
-    public OrderMaintenence(String productid, String issueid, String tybe, String color, String note, String address, String latitude, String longetude, String user_token,String price) {
-        this.productid = productid;
+    public OrderMaintenence(String phone,String phoneid,String productid, String issueid, String tybe, String color, String note, String address, String latitude, String longetude, String user_token,String price) {
+      this.phone=phone;
+      this.phoneid=phoneid;
+       this.productid = productid;
         this.issueid = issueid;
         this.tybe = tybe;
         this.color = color;
@@ -27,6 +31,14 @@ public class OrderMaintenence {
         this.longetude = longetude;
         this.user_token = user_token;
         this.price=price;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getPhoneid() {
+        return phoneid;
     }
 
     public String getPrice() {

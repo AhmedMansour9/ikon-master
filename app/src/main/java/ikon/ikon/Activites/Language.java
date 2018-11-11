@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 
 /**
@@ -31,6 +31,7 @@ public class Language extends AppCompatActivity {
         setContentView(R.layout.language);
         btnAtabic=findViewById(R.id.arabic);
         btnEng=findViewById(R.id.eng);
+
         share=getSharedPreferences("Language",MODE_PRIVATE).edit();
 
 

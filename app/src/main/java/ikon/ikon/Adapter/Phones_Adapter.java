@@ -33,7 +33,7 @@ import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Items;
 import ikon.ikon.Model.Phone;
 import ikon.ikon.Model.Phones;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -105,7 +105,7 @@ public class Phones_Adapter extends RecyclerView.Adapter<Phones_Adapter.MyViewHo
         Uri u = Uri.parse(i);
        holder.progressBar.setVisibility(View.VISIBLE);
         Picasso.with(getApplicationContext())
-                .load("http://ikongo.com/site/"+u)
+                .load("https://ikongo.com/"+u)
                 .resize(500,500)
                 .into(holder.mobile, new Callback() {
                     @Override

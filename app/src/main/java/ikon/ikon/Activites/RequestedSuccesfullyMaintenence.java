@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
+
 
 public class RequestedSuccesfullyMaintenence extends AppCompatActivity {
     SharedPreferences.Editor share;
     TextView text_spare,textPrice,textdone;
-
+   String id;
+   TextView T_Order;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,7 @@ public class RequestedSuccesfullyMaintenence extends AppCompatActivity {
         text_spare=findViewById(R.id.T_Spare);
         textPrice=findViewById(R.id.T_Price);
         textdone=findViewById(R.id.TextDon);
+        T_Order=findViewById(R.id.T_Order);
         textdone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,5 +41,6 @@ public class RequestedSuccesfullyMaintenence extends AppCompatActivity {
 
         text_spare.setText(getIntent().getStringExtra("spare"));
         textPrice.setText(getIntent().getStringExtra("price"));
+        T_Order.setText(getIntent().getStringExtra("id"));
     }
 }

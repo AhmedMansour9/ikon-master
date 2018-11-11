@@ -33,9 +33,7 @@ public class GetAccessoriesPresenter {
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put("lang", lang);
         queryMap.put("api_token", "100");
-
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
-
 
         Call<AccessoriesResponse> call = apiInterface.GetAccessories(queryMap);
         call.enqueue(new Callback<AccessoriesResponse>() {
@@ -44,14 +42,10 @@ public class GetAccessoriesPresenter {
 
                 if (response.isSuccessful()) {
                     getAccessories.GetAccessories(response.body().getData().getProducts());
-
-
                 } else {
                     getAccessories.ErrorAccessories();
                 }
             }
-
-
             @Override
             public void onFailure(Call<AccessoriesResponse> call, Throwable t) {
                 getAccessories.ErrorAccessories();

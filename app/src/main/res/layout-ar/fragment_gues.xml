@@ -12,21 +12,19 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/toolbar"
         android:id="@+id/rela"
-        android:layout_height="@dimen/_180sdp">
+        android:layout_height="@dimen/_160sdp">
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp" />
+            android:layout_height="@dimen/_180sdp" />
 
-        <LinearLayout
-            android:id="@+id/layoutDots"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_banner"
+            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="@dimen/_150sdp"/>
 
-        </LinearLayout>
+
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"

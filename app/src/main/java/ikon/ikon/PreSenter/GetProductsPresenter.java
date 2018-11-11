@@ -30,10 +30,11 @@ public class GetProductsPresenter {
 
     }
 
-    public void GetProducts(String lang) {
+    public void GetProducts(String lang,String Sparts) {
         Map<String, String> queryMap = new HashMap<>();
         queryMap.put("lang", lang);
         queryMap.put("api_token", "100");
+        queryMap.put("product_id", Sparts);
 
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
 
@@ -43,7 +44,7 @@ public class GetProductsPresenter {
             @Override
             public void onResponse(Call<PeoductResponse> call, Response<PeoductResponse> response) {
 
-                if (response.isSuccessful()) {
+                    if (response.isSuccessful()) {
                     getProducts.GetProductsList(response.body().getData().getProducts());
 
                 } else {

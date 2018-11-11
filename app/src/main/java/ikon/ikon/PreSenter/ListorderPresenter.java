@@ -70,7 +70,7 @@ public class ListorderPresenter {
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
 
 
-        Call<ListOrderResponse> call = apiInterface.GetListOrder(queryMap);
+        Call<ListOrderResponse> call = apiInterface.GetListOrdercustomer(queryMap);
         call.enqueue(new Callback<ListOrderResponse>() {
             @Override
             public void onResponse(Call<ListOrderResponse> call, Response<ListOrderResponse> response) {

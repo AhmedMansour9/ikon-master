@@ -46,6 +46,8 @@ public class OrderPresenter {
         queryMap.put("user_token", order.getUser_token());
         queryMap.put("issue", order.getIssueid());
         queryMap.put("price", order.getPrice());
+        queryMap.put("product_id", order.getPhoneid());
+        queryMap.put("phone", order.getPhone());
 
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
 
@@ -56,7 +58,7 @@ public class OrderPresenter {
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
 
                 if (response.isSuccessful()) {
-                    orderss.OrderSuccess();
+                    orderss.OrderSuccess(String.valueOf(response.body().getData().getOrderId()));
                 } else {
                     orderss.ErrorOrder();
                 }

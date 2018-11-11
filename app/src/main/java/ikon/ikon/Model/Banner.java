@@ -56,5 +56,6 @@ public class Banner {
     @Override
     public String toString() {
         return image;
+
     }
 }

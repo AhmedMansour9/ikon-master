@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +14,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,25 +28,41 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import ikon.ikon.Adapter.Banner_Adapter;
 import ikon.ikon.Bussiness.ListItemCart;
 import ikon.ikon.Fragments.Accessories;
 import ikon.ikon.Fragments.Phones;
 import ikon.ikon.Fragments.Sparts;
+import ikon.ikon.Model.Banner;
 import ikon.ikon.Model.Cart;
 import ikon.ikon.Model.Count;
+import ikon.ikon.PreSenter.BannerPresenter;
 import ikon.ikon.PreSenter.CounterPresenter;
+import ikon.ikon.Viewes.BannerView;
 import ikon.ikon.Viewes.CountView;
-import ikonNNN.ikonN.R;
+import ikon.ikonN.R;
 
-public class Shoping extends AppCompatActivity{
+public class Shoping extends AppCompatActivity implements BannerView {
     public static TabLayout tabLayout;
     private ViewPager viewPager;
    public static TextView T_Cartshop;
     private List<Cart> liscart=new LinkedList<>();
     ImageView btncartshop;
-
+    Banner_Adapter banerAdapter;
+    RecyclerView recyclerVie;
+    BannerPresenter baner;
     SharedPreferences share;
+    LinearLayoutManager linearLayoutManager;
+    private RecyclerView rv_autoScroll;
+    final int duration = 10;
+    final int pixelsToMove = 30;
+    int position;
+    List<Banner> banne=new ArrayList<>();
+    Boolean end;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,16 +70,29 @@ public class Shoping extends AppCompatActivity{
         viewPager = findViewById(R.id.viewpager);
         T_Cartshop=findViewById(R.id.T_Cartshop);
         btncartshop=findViewById(R.id.btncartshop);
+        Recyclview();
+        baner=new BannerPresenter(this,this);
+        if(isRTL()){
+            baner.GetBanner("ar");
+        }else {
+            baner.GetBanner("en");
+        }
+
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new AutoScrollTask(), 2000, 5000);
 
 
+
+        ;
         share=getSharedPreferences("count",MODE_PRIVATE);
         setupViewPager(viewPager);
 
-     String count=share.getString("count",null);
-     if(count!=null){
-         T_Cartshop.setText(count);
-         T_Cartshop.setBackgroundResource(R.drawable.circlecart);
-     }
+        String count=share.getString("count",null);
+        if(count!=null){
+            T_Cartshop.setText(count);
+            T_Cartshop.setBackgroundResource(R.drawable.circlecart);
+        }
+
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabTextColors(
@@ -90,7 +124,22 @@ public class Shoping extends AppCompatActivity{
 
     }
 
-
+    private class AutoScrollTask extends TimerTask {
+        @Override
+        public void run() {
+            if(position == banne.size() -1){
+                end = true;
+            } else if (position == 0) {
+                end = false;
+            }
+            if(!end){
+                position++;
+            } else {
+                position--;
+            }
+            rv_autoScroll.smoothScrollToPosition(position);
+        }
+    }
 
     public static boolean isRTL(Locale locale) {
         final int directionality = Character.getDirectionality(locale.getDisplayName().charAt(0));
@@ -102,7 +151,10 @@ public class Shoping extends AppCompatActivity{
         startActivity(new Intent(Shoping.this,Navigation.class));
         finish();
     }
-
+    public void Recyclview(){
+        rv_autoScroll = findViewById(R.id.recycler_banner2);
+        rv_autoScroll.setHasFixedSize(true);
+    }
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
 
@@ -130,7 +182,32 @@ public class Shoping extends AppCompatActivity{
         return isRTL(Locale.getDefault());
     }
 
+    @Override
+    public void getBanner(List<Banner> banners) {
+        banne=banners;
+        banerAdapter = new Banner_Adapter(banners,this);
+         linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rv_autoScroll.setLayoutManager(linearLayoutManager);
+        rv_autoScroll.setAdapter(banerAdapter);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new AutoScrollTask(), 1000, 2000);
 
+//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        rv_autoScroll.setItemAnimator(new DefaultItemAnimator());
+//        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+//        recyclerView.setHasFixedSize(true);
+//        rv_autoScroll.setLayoutManager(linearLayoutManager);
+//
+//        recyclerView.setHasFixedSize(true);
+//        rv_autoScroll.setAdapter(banerAdapter);
+
+    }
+
+    @Override
+    public void Errorbaner() {
+
+    }
 
 
     static  class Adapter extends FragmentStatePagerAdapter {
