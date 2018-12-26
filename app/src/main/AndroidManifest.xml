@@ -12,11 +12,11 @@
         android:name="ikon.ikon.App"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@mipmap/iconlogo"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="false"
+        android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:windowSoftInputMode="stateHidden">
         <activity android:name="ikon.ikon.Activites.Splash">

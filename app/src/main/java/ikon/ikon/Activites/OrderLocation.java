@@ -323,7 +323,7 @@ public class OrderLocation extends AppCompatActivity implements RoutingListener,
     }
 
     @Override
-    public void onRoutingSuccess(ArrayList<Route> arrayList, int y) {
+    public void onRoutingSuccess(ArrayList<Route> arrayList, int s) {
         if (polylines.size() > 0) {
             for (Polyline poly : polylines) {
                 poly.remove();

@@ -82,8 +82,6 @@ public class Shoping extends AppCompatActivity implements BannerView {
 //        timer.scheduleAtFixedRate(new AutoScrollTask(), 2000, 5000);
 
 
-
-        ;
         share=getSharedPreferences("count",MODE_PRIVATE);
         setupViewPager(viewPager);
 
@@ -118,10 +116,6 @@ public class Shoping extends AppCompatActivity implements BannerView {
                finish();
             }
         });
-
-
-
-
     }
 
     private class AutoScrollTask extends TimerTask {
@@ -190,17 +184,11 @@ public class Shoping extends AppCompatActivity implements BannerView {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rv_autoScroll.setLayoutManager(linearLayoutManager);
         rv_autoScroll.setAdapter(banerAdapter);
+
+
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new AutoScrollTask(), 1000, 2000);
 
-//        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        rv_autoScroll.setItemAnimator(new DefaultItemAnimator());
-//        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
-//        recyclerView.setHasFixedSize(true);
-//        rv_autoScroll.setLayoutManager(linearLayoutManager);
-//
-//        recyclerView.setHasFixedSize(true);
-//        rv_autoScroll.setAdapter(banerAdapter);
 
     }
 

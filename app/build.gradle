@@ -8,8 +8,8 @@ android {
         applicationId "ikon.ikonN"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 36
-        versionName "4.5"
+        versionCode 38
+        versionName "4.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -36,7 +36,7 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.5'
     implementation 'com.google.firebase:firebase-core:11.8.0'
     implementation 'com.google.firebase:firebase-auth:11.8.0'
-    compile 'com.facebook.android:facebook-android-sdk:4.11.0'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services-auth:11.8.0'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'

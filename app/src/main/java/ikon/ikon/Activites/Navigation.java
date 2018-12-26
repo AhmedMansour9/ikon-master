@@ -93,7 +93,6 @@ public class Navigation extends AppCompatActivity
                     getBaseContext().getResources().getDisplayMetrics());
         }
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-
         setContentView(R.layout.activity_navigation);
         imgdots=findViewById(R.id.dotss);
          toolbar = findViewById(R.id.toolbarnavigation);
